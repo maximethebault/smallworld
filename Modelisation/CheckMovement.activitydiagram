@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" xmlns:dm11="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" dslVersion="1.0.0.0" Id="44917227-9126-47d5-a5d6-c7e9117b57ec" name="Check Movement" linkedPackageId="af90aa2b-2dce-4d5b-a8cc-cd456367517c" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="71ec4ee8-9417-42d4-9dbe-c35044658fe9">
+      <profileInstance Id="57224031-287e-445b-81dd-71ed553bb7e0" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="1d93bced-393f-40ce-8039-1394194bbd05">
+      <profileInstance Id="80a3af19-0246-4ea2-afd6-a1d12dce585b" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="6b402382-4f49-43d4-b957-98f4522091e0" name="Check Movement" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="24091aea-6d68-463a-9914-54cd54773411" />
+        <nodes>
+          <initialNode Id="6c42d43b-449d-4de0-9864-b292efa8cb97" name="Initial1" isLeaf="false">
+            <elementDefinition Id="97053404-6bae-4310-96fe-9c04240caab9" />
+            <flowNodeTargets>
+              <controlFlow Id="e3d4a3a9-b41f-409f-8484-d51a9616f046" isLeaf="false">
+                <opaqueActionMoniker Id="e6bdd178-008c-422d-8d28-3303965af207" LastKnownName="Determine required move points" />
+                <elementDefinition Id="cb56a15b-46fc-4740-8826-442493112fa3" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction Id="e6bdd178-008c-422d-8d28-3303965af207" name="Determine required move points" isLeaf="false">
+            <elementDefinition Id="3a1c3fdf-d70d-47e8-a471-a5a9080a21e6" />
+            <flowNodeTargets>
+              <controlFlow Id="faf09a4f-4f81-487e-833e-a1a12125af7c" isLeaf="false">
+                <decisionNodeMoniker Id="b6d0c320-9c52-4e5f-ae86-5a4ebe60dea4" LastKnownName="Decision1" />
+                <elementDefinition Id="c54b39bd-34ed-4b84-a026-11fffc0c4475" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="f4f6ab01-556f-4699-9a98-9b2426c42a7e" name="Check target tile adjacency" isLeaf="false">
+            <elementDefinition Id="5f152992-0f02-41c5-a622-4ffab2fa9cd2" />
+            <flowNodeTargets>
+              <controlFlow Id="1fe0544c-9d17-4b6f-a463-a94ed403ac3f" isLeaf="false">
+                <decisionNodeMoniker Id="4eaed8d8-860d-4846-9cd7-1d67bb3c3e08" LastKnownName="Decision11" />
+                <elementDefinition Id="5dfb5d99-b367-472a-884f-90f70b5e8bcc" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="b6d0c320-9c52-4e5f-ae86-5a4ebe60dea4" name="Decision1" isLeaf="false">
+            <elementDefinition Id="ae727bed-0016-4e0f-9e19-16fe9f2b96be" />
+            <flowNodeTargets>
+              <controlFlow Id="debf0ff0-5e96-45fb-b388-775466cb36e8" guard="Unit move point &lt; Required move point" isLeaf="false">
+                <activityFinalNodeMoniker Id="fee7ff11-d590-4d2c-8c4e-3dcbac643944" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="2f556026-aa72-42ac-8c4d-aee75eae36b2" />
+              </controlFlow>
+              <controlFlow Id="0b0edd05-3c21-4ede-aa8a-01d687f00c57" guard="Unit move point &gt;= Required move point" isLeaf="false">
+                <opaqueActionMoniker Id="f4f6ab01-556f-4699-9a98-9b2426c42a7e" LastKnownName="Check target tile adjacency" />
+                <elementDefinition Id="7fa2dae3-7279-4969-b273-6fbb02289141" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <activityFinalNode Id="fee7ff11-d590-4d2c-8c4e-3dcbac643944" name="ActivityFinal1" isLeaf="false">
+            <elementDefinition Id="219b9857-9605-4808-9313-d0da31a7332d" />
+          </activityFinalNode>
+          <decisionNode Id="4eaed8d8-860d-4846-9cd7-1d67bb3c3e08" name="Decision11" isLeaf="false">
+            <elementDefinition Id="f36c8496-1e0d-467a-82ef-56d8abfa2a9b" />
+            <flowNodeTargets>
+              <controlFlow Id="5a4a6db1-b4ed-4460-a5e2-ee37728526a9" guard="Tile is adjacent" isLeaf="false">
+                <opaqueActionMoniker Id="8097db4e-e89c-4cb0-a7d7-e5eb2de397c9" LastKnownName="Authorize movement" />
+                <elementDefinition Id="8a3b943f-ec28-4711-8494-d9999b4f8b3c" />
+              </controlFlow>
+              <controlFlow Id="207a9abb-d3c0-4da1-a167-ec7cd1aee534" guard="Tile is not adjacent" isLeaf="false">
+                <opaqueActionMoniker Id="c1d77c58-13ca-4a02-afab-cf00ffe375ba" LastKnownName="Check unit type" />
+                <elementDefinition Id="3deef31a-9735-413d-a5d5-b4a8bd668159" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="8097db4e-e89c-4cb0-a7d7-e5eb2de397c9" name="Authorize movement" isLeaf="false">
+            <elementDefinition Id="14f6ddd6-3a84-446a-9fca-90fae55a55aa" />
+            <flowNodeTargets>
+              <controlFlow Id="06e3213b-53e3-4286-b1e3-131650d4f006" isLeaf="false">
+                <activityFinalNodeMoniker Id="88f3eb91-3243-45df-862e-3860eed9a5d4" LastKnownName="ActivityFinal2" />
+                <elementDefinition Id="9a404b2e-1cc3-483a-a9a1-3344c666bff8" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="c1d77c58-13ca-4a02-afab-cf00ffe375ba" name="Check unit type" isLeaf="false">
+            <elementDefinition Id="591b66f6-974d-4877-9fb3-3d0438d4eb4b" />
+            <flowNodeTargets>
+              <controlFlow Id="81ec702a-591d-4930-a2aa-a9811136302b" isLeaf="false">
+                <decisionNodeMoniker Id="39c22a4f-e9ef-4d42-b937-5805ebcc0ba3" LastKnownName="Decision2" />
+                <elementDefinition Id="4adf0c5c-6feb-479f-9ab1-3111c382c9a2" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode Id="88f3eb91-3243-45df-862e-3860eed9a5d4" name="ActivityFinal2" isLeaf="false">
+            <elementDefinition Id="39ae4e9b-93bb-4df8-98b2-5b34d46238fb" />
+          </activityFinalNode>
+          <opaqueAction Id="02872a89-e1a1-4e99-aacb-7fbfd7cd53da" name="Check current and target tile types" isLeaf="false">
+            <elementDefinition Id="6d60d9a4-2de4-438a-906b-979b11c25e12" />
+            <flowNodeTargets>
+              <controlFlow Id="09a92988-f945-42a3-91ca-95060bf3bc1b" isLeaf="false">
+                <decisionNodeMoniker Id="81113a71-f6a4-4e3f-9392-bcf7da821406" LastKnownName="Decision3" />
+                <elementDefinition Id="40773593-757b-4798-92e9-363746f7af21" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="39c22a4f-e9ef-4d42-b937-5805ebcc0ba3" name="Decision2" isLeaf="false">
+            <elementDefinition Id="d7da6fb2-6a31-4e44-8185-09e7639ce097" />
+            <flowNodeTargets>
+              <controlFlow Id="8b39dc15-eafe-410b-80b7-1deff81249eb" guard="Unit is not a dwarf" isLeaf="false">
+                <activityFinalNodeMoniker Id="fee7ff11-d590-4d2c-8c4e-3dcbac643944" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="9ced6c72-aaf6-4c27-a218-b6854c89a077" />
+              </controlFlow>
+              <controlFlow Id="a42bcc61-d5eb-42ef-9908-30d5e5f59d75" guard="Unit is a dwarf" isLeaf="false">
+                <opaqueActionMoniker Id="02872a89-e1a1-4e99-aacb-7fbfd7cd53da" LastKnownName="Check current and target tile types" />
+                <elementDefinition Id="8b2f4dcf-74ea-4c75-bd7f-84c92840daf8" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <decisionNode Id="81113a71-f6a4-4e3f-9392-bcf7da821406" name="Decision3" isLeaf="false">
+            <elementDefinition Id="5221c4a5-f0c5-4984-9c80-b2f461fd0fd7" />
+            <flowNodeTargets>
+              <controlFlow Id="de97d0e6-e87f-47a6-8775-15b4ba981332" guard="Both tiles are mountains" isLeaf="false">
+                <opaqueActionMoniker Id="c2b45db0-aa43-4790-a198-fa0e73c4c13a" LastKnownName="Check target tile occupancy" />
+                <elementDefinition Id="d15e9ed2-959b-4fbb-bfd0-7308e2d60990" />
+              </controlFlow>
+              <controlFlow Id="13e22c85-1b02-4883-8be4-4917a67b7fed" guard="One of them is not of type mountain" isLeaf="false">
+                <activityFinalNodeMoniker Id="fee7ff11-d590-4d2c-8c4e-3dcbac643944" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="0fe9fdb9-9379-49f1-b2cf-0dd3dcef38d9" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="c2b45db0-aa43-4790-a198-fa0e73c4c13a" name="Check target tile occupancy" isLeaf="false">
+            <elementDefinition Id="04328c0a-1767-40d8-8796-e93f519e833d" />
+            <flowNodeTargets>
+              <controlFlow Id="2301099b-82fc-4458-8c71-eb16d226c1e0" isLeaf="false">
+                <decisionNodeMoniker Id="b2a66c8c-8929-4003-b25c-de55cf6296e5" LastKnownName="Decision4" />
+                <elementDefinition Id="0442fe48-ef88-4166-b1ae-48ad10c61262" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="b2a66c8c-8929-4003-b25c-de55cf6296e5" name="Decision4" isLeaf="false">
+            <elementDefinition Id="e6aa0874-66e9-4785-a795-0d652feee6a5" />
+            <flowNodeTargets>
+              <controlFlow Id="02be2740-0b28-4edd-af08-a9319312daa3" guard="Target tile is occupied by ennemy" isLeaf="false">
+                <activityFinalNodeMoniker Id="fee7ff11-d590-4d2c-8c4e-3dcbac643944" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="05dbfbfc-43f0-4d9d-b6f0-813788a6148a" />
+              </controlFlow>
+              <controlFlow Id="6d712683-f1c2-4327-a705-31fd4f4c4c78" guard="Target tile is free or occupîed by units of the same race" isLeaf="false">
+                <opaqueActionMoniker Id="8097db4e-e89c-4cb0-a7d7-e5eb2de397c9" LastKnownName="Authorize movement" />
+                <elementDefinition Id="d4334917-b443-4e9b-8adb-813da7fef152" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="af90aa2b-2dce-4d5b-a8cc-cd456367517c" name="Modelisation">
+    <elementDefinition Id="f0265a87-07a9-4118-b21e-9876574b303f" />
+  </package>
+</activityRootModel>

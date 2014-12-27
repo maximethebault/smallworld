@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm11="http://schemas.microsoft.com/dsltools/UseCaseModel" dslVersion="1.0.0.0" Id="b69edb1f-81bc-4c89-8bc2-6a66240df8a4" name="Attack" linkedPackageId="a9589606-4221-4343-8231-a2c7cb35157d" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="b32901a9-930d-4b82-85df-c9e0db49051f" name="Attack" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="aaf8a259-6389-4931-8cbb-94471e5a0e4c" />
+        <nodes>
+          <initialNode Id="88461760-eb78-4d4b-8458-357ffcd53ebb" name="Initial11" isLeaf="false">
+            <elementDefinition Id="74bab5bc-27e9-4e9a-864f-feaa74543f8c" />
+            <flowNodeTargets>
+              <controlFlow Id="93149ac5-eafd-416b-9b5d-9c2c28f73b39" isLeaf="false">
+                <opaqueActionMoniker Id="a6ad5ac7-5e9c-420b-8815-d774e0172e71" LastKnownName="Choose attacked unit" />
+                <elementDefinition Id="a78dbb25-f71c-458f-b7f3-7c2729a50cdc" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction Id="a6ad5ac7-5e9c-420b-8815-d774e0172e71" name="Choose attacked unit" isLeaf="false">
+            <elementDefinition Id="b7090c9e-1b36-42f8-8bfd-e04baadf1c02" />
+            <flowNodeTargets>
+              <controlFlow Id="41cdabe5-6e7a-45a8-b51b-f72f0e8ccbd3" isLeaf="false">
+                <opaqueActionMoniker Id="74c791c8-0045-442a-b6b1-3f1310cd286e" LastKnownName="Determine number of rounds" />
+                <elementDefinition Id="2d02422a-5a2e-408e-80a3-5db1ec2e25bc" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="74c791c8-0045-442a-b6b1-3f1310cd286e" name="Determine number of rounds" isLeaf="false">
+            <elementDefinition Id="20dc38f4-51dd-4430-a237-422d97b3c9ea" />
+            <flowNodeTargets>
+              <controlFlow Id="3b7d3f23-3b9c-4d1e-8789-24c3e4b14bb3" isLeaf="false">
+                <opaqueActionMoniker Id="fcd9968d-ad06-4dbf-b629-d680707026e4" LastKnownName="Check round number" />
+                <elementDefinition Id="9efc483a-a262-4ed5-8a43-e5b052401875" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="da7d46a4-b9ee-4f85-9e12-c8398212ef67" name="Decision2" isLeaf="false">
+            <elementDefinition Id="14e48bf6-c74c-43bc-a237-0cee12a13408" />
+            <flowNodeTargets>
+              <controlFlow Id="5e76cfa2-3f37-47b4-b674-e818556258c5" guard="No more round left" isLeaf="false">
+                <activityFinalNodeMoniker Id="6ce3344b-b449-4d2c-871b-a25b1d9f61ac" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="833e4e50-b2d2-45e1-b65e-34f287b035c0" />
+              </controlFlow>
+              <controlFlow Id="66d210fc-c2ba-442b-b139-6aee5be146d6" guard="At least 1 round left" isLeaf="false">
+                <opaqueActionMoniker Id="3fe6b6e0-723a-4ca4-b99c-453e0ed2f453" LastKnownName="Decrement round number" />
+                <elementDefinition Id="c7c27800-48eb-47ed-86d1-0161020f701d" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="fcd9968d-ad06-4dbf-b629-d680707026e4" name="Check round number" isLeaf="false">
+            <elementDefinition Id="09f261e7-1766-4ffb-a0f3-ac37556fe605" />
+            <flowNodeTargets>
+              <controlFlow Id="e059e171-4cf2-4fbb-8bec-d90eec799847" isLeaf="false">
+                <decisionNodeMoniker Id="da7d46a4-b9ee-4f85-9e12-c8398212ef67" LastKnownName="Decision2" />
+                <elementDefinition Id="5d1071ff-ed20-4c84-9eaa-d3c3b850e9e7" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode Id="6ce3344b-b449-4d2c-871b-a25b1d9f61ac" name="ActivityFinal1" isLeaf="false">
+            <elementDefinition Id="d26be849-f9cb-4930-a64b-746ea3f3f9c4" />
+          </activityFinalNode>
+          <opaqueAction Id="3fe6b6e0-723a-4ca4-b99c-453e0ed2f453" name="Decrement round number" isLeaf="false">
+            <elementDefinition Id="214b8086-f340-4c38-b83f-7d3630047c4c" />
+            <flowNodeTargets>
+              <controlFlow Id="b8f44b53-4b36-48c9-a697-84ea24597cdc" isLeaf="false">
+                <opaqueActionMoniker Id="d1db39c0-562d-483a-8eca-1de3093b565d" LastKnownName="Start a new round" />
+                <elementDefinition Id="c8d6867c-ec40-4567-b318-3f655a5294d3" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="d1db39c0-562d-483a-8eca-1de3093b565d" name="Start a new round" isLeaf="false">
+            <elementDefinition Id="c8072d88-bd87-4934-98a1-fe118ad3faa7" />
+            <flowNodeTargets>
+              <controlFlow Id="b9930604-2c44-49ba-9ae7-55ff527bff3c" isLeaf="false">
+                <opaqueActionMoniker Id="93992a9c-b558-4536-b7d2-8d043d0030dd" LastKnownName="Determine losing unit" />
+                <elementDefinition Id="12c23e86-38f1-432a-bd94-eceecf72b156" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="93992a9c-b558-4536-b7d2-8d043d0030dd" name="Determine losing unit" isLeaf="false">
+            <elementDefinition Id="1d447dfa-c64f-4475-a323-ab8834795f7b" />
+            <flowNodeTargets>
+              <controlFlow Id="491115bf-bbd2-4470-84af-cfde3a806bfd" isLeaf="false">
+                <opaqueActionMoniker Id="4afccd10-35c4-47fc-9862-2403477bf899" LastKnownName="Decrement losing unit life point" />
+                <elementDefinition Id="370e0c5b-c822-488b-8fbb-fb053d3e2fd9" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="4afccd10-35c4-47fc-9862-2403477bf899" name="Decrement losing unit life point" isLeaf="false">
+            <elementDefinition Id="fa4cfa70-0299-47b3-9f6c-f68cfe34731c" />
+            <flowNodeTargets>
+              <controlFlow Id="7df3d2d1-61c4-48b4-bee7-ef1d8cdb2434" isLeaf="false">
+                <decisionNodeMoniker Id="91949de8-9924-4eb7-972e-1c21cfd3e031" LastKnownName="Decision21" />
+                <elementDefinition Id="988b4334-c133-4440-b1a4-c070b12f00c6" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="91949de8-9924-4eb7-972e-1c21cfd3e031" name="Decision21" isLeaf="false">
+            <elementDefinition Id="f23d112f-a62b-4c80-8c7a-69f7f880df77" />
+            <flowNodeTargets>
+              <controlFlow Id="a55cb13b-2948-4cc1-80b8-325a2e3dc381" guard="Unit has got at least 1 life point" isLeaf="false">
+                <opaqueActionMoniker Id="fcd9968d-ad06-4dbf-b629-d680707026e4" LastKnownName="Check round number" />
+                <elementDefinition Id="fbf73fc5-2f47-440b-91c0-9cfa60d130e3" />
+              </controlFlow>
+              <controlFlow Id="16d82556-62c7-4e99-94eb-c7a2ae282e22" guard="Unit ran out of life point and is not an elf" isLeaf="false">
+                <opaqueActionMoniker Id="218e6d28-cf15-4fa2-aabb-75d495e76512" LastKnownName="Kill unit" />
+                <elementDefinition Id="33f705f9-2aab-4353-b108-5045ba6da1f0" />
+              </controlFlow>
+              <controlFlow Id="0485a44c-c786-46b3-86d4-c91c36dd4186" guard="Unit ran out of life point and is an elf" isLeaf="false">
+                <opaqueActionMoniker Id="753be4ca-4b5c-477c-a9fd-1fdd6c36e879" LastKnownName="Determine unit withdrawal" />
+                <elementDefinition Id="3daf2513-4474-4102-9d6c-a219c44b5854" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="218e6d28-cf15-4fa2-aabb-75d495e76512" name="Kill unit" isLeaf="false">
+            <elementDefinition Id="a139291a-8173-4f58-90b5-df8a267d7b9e" />
+            <flowNodeTargets>
+              <controlFlow Id="7fc0dbe0-fbd8-4b59-b051-f8d784c6d6ca" isLeaf="false">
+                <decisionNodeMoniker Id="b4838a25-6506-4372-9037-b43b37396b31" LastKnownName="Decision3" />
+                <elementDefinition Id="50a5b083-0327-4d6e-b679-a44d56781f29" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="753be4ca-4b5c-477c-a9fd-1fdd6c36e879" name="Determine unit withdrawal" isLeaf="false">
+            <elementDefinition Id="4f389297-f315-48c5-96e7-70837880428b" />
+            <flowNodeTargets>
+              <controlFlow Id="76aa596f-d05f-4b6e-84c1-dc3b0cf9de0b" isLeaf="false">
+                <decisionNodeMoniker Id="93c64ea9-c217-4d3f-9088-be03c5827b00" LastKnownName="Decision1" />
+                <elementDefinition Id="2d9bdd55-5b78-415d-a267-fb82650179f3" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="93c64ea9-c217-4d3f-9088-be03c5827b00" name="Decision1" isLeaf="false">
+            <elementDefinition Id="34431dd5-9e7a-4276-8bb5-c42405b57d2c" />
+            <flowNodeTargets>
+              <controlFlow Id="dd25d0d0-84c7-4ddb-b2c7-4ac215c37365" guard="Unit doesn't withdraw" isLeaf="false">
+                <opaqueActionMoniker Id="218e6d28-cf15-4fa2-aabb-75d495e76512" LastKnownName="Kill unit" />
+                <elementDefinition Id="6cdffbc2-d157-4d43-99d2-3e985ce7857a" />
+              </controlFlow>
+              <controlFlow Id="e3edf0c4-cedb-4d7a-a0de-df90ef0c8d14" guard="Unit withdraws" isLeaf="false">
+                <opaqueActionMoniker Id="36203c30-88d2-409b-98db-c399358c8bc9" LastKnownName="Set unit's life point to 1" />
+                <elementDefinition Id="6736df03-f682-4f70-b5fa-c4c49a2cf311" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="36203c30-88d2-409b-98db-c399358c8bc9" name="Set unit's life point to 1" isLeaf="false">
+            <elementDefinition Id="46cef03c-0876-44ba-af5f-afc2f3f25979" />
+            <flowNodeTargets>
+              <controlFlow Id="823cc9f0-b824-4e57-a489-27ba27bba74b" isLeaf="false">
+                <activityFinalNodeMoniker Id="58fef6d7-a896-417b-9df0-92ce7c73ba1b" LastKnownName="ActivityFinal2" />
+                <elementDefinition Id="2b6021e0-151f-461c-81a1-87597fe73f90" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode Id="58fef6d7-a896-417b-9df0-92ce7c73ba1b" name="ActivityFinal2" isLeaf="false">
+            <elementDefinition Id="0f533b19-74e3-4b8f-8e84-c65a93db344c" />
+          </activityFinalNode>
+          <activityFinalNode Id="8a86d801-19bf-46ff-b31a-055da712df4a" name="ActivityFinal21" isLeaf="false">
+            <elementDefinition Id="033b86be-b213-46f0-b369-ad9ab5c41fc4" />
+          </activityFinalNode>
+          <opaqueAction Id="8a63d5fc-4819-40d9-ac3b-503be4b7abf8" name="Increment orc's bonus point" isLeaf="false">
+            <elementDefinition Id="fc4efcb0-0637-44fd-9c56-fa0a486086d9" />
+            <flowNodeTargets>
+              <controlFlow Id="651247e4-60bc-4cfd-85a7-1e36963daac8" isLeaf="false">
+                <activityFinalNodeMoniker Id="8a86d801-19bf-46ff-b31a-055da712df4a" LastKnownName="ActivityFinal21" />
+                <elementDefinition Id="8e3537c4-3026-48af-a174-5f1089575e4c" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="b4838a25-6506-4372-9037-b43b37396b31" name="Decision3" isLeaf="false">
+            <elementDefinition Id="71d2fec2-5434-4dd1-8e96-e5fee666d8e0" />
+            <flowNodeTargets>
+              <controlFlow Id="f7e1bd61-482d-4fcb-aa5d-9a1e6e11939d" guard="Opponent was an orc" isLeaf="false">
+                <opaqueActionMoniker Id="8a63d5fc-4819-40d9-ac3b-503be4b7abf8" LastKnownName="Increment orc's bonus point" />
+                <elementDefinition Id="6a135cf5-84f3-476a-abfb-46174361862a" />
+              </controlFlow>
+              <controlFlow Id="b2f3e6b9-0249-4b03-993f-d51b290e2287" guard="Opponent was not an orc" isLeaf="false">
+                <activityFinalNodeMoniker Id="8a86d801-19bf-46ff-b31a-055da712df4a" LastKnownName="ActivityFinal21" />
+                <elementDefinition Id="28942807-9171-428f-94c3-99655a1e02e3" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="a9589606-4221-4343-8231-a2c7cb35157d" name="Modelisation">
+    <elementDefinition Id="f0265a87-07a9-4118-b21e-9876574b303f" />
+    <profileInstances>
+      <packageHasProfileInstances Id="84191ab4-f0c3-40a0-b195-0cbf340c678f">
+        <profileInstance Id="cc51b962-37fb-4774-90c5-ac4025e30aba" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="fbebb3c9-1234-4121-82ef-da7ec745f2b3">
+        <profileInstance Id="8e349cd0-3147-4139-b153-a8866cdaa749" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</activityRootModel>

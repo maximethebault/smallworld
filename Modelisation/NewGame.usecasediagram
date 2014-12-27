@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm11="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" dslVersion="1.0.0.0" Id="6a8a66ee-a4e8-4feb-898f-bf4e4f216b23" name="New Game" linkedPackageId="90d8677d-7e2b-452b-ada6-c85e79a12f76" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="922eccf4-2479-4049-80c8-2df3d54961f4" name="Player" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="920f2d57-1983-4cc6-b571-b3186c3f264b" />
+        <targetEnds>
+          <association Id="10c5bf99-d120-4bd1-b4a5-8cf57a1b8892" isDerived="false" sourceEndRoleName="Player" targetEndRoleName="Select Map" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="4a8ad1d0-75bb-47d9-ac08-cedd532f5d80" LastKnownName="Select map" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="226255dc-4482-479c-9f0d-86eb13252e89" name="Player" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="6e396edf-4b08-448f-a304-5b3115e6754e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="08d24830-742c-4180-91e5-0e010016894b" name="Select Map" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="595f8d42-602d-4b29-a079-4717da697ac5" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="39671bcf-8b1d-41fe-b991-4d6536b059ff" />
+          </association>
+          <association Id="f3a426a6-3110-423d-b822-4294c65381bc" isDerived="false" sourceEndRoleName="Player" targetEndRoleName="Select race" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="01c1fc4e-899b-4095-9038-ab6afba54b57" LastKnownName="Select race" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c645c986-2801-46b1-b986-8ed460c27478" name="Player" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="8ba29c50-c9b1-4686-a385-4bccb8abb3c1" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="74b08d09-54fc-4a5b-935d-571ae4b177fc" name="Select race" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="27712cc7-0fa8-41ab-8f5d-d532a56fadab" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="74ae46a7-be72-428c-9612-f010f1958de5" />
+          </association>
+          <association Id="1944469e-641f-4824-a198-c56c156035f8" isDerived="false" sourceEndRoleName="Player" targetEndRoleName="Select name" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="a830264a-6d18-4e88-a211-f9336d72debb" LastKnownName="Select name" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="dd09fab1-2843-48e4-963a-567297727a5e" name="Player" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="087d783f-4a70-497c-939f-87ed0dcd8fae" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8b2a303a-d84c-419e-a71d-bb71afc20e5a" name="Select name" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="1a182b52-514a-4916-a39e-1f2e769e2676" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="8e7d29b9-a3f2-4359-9286-c21b41de4c07" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="4a8ad1d0-75bb-47d9-ac08-cedd532f5d80" name="Select map" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="442993fd-a726-44a8-b2aa-89543a2963f3" />
+        <additions>
+          <include Id="04fc74dc-c9da-4b81-a345-f01c7239665f">
+            <useCaseMoniker Id="14f942cd-a287-4a5b-a96e-1b5ec6852d76" LastKnownName="Play game" />
+            <elementDefinition Id="e3012930-211b-417f-a32e-7e6ba246668e" />
+          </include>
+        </additions>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="01c1fc4e-899b-4095-9038-ab6afba54b57" name="Select race" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="c0116018-b87d-45d2-9f65-4afe1efca60d" />
+        <additions>
+          <include Id="9ad63e55-9d28-46c3-b3a3-1531b551a40f">
+            <useCaseMoniker Id="14f942cd-a287-4a5b-a96e-1b5ec6852d76" LastKnownName="Play game" />
+            <elementDefinition Id="1839faf6-fb5a-40e1-8b28-5469463e3e54" />
+          </include>
+        </additions>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="373c2c91-4ef5-4f78-b24d-76dea1e1b026" name="Race already selected" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="a5c43cdd-fa2e-489e-bff0-2a1ff441af51" />
+        <extendedCases>
+          <extend Id="de3f1d0b-ff49-478f-a790-414c3ba0cbfa">
+            <useCaseMoniker Id="01c1fc4e-899b-4095-9038-ab6afba54b57" LastKnownName="Select race" />
+            <elementDefinition Id="1286313e-fad7-4c08-8265-9e9a4563414d" />
+          </extend>
+        </extendedCases>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="90ccb5c8-f33a-43e6-9ac8-29718be8f5b6" name="Select demo map " isAbstract="false" isLeaf="false">
+        <elementDefinition Id="2c360155-f307-497e-a252-15001333dd9e" />
+        <generalsInternal>
+          <generalization Id="b0c3a72b-5ca5-4a65-8e40-57d385fe7f49" isSubstitutable="false">
+            <useCaseMoniker Id="4a8ad1d0-75bb-47d9-ac08-cedd532f5d80" LastKnownName="Select map" />
+            <elementDefinition Id="e86ce9ad-1fd0-4ce6-8736-6bab71ef73aa" />
+          </generalization>
+        </generalsInternal>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="35ac27c6-220d-44c6-b04c-abb6ee04262d" name="Select small map" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f3bf7257-764f-43c5-80eb-8ce68166bcb4" />
+        <generalsInternal>
+          <generalization Id="83f40c7f-3c85-46b1-95fa-c892be7d5abd" isSubstitutable="false">
+            <useCaseMoniker Id="4a8ad1d0-75bb-47d9-ac08-cedd532f5d80" LastKnownName="Select map" />
+            <elementDefinition Id="b117993c-7d72-4ec2-8451-0ff9796b014b" />
+          </generalization>
+        </generalsInternal>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="e130c5e3-caaa-4e7d-bf97-4a6d8ed33183" name="Select standard map" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b67916c8-7a48-4b92-886c-4613d9d6c873" />
+        <generalsInternal>
+          <generalization Id="8a528cc5-8465-4333-90dd-5e441acfd74c" isSubstitutable="false">
+            <useCaseMoniker Id="4a8ad1d0-75bb-47d9-ac08-cedd532f5d80" LastKnownName="Select map" />
+            <elementDefinition Id="807faa14-8d3f-4c5d-91f2-6b54eb5e627a" />
+          </generalization>
+        </generalsInternal>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="14f942cd-a287-4a5b-a96e-1b5ec6852d76" name="Play game" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ca0f1ddc-daf0-4152-99cb-063bffc28c7b" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="a830264a-6d18-4e88-a211-f9336d72debb" name="Select name" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="3a6ebcf5-646e-4f64-8209-e89fc740e3d9" />
+        <additions>
+          <include Id="de5084fa-6055-49c5-a3b8-5f4b883569a7">
+            <useCaseMoniker Id="14f942cd-a287-4a5b-a96e-1b5ec6852d76" LastKnownName="Play game" />
+            <elementDefinition Id="591fe278-d4c5-4334-87c7-af2790426fe1" />
+          </include>
+        </additions>
+      </useCase>
+    </useCaseModelRootHasTypes>
+  </packagedElements>
+  <package Id="90d8677d-7e2b-452b-ada6-c85e79a12f76" name="Modelisation">
+    <elementDefinition Id="f0265a87-07a9-4118-b21e-9876574b303f" />
+    <profileInstances>
+      <packageHasProfileInstances Id="50197cfe-36bb-465f-999a-13df88689036">
+        <profileInstance Id="bd0022ad-7ae6-4ed2-8c53-49a5398b0ac0" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="c087d5ef-859a-4309-a56f-dd7cca095989">
+        <profileInstance Id="efc257c9-81a1-47a3-8185-4ee500e7fa15" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</useCaseModelRoot>

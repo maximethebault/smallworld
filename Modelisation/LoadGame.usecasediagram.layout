@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="CasUtilisation">
+  <useCaseModelRootMoniker Id="c02cd0bc-5ad3-44e5-81a5-81111447dd5b" />
+  <nestedChildShapes>
+    <useCaseShape Id="cdfa42f8-3887-4abf-8759-4404da62aa19" absoluteBounds="3.875, 3.75, 1, 0.5" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="4a8862ff-5544-4b3c-80fc-708ab8f66d18" LastKnownName="Select file" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <actorShape Id="31c5a0c1-899b-4dfc-a172-d12c661c3700" absoluteBounds="2, 3.75, 0.5, 0.5" isReference="false" heightOffset="0">
+      <actorMoniker Id="955f0a80-3613-4bec-b862-c54fc251f58f" LastKnownName="Player" />
+      <relativeChildShapes />
+    </actorShape>
+    <useCaseAssociationConnector edgePoints="[(2.5 : 4); (3.875 : 4)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
+      <associationMoniker Id="eab131af-5aac-486b-ac99-11b0824dfeca" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="31c5a0c1-899b-4dfc-a172-d12c661c3700" />
+        <useCaseShapeMoniker Id="cdfa42f8-3887-4abf-8759-4404da62aa19" />
+      </nodes>
+    </useCaseAssociationConnector>
+    <rectangleShape Id="157c7ef5-87ff-476d-9227-d22bb0f68329" absoluteBounds="2.625, 3.5, 2.5, 1" outlineColor="83, 134, 191" outlineThickness="0.03125" />
+  </nestedChildShapes>
+</useCaseDiagram>

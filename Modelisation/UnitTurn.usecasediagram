@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm11="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" dslVersion="1.0.0.0" Id="77a1b2fc-3ea2-4a37-b8cd-46cd38b56238" name="Unit Turn" linkedPackageId="41cea367-72f2-492a-8804-dc73acd0b0e1" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="fd6b17ce-4513-4801-ac77-b5994cdae5ac" name="Player" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="fc73685b-2bac-471c-943c-fc2f10041973" />
+        <targetEnds>
+          <association Id="eec03a79-a80b-46fc-aad3-dee6600402eb" isDerived="false" sourceEndRoleName="Player" targetEndRoleName="Skip unit turn" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="b9c2fa0f-1a25-4288-a050-be90fbd16239" LastKnownName="Skip unit turn" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="23ddbb0d-1405-4c7d-b68a-c226a8b311da" name="Player" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="1991dcaa-d8bc-4fa1-8f03-f09b2239d3f4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="236a0e5d-17b6-49fd-815d-6767823be2f3" name="Skip unit turn" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="3d999022-de05-4712-b166-03753b828d4f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="87b39854-f189-4d1a-9d0c-4daa0873023e" />
+          </association>
+          <association Id="f21b012b-535f-4444-9d72-8bd68f42b6c2" isDerived="false" sourceEndRoleName="Player" targetEndRoleName="Finish turn" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="24f926de-66f2-401f-a63a-b03f27c970a6" LastKnownName="Finish turn" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8cc1ec5f-c687-416f-b1d5-0f8e0987d285" name="Player" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="c7a96579-48c1-4c05-b37b-bbd2995c0686" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="2cb14e6c-e3b7-48e3-b706-35a000069b96" name="Finish turn" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="9a305671-3888-477b-8d12-9ccb86e6fede" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c13491f1-d017-4947-8746-60482a90598b" />
+          </association>
+          <association Id="c4f986f5-fa07-47c9-81a5-df205ced0882" isDerived="false" sourceEndRoleName="Player" targetEndRoleName="Select target tile" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="2e123da8-eec3-469d-b1f1-4a35520d79a1" LastKnownName="Select target tile" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c467a761-18cf-42b0-a591-fe91dc740b57" name="Player" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="a2cfd558-2274-4f80-9e51-a5763d1e01d7" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="87dd984d-869d-476f-84d9-c1afc5add668" name="Select target tile" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="f00f2daa-c4bc-4a07-8649-dbd4492a93bc" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="1b818c57-e7bd-4b5d-95dc-5e2e07c81b79" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="31daabe5-ca82-4e7b-af3c-7812859e8dd6" name="No more  move points" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="7c9b8e56-2d8d-4254-9349-2147ccd0bbcb" />
+        <extendedCases>
+          <extend Id="554b224c-ddc0-4dc7-85cc-9c39cc1c0156">
+            <useCaseMoniker Id="2e123da8-eec3-469d-b1f1-4a35520d79a1" LastKnownName="Select target tile" />
+            <elementDefinition Id="c6210a70-ad64-4bfd-b988-d6535f355ef4" />
+          </extend>
+        </extendedCases>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="24f926de-66f2-401f-a63a-b03f27c970a6" name="Finish turn" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="003577a1-763a-43fb-a65e-2221f3a1354a" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="b9c2fa0f-1a25-4288-a050-be90fbd16239" name="Skip unit turn" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b15ba12a-7065-42b0-8dff-05b915a14d34" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="e2f66e60-0b05-4584-9b5b-fda389352d6c" name="Engage unit" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="7479a1fc-b376-4f54-b8df-17ed14d5d694" />
+        <extendedCases>
+          <extend Id="99d99da9-35be-43c4-ac60-e5f05da1f575">
+            <useCaseMoniker Id="2e123da8-eec3-469d-b1f1-4a35520d79a1" LastKnownName="Select target tile" />
+            <elementDefinition Id="17cfa16c-3f1f-402c-8aea-fc516e7f5297" />
+          </extend>
+        </extendedCases>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="2e123da8-eec3-469d-b1f1-4a35520d79a1" name="Select target tile" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="9532ff61-092f-41b4-bdfb-68614ffa3771" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="4e0fd9b3-9886-4b72-bfe8-4698215dbe92" name="Do movement" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="4f6a79d2-2ccd-4d83-a374-0a2695ac06f0" />
+        <extendedCases>
+          <extend Id="63af69d7-c1fd-4f36-8d67-cff359cc415a">
+            <useCaseMoniker Id="2e123da8-eec3-469d-b1f1-4a35520d79a1" LastKnownName="Select target tile" />
+            <elementDefinition Id="a9261fa3-5d19-4caa-beda-e1d3f4caa874" />
+          </extend>
+        </extendedCases>
+      </useCase>
+    </useCaseModelRootHasTypes>
+  </packagedElements>
+  <package Id="41cea367-72f2-492a-8804-dc73acd0b0e1" name="Modelisation">
+    <elementDefinition Id="f0265a87-07a9-4118-b21e-9876574b303f" />
+    <profileInstances>
+      <packageHasProfileInstances Id="0a30c6bf-e6bd-4c99-ae8c-eac63f8af890">
+        <profileInstance Id="ccbf4935-4dec-4691-90f0-898db8b829e1" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="26e9e441-bb89-4040-9b1a-2e6c3bfdded4">
+        <profileInstance Id="20e0f46d-932d-4411-98c2-173d7b1943db" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</useCaseModelRoot>

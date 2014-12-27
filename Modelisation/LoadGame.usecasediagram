@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm11="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" dslVersion="1.0.0.0" Id="c02cd0bc-5ad3-44e5-81a5-81111447dd5b" name="Load Game" linkedPackageId="54ce3fc3-e1b5-4423-a7c3-24f7e27c8afa" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <useCase Id="4a8862ff-5544-4b3c-80fc-708ab8f66d18" name="Select file" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="a3e7963c-9559-4955-bf8e-87561fd5ad0f" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="955f0a80-3613-4bec-b862-c54fc251f58f" name="Player" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="8980e648-1505-491f-903b-672298a84a62" />
+        <targetEnds>
+          <association Id="eab131af-5aac-486b-ac99-11b0824dfeca" isDerived="false" sourceEndRoleName="Player1" targetEndRoleName="Select file" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="4a8862ff-5544-4b3c-80fc-708ab8f66d18" LastKnownName="Select file" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="85958777-44be-4297-a2b0-d35e922a2588" name="Player1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="61f9e9a9-81c6-4256-86ad-c2cc1af2b6ea" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7bcf39a3-eeae-448f-a9cc-71577b6a84e6" name="Select file" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="1e791882-562e-499a-98fb-0c5f105a69dd" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="38160ebc-20dd-4a0b-9d7d-4eb0f673f86d" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+  </packagedElements>
+  <package Id="54ce3fc3-e1b5-4423-a7c3-24f7e27c8afa" name="Modelisation">
+    <elementDefinition Id="f0265a87-07a9-4118-b21e-9876574b303f" />
+    <profileInstances>
+      <packageHasProfileInstances Id="a39bbe79-a410-45b3-8b77-26aa15ed427c">
+        <profileInstance Id="3390dcaa-ed66-42a0-aa9c-9c6bd5fd6973" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="5d6bd174-72be-4ca0-91ac-e23e827751e3">
+        <profileInstance Id="fd74f44b-462d-4ccf-870d-ff184a57ca04" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</useCaseModelRoot>

@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Turn">
+  <useCaseModelRootMoniker Id="77a1b2fc-3ea2-4a37-b8cd-46cd38b56238" />
+  <nestedChildShapes>
+    <actorShape Id="ac5bfe97-b905-4ac6-a9e6-50065a37e2dd" absoluteBounds="3.25, 2.875, 0.5, 0.5" isReference="false" heightOffset="0">
+      <actorMoniker Id="fd6b17ce-4513-4801-ac77-b5994cdae5ac" LastKnownName="Player" />
+      <relativeChildShapes />
+    </actorShape>
+    <useCaseShape Id="e0b2e5cc-5769-4ede-a522-db761eaaaeac" absoluteBounds="7.75, 2.125, 1.75, 0.5" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="31daabe5-ca82-4e7b-af3c-7812859e8dd6" LastKnownName="No more  move points" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <useCaseShape Id="dadf5d42-8fd0-47eb-a854-4cadcaa3cdf2" absoluteBounds="5, 3.625, 1.25, 0.5" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="24f926de-66f2-401f-a63a-b03f27c970a6" LastKnownName="Finish turn" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <useCaseAssociationConnector edgePoints="[(3.75 : 3.21323529411765); (5.15635134039682 : 3.70959459072829)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
+      <associationMoniker Id="f21b012b-535f-4444-9d72-8bd68f42b6c2" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="ac5bfe97-b905-4ac6-a9e6-50065a37e2dd" />
+        <useCaseShapeMoniker Id="dadf5d42-8fd0-47eb-a854-4cadcaa3cdf2" />
+      </nodes>
+    </useCaseAssociationConnector>
+    <useCaseShape Id="2321e8e4-6c55-48b3-b0b6-6e3047ffe9e0" absoluteBounds="5, 2.125, 1.25, 0.5" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="b9c2fa0f-1a25-4288-a050-be90fbd16239" LastKnownName="Skip unit turn" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <useCaseAssociationConnector edgePoints="[(3.75 : 3.03676470588235); (5.15635134039682 : 2.54040540927171)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
+      <associationMoniker Id="eec03a79-a80b-46fc-aad3-dee6600402eb" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="ac5bfe97-b905-4ac6-a9e6-50065a37e2dd" />
+        <useCaseShapeMoniker Id="2321e8e4-6c55-48b3-b0b6-6e3047ffe9e0" />
+      </nodes>
+    </useCaseAssociationConnector>
+    <useCaseShape Id="9eed2f7e-5512-410d-a91d-a58c3ec19c09" absoluteBounds="7.75, 2.875, 1.75, 0.5" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="e2f66e60-0b05-4584-9b5b-fda389352d6c" LastKnownName="Engage unit" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <useCaseShape Id="210f7dda-a590-4b3e-a23b-d3bd0c78e471" absoluteBounds="5, 2.875, 1.25, 0.5" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="2e123da8-eec3-469d-b1f1-4a35520d79a1" LastKnownName="Select target tile" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <extendConnector edgePoints="[(7.96649539213148 : 2.53962615196713); (6.15499894000318 : 2.99250026499921)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black" useCaseStereotype="«extend»">
+      <extendMoniker Id="554b224c-ddc0-4dc7-85cc-9c39cc1c0156" />
+      <relativeChildShapes />
+      <moveableDecoratorHostShapes>
+        <moveableDecoratorHostShape manuallyPlaced="true" absoluteBounds="6.6875000000000009, 2.5625, 0.51066982746124268, 0.14800345897674561" shapeFieldName="NameDecorator" />
+      </moveableDecoratorHostShapes>
+      <nodes>
+        <useCaseShapeMoniker Id="e0b2e5cc-5769-4ede-a522-db761eaaaeac" />
+        <useCaseShapeMoniker Id="210f7dda-a590-4b3e-a23b-d3bd0c78e471" />
+      </nodes>
+    </extendConnector>
+    <extendConnector edgePoints="[(7.75 : 3.125); (6.25 : 3.125)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black" useCaseStereotype="«extend»">
+      <extendMoniker Id="99d99da9-35be-43c4-ac60-e5f05da1f575" />
+      <relativeChildShapes />
+      <moveableDecoratorHostShapes>
+        <moveableDecoratorHostShape manuallyPlaced="true" absoluteBounds="6.6875, 2.9375000000000004, 0.51066982746124268, 0.14800345897674561" shapeFieldName="NameDecorator" />
+      </moveableDecoratorHostShapes>
+      <nodes>
+        <useCaseShapeMoniker Id="9eed2f7e-5512-410d-a91d-a58c3ec19c09" />
+        <useCaseShapeMoniker Id="210f7dda-a590-4b3e-a23b-d3bd0c78e471" />
+      </nodes>
+    </extendConnector>
+    <useCaseAssociationConnector edgePoints="[(3.75 : 3.125); (5 : 3.125)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
+      <associationMoniker Id="c4f986f5-fa07-47c9-81a5-df205ced0882" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="ac5bfe97-b905-4ac6-a9e6-50065a37e2dd" />
+        <useCaseShapeMoniker Id="210f7dda-a590-4b3e-a23b-d3bd0c78e471" />
+      </nodes>
+    </useCaseAssociationConnector>
+    <useCaseShape Id="64eccc75-ddcb-4cd3-9d66-7eb49c4649e1" absoluteBounds="7.75, 3.625, 1.75, 0.5" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="4e0fd9b3-9886-4b72-bfe8-4698215dbe92" LastKnownName="Do movement" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <extendConnector edgePoints="[(7.96649539213148 : 3.71037384803287); (6.15499894000318 : 3.2574997350008)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black" useCaseStereotype="«extend»">
+      <extendMoniker Id="63af69d7-c1fd-4f36-8d67-cff359cc415a" />
+      <relativeChildShapes />
+      <moveableDecoratorHostShapes>
+        <moveableDecoratorHostShape manuallyPlaced="true" absoluteBounds="6.6875000000000009, 3.5625, 0.51066982746124268, 0.14800345897674561" shapeFieldName="NameDecorator" />
+      </moveableDecoratorHostShapes>
+      <nodes>
+        <useCaseShapeMoniker Id="64eccc75-ddcb-4cd3-9d66-7eb49c4649e1" />
+        <useCaseShapeMoniker Id="210f7dda-a590-4b3e-a23b-d3bd0c78e471" />
+      </nodes>
+    </extendConnector>
+    <rectangleShape Id="69e40a20-dc72-4e03-ae1b-de4d066ed3e4" absoluteBounds="4.375, 1.75, 5.5, 2.75" outlineColor="83, 134, 191" outlineThickness="0.03125" />
+  </nestedChildShapes>
+</useCaseDiagram>
