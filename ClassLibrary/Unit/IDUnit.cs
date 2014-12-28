@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ClassLibrary.Map;
 using ClassLibrary.Player;
 using ClassLibrary.Tile;
@@ -7,6 +8,12 @@ namespace ClassLibrary.Unit
 {
     public interface IDUnit : IUnit
     {
+        new int HealthPoint { get; set; }
+        new int AttackPoint { get; set; }
+        new int DefensePoint { get; set; }
+        new float MovePoint { get; set; }
+        new IPosition Position { get; set; }
+        ITile Tile { get; set; }
         IDPlayer IDPlayer { get; set; }
 
         /// <summary>
@@ -22,7 +29,7 @@ namespace ClassLibrary.Unit
         /// <param name="targetTile">The target tile</param>
         void MoveTo(IPosition targetPosition, ITile targetTile);
 
-        int GetScore();
+        int ComputeScore();
         void Kill(Unit killed);
 
         /// <summary>
@@ -43,5 +50,12 @@ namespace ClassLibrary.Unit
         /// Removes a life point from 
         /// </summary>
         void DecrementLifePoint();
+
+        /// <summary>
+        /// Performs a shallow copy of the unit
+        /// </summary>
+        /// <param name="other">The unit to copy the field from</param>
+        /// <returns>The newly created unit object</returns>
+        IDUnit ShallowCopy();
     }
 }

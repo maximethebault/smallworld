@@ -11,6 +11,13 @@ namespace ClassLibrary.Unit
         {
         }
 
+        public override IDUnit ShallowCopy()
+        {
+            var copy = new UnitDwarf(IDPlayer, Position, Tile);
+            ShallowCopyProperties(copy);
+            return copy;
+        }
+
         protected override bool IsMovementPossible(IPosition targetPosition, ITile targetTile, bool ennemyOnTargetTile)
         {
             if (Tile.IsMountain() && targetTile.IsMountain() && !ennemyOnTargetTile)
@@ -27,9 +34,9 @@ namespace ClassLibrary.Unit
             return base.GetNeededPointToMoveAt(targetTile);
         }
 
-        public override int GetScore()
+        public override int ComputeScore()
         {
-            return Tile.IsPlain() ? 0 : base.GetScore();
+            return Tile.IsPlain() ? 0 : base.ComputeScore();
         }
     }
 }

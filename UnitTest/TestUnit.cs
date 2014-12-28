@@ -31,6 +31,8 @@ namespace UnitTest
             var units = game.UnitsAt(new Position(0, 0));
             var unit = units.ElementAt(0);
             game.MoveUnit(unit, new Position(1, 0));
+            Assert.AreEqual(1, unit.Position.X);
+            Assert.AreEqual(0, unit.Position.Y);
         }
     }
 }

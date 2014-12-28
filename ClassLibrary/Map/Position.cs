@@ -46,11 +46,23 @@ namespace ClassLibrary.Map
              * Odd rows start with an offset, while even rows haven't got any
              */
             
-            // easiest case: neighboor 2 or 5: same row, difference on column index is 1
+            // neighboors 2, 5: same row, difference on column index is 1
             if (Y == other.Y && Math.Abs(X - other.X) == 1)
             {
                 return true;
             }
+            // neihgboors 1, 4, 3, 6 ; 'this' tile is on even row
+            if (Y % 2 == 0 && Math.Abs(Y - other.Y) == 1 && (X == other.X || X == other.X + 1))
+            {
+                return true;
+            }
+            // neihgboors 1, 4, 3, 6 ; 'this' tile is on odd row
+            // ReSharper disable once ConvertIfStatementToReturnStatement
+            if (Y % 2 == 1 && Math.Abs(Y - other.Y) == 1 && (X == other.X || X == other.X - 1))
+            {
+                return true;
+            }
+            return false;
         }
 
         public bool Equals(IPosition other)

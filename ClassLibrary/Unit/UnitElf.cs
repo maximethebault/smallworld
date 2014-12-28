@@ -12,6 +12,13 @@ namespace ClassLibrary.Unit
         {
         }
 
+        public override IDUnit ShallowCopy()
+        {
+            var copy = new UnitElf(IDPlayer, Position, Tile);
+            ShallowCopyProperties(copy);
+            return copy;
+        }
+
         public override void DecrementLifePoint()
         {
             if (HealthPoint == 1)

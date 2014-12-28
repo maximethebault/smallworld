@@ -17,22 +17,14 @@ namespace ClassLibrary.Unit
         protected static int UnitDefaultDefensePoint = 1;
         protected static float UnitDefaultMovePoint = 1;
 
-        public int HealthPoint { get; protected set; }
-        public int AttackPoint { get; protected set; }
-        public int DefensePoint { get; protected set; }
-        public float MovePoint { get; protected set; }
+        public int HealthPoint { get; set; }
+        public int AttackPoint { get; set; }
+        public int DefensePoint { get; set; }
+        public float MovePoint { get; set; }
 
-        public IPosition Position
-        {
-            get;
-            set;
-        }
+        public IPosition Position { get; set; }
 
-        public ITile Tile
-        {
-            get;
-            set;
-        }
+        public ITile Tile { get; set; }
 
         public IDPlayer IDPlayer { get; set; }
 
@@ -47,20 +39,11 @@ namespace ClassLibrary.Unit
             MovePoint = UnitDefaultMovePoint;
         }
 
-        /// <summary>
-        /// Checks if a unit is dead
-        /// </summary>
-        /// <returns>Whether the unit is dead</returns>
         public bool IsDead()
         {
             return HealthPoint <= 0;
         }
 
-        /// <summary>
-        /// Blindly moves the unit to the given position (doesn't do any consistency check!)
-        /// </summary>
-        /// <param name="targetPosition">The target position</param>
-        /// <param name="targetTile">The target tile</param>
         public void MoveTo(IPosition targetPosition, ITile targetTile)
         {
             Position = targetPosition;
@@ -68,7 +51,7 @@ namespace ClassLibrary.Unit
             MovePoint -= GetNeededPointToMoveAt(targetTile);
         }
 
-        public virtual int GetScore()
+        public virtual int ComputeScore()
         {
             return UnitDefaultScore;
         }
@@ -78,15 +61,6 @@ namespace ClassLibrary.Unit
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Performs the following checks on the given movement :
-        /// - Whether the unit has enough move point for this movement
-        /// - Whether the movement is possible, geographically wise
-        /// </summary>
-        /// <param name="targetPosition">The target position we'd like to probe</param>
-        /// <param name="targetTile">The target tile we'd like to probe</param>
-        /// <param name="ennemyOnTargetTile">Whether the target tile is occupied by an ennemy</param>
-        /// <returns>A boolean indicating whether the movement is possible</returns>
         public bool CanMoveTo(IPosition targetPosition, ITile targetTile, bool ennemyOnTargetTile)
         {
             return IsMovementPossible(targetPosition, targetTile, ennemyOnTargetTile) && GetNeededPointToMoveAt(targetTile) <= MovePoint;
@@ -107,32 +81,17 @@ namespace ClassLibrary.Unit
             MovePoint = UnitDefaultMovePoint;
         }
 
-        /// <summary>
-        /// Removes a life point from 
-        /// </summary>
         public virtual void DecrementLifePoint()
         {
             HealthPoint--;
             // TODO: something else? check dead?
         }
 
-        /// <summary>
-        /// Whether the movement is possible, geographically wise
-        /// </summary>
-        /// <param name="targetPosition">The target position we'd like to probe</param>
-        /// <param name="targetTile">The target tile we'd like to probe</param>
-        /// <param name="ennemyOnTargetTile">Whether the target tile is occupied by an ennemy</param>
-        /// <returns>A boolean indicating whether the movement is possible, geographically wise</returns>
         protected virtual bool IsMovementPossible(IPosition targetPosition, ITile targetTile, bool ennemyOnTargetTile)
         {
             return Position.IsAdjacent(targetPosition);
         }
 
-        /// <summary>
-        /// Get the number of move point needed for this movement
-        /// </summary>
-        /// <param name="targetTile">The target tile we'd like to probe</param>
-        /// <returns>The number of move point needed for this movement</returns>
         protected virtual float GetNeededPointToMoveAt(ITile targetTile)
         {
             return (float) UnitDefaultMovementCost;
@@ -154,6 +113,19 @@ namespace ClassLibrary.Unit
         public override int GetHashCode()
         {
             throw new NotImplementedException();
+        }
+
+        public abstract IDUnit ShallowCopy();
+
+        protected void ShallowCopyProperties(IDUnit copy)
+        {
+            copy.HealthPoint = HealthPoint;
+            copy.AttackPoint = AttackPoint;
+            copy.DefensePoint = DefensePoint;
+            copy.MovePoint = MovePoint;
+            copy.Position = Position;
+            copy.Tile = Tile;
+            copy.IDPlayer = IDPlayer;
         }
     }
 }

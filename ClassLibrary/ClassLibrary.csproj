@@ -44,16 +44,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameEngine\Exception\TooFewPlayersException.cs" />
-    <Compile Include="GameEngine\Exception\SameRaceSelectedException.cs" />
-    <Compile Include="GameEngine\Builder\GameCreator.cs" />
-    <Compile Include="GameEngine\IDGame.cs" />
-    <Compile Include="GameEngine\IGame.cs" />
-    <Compile Include="GameEngine\Builder\IGameBuilder.cs" />
-    <Compile Include="GameEngine\Builder\ILoadGameBuilder.cs" />
+    <Compile Include="Game\Exception\TooFewPlayersException.cs" />
+    <Compile Include="Game\Exception\SameRaceSelectedException.cs" />
+    <Compile Include="Game\Builder\GameCreator.cs" />
+    <Compile Include="Game\IDGame.cs" />
+    <Compile Include="Game\IGame.cs" />
+    <Compile Include="Game\Builder\IGameBuilder.cs" />
+    <Compile Include="Game\Builder\ILoadGameBuilder.cs" />
     <Compile Include="Map\IDMap.cs" />
     <Compile Include="Map\IMap.cs" />
-    <Compile Include="GameEngine\Builder\INewGameBuilder.cs" />
+    <Compile Include="Game\Builder\INewGameBuilder.cs" />
     <Compile Include="Player\IDPlayer.cs" />
     <Compile Include="Player\IPlayer.cs" />
     <Compile Include="Race\IDRace.cs" />
@@ -76,17 +76,17 @@
     <Compile Include="Tile\Desert.cs" />
     <Compile Include="Difficulty\IDifficultyStrategy.cs" />
     <Compile Include="Tile\Forest.cs" />
-    <Compile Include="GameEngine\Game.cs" />
-    <Compile Include="GameEngine\Builder\GameBuilder.cs" />
-    <Compile Include="GameEngine\Builder\LoadGameBuilder.cs" />
+    <Compile Include="Game\Game.cs" />
+    <Compile Include="Game\Builder\GameBuilder.cs" />
+    <Compile Include="Game\Builder\LoadGameBuilder.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Tile\Mountain.cs" />
-    <Compile Include="GameEngine\Builder\NewGameBuilder.cs" />
+    <Compile Include="Game\Builder\NewGameBuilder.cs" />
     <Compile Include="Tile\Plain.cs" />
     <Compile Include="Player\Player.cs" />
     <Compile Include="Turn\UnitTurn.cs" />
     <Compile Include="Difficulty\StandardMapStrategy.cs" />
-    <Compile Include="GameEngine\Exception\TooManyPlayersException.cs" />
+    <Compile Include="Game\Exception\TooManyPlayersException.cs" />
     <Compile Include="Turn\PlayerTurn.cs" />
     <Compile Include="Unit\Unit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

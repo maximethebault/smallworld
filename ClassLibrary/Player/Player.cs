@@ -49,7 +49,7 @@ namespace ClassLibrary.Player
 
         public int ComputeScore()
         {
-            return IDUnits.Sum(unit => unit.GetScore());
+            return IDUnits.Sum(unit => unit.ComputeScore());
         }
 
         public bool HasUnitLeft()
