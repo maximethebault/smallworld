@@ -7,11 +7,8 @@ namespace ClassLibrary.Player
 {
     public interface IDPlayer : IPlayer
     {
-        List<IDUnit> IDUnits
-        {
-            get;
-            set;
-        }
+        List<IDUnit> IDUnits { get; set; }
+        IDRace IDRace { get; }
         void RemoveUnit(IUnit unit);
         int ComputeScore();
         bool HasUnitLeft();

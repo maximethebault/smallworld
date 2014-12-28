@@ -27,7 +27,7 @@ namespace UnitTest
             newGameBuilder.SetDifficulty(new SmallMapStrategy());
             var gameCreator = new GameCreator(newGameBuilder);
             var game = gameCreator.CreateGame().GetGame();
-            IEnumerable<IPlayer> actualPlayersList = game.GetPlayers();
+            IEnumerable<IPlayer> actualPlayersList = game.Players;
             Assert.IsFalse(actualPlayersList.IsNullOrEmpty());
             IEnumerable<IPlayer> expectedPlayersList = new List<IPlayer> { (IPlayer)new Player("Kikou", new RaceDwarf()), (IPlayer)new Player("salut", new RaceOrc()) };
             ComparePlayerList(expectedPlayersList, actualPlayersList);
@@ -81,8 +81,8 @@ namespace UnitTest
                 {
                     var expectedPlayer = expectedPlayersIterator.Current;
                     var actualPlayer = actualPlayersIterator.Current;
-                    Assert.AreEqual(expectedPlayer.GetName(), actualPlayer.GetName());
-                    Assert.AreEqual(expectedPlayer.GetRace().GetName(), actualPlayer.GetRace().GetName());
+                    Assert.AreEqual(expectedPlayer.Name, actualPlayer.Name);
+                    Assert.AreEqual(expectedPlayer.Race.GetName(), actualPlayer.Race.GetName());
                 }
             }
         }
@@ -124,7 +124,7 @@ namespace UnitTest
             newGameBuilder.SetDifficulty(difficulty);
             var gameCreator = new GameCreator(newGameBuilder);
             var game = gameCreator.CreateGame().GetGame();
-            var map = game.GetMap();
+            var map = game.Map;
 
             // we're going to check if the number of tiles for each type is well-distributed
             var nbTilesForType = new int[difficulty.GetNbTileTypes()];
@@ -132,7 +132,7 @@ namespace UnitTest
             {
                 for (var j = 0; j < difficulty.GetMapWidth(); ++j)
                 {
-                    var tile = map.GetTileAtPosition(new Position(i, j));
+                    var tile = map.TileAtPosition(new Position(i, j));
                     if (tile.IsDesert())
                     {
                         nbTilesForType[0]++;
@@ -209,30 +209,30 @@ namespace UnitTest
             newGameBuilder.SetDifficulty(difficulty);
             var gameCreator = new GameCreator(newGameBuilder);
             var game = (Game) gameCreator.CreateGame().GetGame();
-            var players = game.Players;
+            var players = game.IDPlayers;
             var playerNo = 0;
             using (var playersIterator = players.GetEnumerator())
             {
                 while (playersIterator.MoveNext())
                 {
                     var player = playersIterator.Current;
-                    var units = player.Units;
+                    var units = player.IDUnits;
                     Assert.AreEqual(difficulty.GetNbUnitsPerRace(), units.Count);
                     using (var unitsIterator = units.GetEnumerator())
                     {
                         while (unitsIterator.MoveNext())
                         {
                             var unit = unitsIterator.Current;
-                            var unitPosition = unit.GetPosition();
+                            var unitPosition = unit.Position;
                             if (playerNo == 0)
                             {
-                                Assert.AreEqual(0, unitPosition.GetX());
-                                Assert.AreEqual(0, unitPosition.GetY());
+                                Assert.AreEqual(0, unitPosition.X);
+                                Assert.AreEqual(0, unitPosition.Y);
                             }
                             else
                             {
-                                Assert.AreEqual(difficulty.GetMapWidth()-1, unitPosition.GetX());
-                                Assert.AreEqual(difficulty.GetMapWidth() - 1, unitPosition.GetY());
+                                Assert.AreEqual(difficulty.GetMapWidth()-1, unitPosition.X);
+                                Assert.AreEqual(difficulty.GetMapWidth() - 1, unitPosition.Y);
                             }
                         }
                     }

@@ -11,47 +11,43 @@ using ClassLibrary.Unit.Exception;
 
 namespace ClassLibrary.GameEngine
 {
-    public class Game : IGame
+    public class Game : IDGame
     {
         private int elapsedTurns;
         private IEnumerable<IDPlayer> playerTurnOrder;
 
         public Game()
         {
-            //throw new NotImplementedException();
         }
 
-        public List<IDPlayer> Players
+        public List<IDPlayer> IDPlayers { get; set; }
+
+        public List<IPlayer> Players
+        {
+            get
+            {
+                return IDPlayers.Cast<IPlayer>().ToList();
+            }
+        }
+
+        public IDMap IDMap
         {
             get;
             set;
         }
 
-        public List<IPlayer> GetPlayers()
+        public IMap Map
         {
-            return Players.Cast<IPlayer>().ToList();
+            get
+            {
+                return IDMap;
+            }
         }
 
-        public Map.Map Map
+        public IDPlayerTurn CurrentIDPlayerTurn
         {
             get;
             set;
-        }
-
-        public IMap GetMap()
-        {
-            return Map;
-        }
-
-        public PlayerTurn CurrentPlayerTurn
-        {
-            get;
-            set;
-        }
-
-        public IPlayerTurn GetCurrentPlayerTurn()
-        {
-            return CurrentPlayerTurn;
         }
 
         public IDifficultyStrategy DifficultyStrategy
@@ -64,7 +60,7 @@ namespace ClassLibrary.GameEngine
         {
             IDPlayer targetPlayer = null;
             IDUnit targetUnit = null;
-            foreach (var player in Players)
+            foreach (var player in IDPlayers)
             {
                 targetUnit = player.IDUnits.FirstOrDefault(movedUnit.Equals);
                 targetPlayer = player;
@@ -77,8 +73,8 @@ namespace ClassLibrary.GameEngine
             {
                 throw new UnitNotFoundException("The given unit doesn't belong to any player, and thus can't be moved.");
             }
-            var targetTile = Map.TileMap[targetPosition.GetX(), targetPosition.GetY()];
-            var unitsOnTile = this.GetIDUnitsAt(targetPosition);
+            var targetTile = Map.TileAtPosition(targetPosition);
+            var unitsOnTile = this.IDUnitsAt(targetPosition);
             var isEnnemyOnTargetTile = unitsOnTile != null && !unitsOnTile.First().IDPlayer.Equals(targetPlayer);
             if (!targetUnit.CanMoveTo(targetPosition, targetTile, isEnnemyOnTargetTile))
             {
@@ -114,7 +110,7 @@ namespace ClassLibrary.GameEngine
         {
             IDPlayer targetPlayer = null;
             IDUnit targetUnit = null;
-            foreach (var player in Players)
+            foreach (var player in IDPlayers)
             {
                 targetUnit = player.IDUnits.FirstOrDefault(movedUnit.Equals);
                 targetPlayer = player;
@@ -127,8 +123,8 @@ namespace ClassLibrary.GameEngine
             {
                 throw new UnitNotFoundException("The given unit doesn't belong to any player, and thus can't be moved.");
             }
-            var targetTile = Map.TileMap[targetPosition.GetX(), targetPosition.GetY()];
-            var unitsOnTile = this.GetIDUnitsAt(targetPosition);
+            var targetTile = Map.TileAtPosition(targetPosition);
+            var unitsOnTile = this.IDUnitsAt(targetPosition);
             var isEnnemyOnTargetTile = unitsOnTile != null && !unitsOnTile.First().IDPlayer.Equals(targetPlayer);
             return targetUnit.CanMoveTo(targetPosition, targetTile, isEnnemyOnTargetTile);
         }
@@ -138,7 +134,7 @@ namespace ClassLibrary.GameEngine
             throw new NotImplementedException();
         }
 
-        private void EngageUnit(Unit.Unit attacker, Unit.Unit attackee)
+        private void EngageUnit(IDUnit attacker, IDUnit attackee)
         {
             throw new NotImplementedException();
         }
@@ -148,12 +144,12 @@ namespace ClassLibrary.GameEngine
             throw new NotImplementedException();
         }
 
-        private List<IDUnit> GetIDUnitsAt(IPosition position)
+        private List<IDUnit> IDUnitsAt(IPosition position)
         {
-            return Players.Select(player => player.IDUnitsAt(position)).FirstOrDefault(playerUnits => playerUnits.Count > 0);
+            return IDPlayers.Select(player => player.IDUnitsAt(position)).FirstOrDefault(playerUnits => playerUnits.Count > 0);
         }
 
-        public List<IUnit> GetUnitsAt(IPosition position)
+        public List<IUnit> UnitsAt(IPosition position)
         {
             return Players.Select(player => player.UnitsAt(position)).FirstOrDefault(playerUnits => playerUnits.Count > 0);
         }

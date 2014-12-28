@@ -1,18 +1,20 @@
 ﻿using System;
 using ClassLibrary.Map;
 using ClassLibrary.Player;
+using ClassLibrary.Tile;
 
 namespace ClassLibrary.Unit
 {
     public class UnitElf : Unit
     {
-        public UnitElf(IDPlayer player, IPosition position, Tile.Tile tile) : base(player, position, tile)
+        public UnitElf(IDPlayer player, IPosition position, ITile tile)
+            : base(player, position, tile)
         {
         }
 
         public override void DecrementLifePoint()
         {
-            if (_lifePoint == 1)
+            if (HealthPoint == 1)
             {
                 // a bonus allows an elf to survive once out of twice when it runs out of life points
                 var rnd = new Random();
@@ -22,10 +24,10 @@ namespace ClassLibrary.Unit
                     return;
                 }
             }
-            _lifePoint--;
+            HealthPoint--;
         }
 
-        protected override float GetNeededPointToMoveAt(Tile.Tile targetTile)
+        protected override float GetNeededPointToMoveAt(ITile targetTile)
         {
             if (targetTile.IsForest())
             {

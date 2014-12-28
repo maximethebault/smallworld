@@ -4,6 +4,7 @@ using System.Linq;
 using ClassLibrary.Difficulty;
 using ClassLibrary.GameEngine.Exception;
 using ClassLibrary.Map;
+using ClassLibrary.Player;
 using ClassLibrary.Tile;
 using Wrapper;
 
@@ -12,12 +13,12 @@ namespace ClassLibrary.GameEngine.Builder
     public class NewGameBuilder : GameBuilder, INewGameBuilder
     {
         private readonly List<String> _playerNames;
-        private readonly List<Race.Race> _playerRaces;
+        private readonly List<Race.IDRace> _playerRaces;
         private WrapperAlgo _wrapperAlgo;
 
         public NewGameBuilder()
         {
-            _playerRaces = new List<Race.Race>();
+            _playerRaces = new List<Race.IDRace>();
             _playerNames = new List<string>();
         }
 
@@ -46,7 +47,7 @@ namespace ClassLibrary.GameEngine.Builder
             if (_playerNames.Count < difficulty.GetMinPlayer())
                 throw new TooFewPlayersException("Cette carte nécessite au moins " + difficulty.GetMinPlayer() + " joueurs, " + _playerNames.Count + " donné(s)");
 
-            var players = new List<Player.Player>();
+            var players = new List<IDPlayer>();
             var alreadyUsedRaces = new List<String>();
 
             using (var playerNamesIterator = _playerNames.GetEnumerator())
@@ -67,7 +68,7 @@ namespace ClassLibrary.GameEngine.Builder
                     }
             }
             }
-            Game.Players = players;
+            Game.IDPlayers = players;
         }
 
         public unsafe override void BuildUnits()
@@ -76,12 +77,12 @@ namespace ClassLibrary.GameEngine.Builder
             var players = _wrapperAlgo.placePlayers();
             for (var i = 0; i < Game.Players.Count; ++i)
             {
-                var player = Game.Players.ElementAt(i);
+                var player = Game.IDPlayers.ElementAt(i);
                 for (var j = 0; j < difficulty.GetNbUnitsPerRace(); ++j)
                 {
                     var position = new Position(players[i][0], players[i][1]);
-                    var unit = player.Race.CreateUnit(player, position, Game.Map.TileMap[position.GetX(), position.GetY()]);
-                    player.Units.Add(unit);
+                    var unit = player.IDRace.CreateUnit(player, position, Game.Map.TileAtPosition(position));
+                    player.IDUnits.Add(unit);
                 }
             }
         }
@@ -115,7 +116,7 @@ namespace ClassLibrary.GameEngine.Builder
                 }
             }
 
-            Game.Map = map;
+            Game.IDMap = map;
         }
 
         public override void BuildDifficulty()
@@ -123,7 +124,7 @@ namespace ClassLibrary.GameEngine.Builder
             Game.DifficultyStrategy = Difficulty;
         }
 
-        public void AddPlayer(string name, Race.Race race)
+        public void AddPlayer(string name, Race.IDRace race)
         {
             if (name == null || race == null || name.Length < 1)
             {

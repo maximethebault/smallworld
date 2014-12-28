@@ -2,7 +2,7 @@
 
 namespace ClassLibrary.Map
 {
-    public class Map : IMap
+    public class Map : IDMap
     {
         public Tile.Tile[,] TileMap
         {
@@ -21,12 +21,12 @@ namespace ClassLibrary.Map
 
         public void AddTile(IPosition position, Tile.Tile tile)
         {
-            TileMap[position.GetX(), position.GetY()] = tile;
+            TileMap[position.X, position.Y] = tile;
         }
 
-        public ITile GetTileAtPosition(IPosition position)
+        public ITile TileAtPosition(IPosition position)
         {
-            return TileMap[position.GetX(), position.GetY()];
+            return TileMap[position.X, position.Y];
         }
 
     }

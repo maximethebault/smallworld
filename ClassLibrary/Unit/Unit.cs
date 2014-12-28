@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ClassLibrary.Map;
 using ClassLibrary.Player;
+using ClassLibrary.Tile;
 
 namespace ClassLibrary.Unit
 {
@@ -16,10 +17,10 @@ namespace ClassLibrary.Unit
         protected static int UnitDefaultDefensePoint = 1;
         protected static float UnitDefaultMovePoint = 1;
 
-        protected int _lifePoint;
-        protected int _attackPoint;
-        protected int _defensePoint;
-        protected float _movePoint;
+        public int HealthPoint { get; protected set; }
+        public int AttackPoint { get; protected set; }
+        public int DefensePoint { get; protected set; }
+        public float MovePoint { get; protected set; }
 
         public IPosition Position
         {
@@ -27,7 +28,7 @@ namespace ClassLibrary.Unit
             set;
         }
 
-        public Tile.Tile Tile
+        public ITile Tile
         {
             get;
             set;
@@ -35,15 +36,15 @@ namespace ClassLibrary.Unit
 
         public IDPlayer IDPlayer { get; set; }
 
-        protected Unit(IDPlayer player, IPosition position, Tile.Tile tile)
+        protected Unit(IDPlayer player, IPosition position, ITile tile)
         {
             IDPlayer = player;
             Position = position;
             Tile = tile;
-            _lifePoint = UnitDefaultLifePoint;
-            _attackPoint = UnitDefaultAttackPoint;
-            _defensePoint = UnitDefaultDefensePoint;
-            _movePoint = UnitDefaultMovePoint;
+            HealthPoint = UnitDefaultLifePoint;
+            AttackPoint = UnitDefaultAttackPoint;
+            DefensePoint = UnitDefaultDefensePoint;
+            MovePoint = UnitDefaultMovePoint;
         }
 
         /// <summary>
@@ -52,7 +53,7 @@ namespace ClassLibrary.Unit
         /// <returns>Whether the unit is dead</returns>
         public bool IsDead()
         {
-            return _lifePoint <= 0;
+            return HealthPoint <= 0;
         }
 
         /// <summary>
@@ -60,11 +61,11 @@ namespace ClassLibrary.Unit
         /// </summary>
         /// <param name="targetPosition">The target position</param>
         /// <param name="targetTile">The target tile</param>
-        public void MoveTo(IPosition targetPosition, Tile.Tile targetTile)
+        public void MoveTo(IPosition targetPosition, ITile targetTile)
         {
             Position = targetPosition;
             Tile = targetTile;
-            _movePoint -= GetNeededPointToMoveAt(targetTile);
+            MovePoint -= GetNeededPointToMoveAt(targetTile);
         }
 
         public virtual int GetScore()
@@ -86,9 +87,9 @@ namespace ClassLibrary.Unit
         /// <param name="targetTile">The target tile we'd like to probe</param>
         /// <param name="ennemyOnTargetTile">Whether the target tile is occupied by an ennemy</param>
         /// <returns>A boolean indicating whether the movement is possible</returns>
-        public bool CanMoveTo(IPosition targetPosition, Tile.Tile targetTile, bool ennemyOnTargetTile)
+        public bool CanMoveTo(IPosition targetPosition, ITile targetTile, bool ennemyOnTargetTile)
         {
-            return IsMovementPossible(targetPosition, targetTile, ennemyOnTargetTile) && GetNeededPointToMoveAt(targetTile) <= _movePoint;
+            return IsMovementPossible(targetPosition, targetTile, ennemyOnTargetTile) && GetNeededPointToMoveAt(targetTile) <= MovePoint;
         }
 
         public void ComputeRoundWinner(Unit attackee)
@@ -96,14 +97,14 @@ namespace ClassLibrary.Unit
             throw new NotImplementedException();
         }
 
-        public static Unit GetBestUnit(IEnumerable<Unit> units)
+        public static IDUnit GetBestUnit(IEnumerable<IDUnit> units)
         {
-            return units.OrderBy(unit => unit._lifePoint).Last();
+            return units.OrderBy(unit => unit.HealthPoint).Last();
         }
 
         public void ResetMovePoint()
         {
-            _movePoint = UnitDefaultMovePoint;
+            MovePoint = UnitDefaultMovePoint;
         }
 
         /// <summary>
@@ -111,7 +112,7 @@ namespace ClassLibrary.Unit
         /// </summary>
         public virtual void DecrementLifePoint()
         {
-            _lifePoint--;
+            HealthPoint--;
             // TODO: something else? check dead?
         }
 
@@ -122,7 +123,7 @@ namespace ClassLibrary.Unit
         /// <param name="targetTile">The target tile we'd like to probe</param>
         /// <param name="ennemyOnTargetTile">Whether the target tile is occupied by an ennemy</param>
         /// <returns>A boolean indicating whether the movement is possible, geographically wise</returns>
-        protected virtual bool IsMovementPossible(IPosition targetPosition, Tile.Tile targetTile, bool ennemyOnTargetTile)
+        protected virtual bool IsMovementPossible(IPosition targetPosition, ITile targetTile, bool ennemyOnTargetTile)
         {
             return Position.IsAdjacent(targetPosition);
         }
@@ -132,7 +133,7 @@ namespace ClassLibrary.Unit
         /// </summary>
         /// <param name="targetTile">The target tile we'd like to probe</param>
         /// <returns>The number of move point needed for this movement</returns>
-        protected virtual float GetNeededPointToMoveAt(Tile.Tile targetTile)
+        protected virtual float GetNeededPointToMoveAt(ITile targetTile)
         {
             return (float) UnitDefaultMovementCost;
         }

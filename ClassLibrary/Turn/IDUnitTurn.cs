@@ -2,8 +2,8 @@ using ClassLibrary.Unit;
 
 namespace ClassLibrary.Turn
 {
-    public interface IUnitTurn
+    public interface IDUnitTurn
     {
-        IUnit GetCurrentUnit();
+        IUnit CurrentUnit { get; }
     }
 }

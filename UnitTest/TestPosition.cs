@@ -6,15 +6,14 @@ namespace UnitTest
 {
     public class MockPosition : IPosition
     {
-
-        public int GetY()
+        public int Y
         {
-            return 2;
+            get { return 2; }
         }
 
-        public int GetX()
+        public int X
         {
-            return 1;
+            get { return 1; }
         }
 
         public bool IsAdjacent(IPosition coordinate)
@@ -24,7 +23,7 @@ namespace UnitTest
 
         public bool Equals(IPosition other)
         {
-            return GetY() == other.GetY() && GetX() == other.GetX();
+            return Y == other.Y && X == other.X;
         }
 
         public override bool Equals(object obj)

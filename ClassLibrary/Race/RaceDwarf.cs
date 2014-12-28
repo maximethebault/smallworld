@@ -1,16 +1,18 @@
 ﻿using ClassLibrary.Map;
+using ClassLibrary.Player;
+using ClassLibrary.Tile;
 using ClassLibrary.Unit;
 
 namespace ClassLibrary.Race
 {
-    public class RaceDwarf : Race
+    public class RaceDwarf : IDRace
     {
-        public override string GetName()
+        public string GetName()
         {
             return "nain";
         }
 
-        public override Unit.Unit CreateUnit(Player.Player player, IPosition position, Tile.Tile tile)
+        public IDUnit CreateUnit(IDPlayer player, IPosition position, ITile tile)
         {
             return new UnitDwarf(player, position, tile);
         }

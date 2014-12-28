@@ -8,14 +8,14 @@ namespace ClassLibrary.GameEngine
 {
     public interface IGame
     {
-        List<IPlayer> GetPlayers();
-        IMap GetMap();
-        IPlayerTurn GetCurrentPlayerTurn();
+        List<IPlayer> Players { get; }
+        IMap Map { get; }
+        IDPlayerTurn CurrentIDPlayerTurn { get; }
         void MoveUnit(IUnit unit, IPosition targetPosition);
         void FinishUnitTurn();
         void FinishPlayerTurn();
         bool CanMoveUnit(IUnit unit, IPosition targetPosition);
-        List<IUnit> GetUnitsAt(IPosition position);
+        List<IUnit> UnitsAt(IPosition position);
         void StartGame();
     }
 }

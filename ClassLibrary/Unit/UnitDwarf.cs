@@ -1,22 +1,24 @@
 ﻿using ClassLibrary.Map;
 using ClassLibrary.Player;
+using ClassLibrary.Tile;
 
 namespace ClassLibrary.Unit
 {
     public class UnitDwarf : Unit
     {
-        public UnitDwarf(IDPlayer player, IPosition position, Tile.Tile tile) : base(player, position, tile)
+        public UnitDwarf(IDPlayer player, IPosition position, ITile tile)
+            : base(player, position, tile)
         {
         }
 
-        protected override bool IsMovementPossible(IPosition targetPosition, Tile.Tile targetTile, bool ennemyOnTargetTile)
+        protected override bool IsMovementPossible(IPosition targetPosition, ITile targetTile, bool ennemyOnTargetTile)
         {
             if (Tile.IsMountain() && targetTile.IsMountain() && !ennemyOnTargetTile)
                 return true;
             return base.IsMovementPossible(targetPosition, targetTile, ennemyOnTargetTile);
         }
 
-        protected override float GetNeededPointToMoveAt(Tile.Tile targetTile)
+        protected override float GetNeededPointToMoveAt(ITile targetTile)
         {
             if (targetTile.IsPlain())
             {

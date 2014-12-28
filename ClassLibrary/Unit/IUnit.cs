@@ -6,6 +6,10 @@ namespace ClassLibrary.Unit
 {
     public interface IUnit : IEquatable<IUnit>
     {
+        int HealthPoint { get; }
+        int AttackPoint { get; }
+        int DefensePoint { get; }
+        float MovePoint { get; }
         IPosition Position { get; }
 
         /// <summary>

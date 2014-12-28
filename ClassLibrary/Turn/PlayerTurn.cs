@@ -4,7 +4,7 @@ using ClassLibrary.Player;
 
 namespace ClassLibrary.Turn
 {
-    public class PlayerTurn : IPlayerTurn
+    public class PlayerTurn : IDPlayerTurn
     {
         private IEnumerator<Player.Player> _playerOrderIterator;
 
@@ -13,21 +13,16 @@ namespace ClassLibrary.Turn
             _playerOrderIterator = playerOrderIterator;
         }
 
-        public UnitTurn CurrentUnitTurn
+        public IDUnitTurn CurrentIDUnitTurn
         {
             get;
             set;
         }
 
-        public Player.Player CurrentPlayer
+        public IPlayer CurrentPlayer
         {
             get;
             set;
-        }
-
-        public IUnitTurn GetCurrentUnitTurn()
-        {
-            return CurrentUnitTurn;
         }
 
         public IPlayer GetCurrentPlayer()

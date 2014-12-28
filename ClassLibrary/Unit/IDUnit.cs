@@ -1,6 +1,7 @@
 ﻿using System;
 using ClassLibrary.Map;
 using ClassLibrary.Player;
+using ClassLibrary.Tile;
 
 namespace ClassLibrary.Unit
 {
@@ -19,7 +20,7 @@ namespace ClassLibrary.Unit
         /// </summary>
         /// <param name="targetPosition">The target position</param>
         /// <param name="targetTile">The target tile</param>
-        void MoveTo(IPosition targetPosition, Tile.Tile targetTile);
+        void MoveTo(IPosition targetPosition, ITile targetTile);
 
         int GetScore();
         void Kill(Unit killed);
@@ -33,7 +34,7 @@ namespace ClassLibrary.Unit
         /// <param name="targetTile">The target tile we'd like to probe</param>
         /// <param name="ennemyOnTargetTile">Whether the target tile is occupied by an ennemy</param>
         /// <returns>A boolean indicating whether the movement is possible</returns>
-        bool CanMoveTo(IPosition targetPosition, Tile.Tile targetTile, bool ennemyOnTargetTile);
+        bool CanMoveTo(IPosition targetPosition, ITile targetTile, bool ennemyOnTargetTile);
 
         void ComputeRoundWinner(Unit attackee);
         void ResetMovePoint();

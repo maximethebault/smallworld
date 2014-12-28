@@ -4,10 +4,10 @@ using ClassLibrary.Unit;
 
 namespace ClassLibrary.Turn
 {
-    public class UnitTurn : IUnitTurn
+    public class UnitTurn : IDUnitTurn
     {
 
-        public Unit.Unit CurrentUnit
+        public IUnit CurrentUnit
         {
             get;
             set;
@@ -28,11 +28,6 @@ namespace ClassLibrary.Turn
         public void FinishUnitTurn()
         {
             throw new NotImplementedException();
-        }
-
-        public IUnit GetCurrentUnit()
-        {
-            return CurrentUnit;
         }
     }
 }

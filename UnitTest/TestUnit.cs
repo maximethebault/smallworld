@@ -28,7 +28,7 @@ namespace UnitTest
             newGameBuilder.SetDifficulty(difficulty);
             var gameCreator = new GameCreator(newGameBuilder);
             var game = (Game) gameCreator.CreateGame().GetGame();
-            var units = game.GetUnitsAt(new Position(0, 0));
+            var units = game.UnitsAt(new Position(0, 0));
             var unit = units.ElementAt(0);
             game.MoveUnit(unit, new Position(1, 0));
         }

@@ -4,6 +4,6 @@ namespace ClassLibrary.Map
 {
     public interface IMap
     {
-        ITile GetTileAtPosition(IPosition position);
+        ITile TileAtPosition(IPosition position);
     }
 }

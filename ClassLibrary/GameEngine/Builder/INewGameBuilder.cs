@@ -7,6 +7,6 @@ namespace ClassLibrary.GameEngine.Builder
 
         void SetDifficulty(IDifficultyStrategy value);
 
-        void AddPlayer(string name, Race.Race race);
+        void AddPlayer(string name, Race.IDRace race);
     }
 }

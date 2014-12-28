@@ -9,10 +9,10 @@ namespace ClassLibrary.Player
 {
     public class Player : IDPlayer
     {
-        public Player(string name, Race.Race raceImpl)
+        public Player(string name, Race.IDRace race)
         {
             Name = name;
-            RaceImpl = raceImpl;
+            IDRace = race;
             IDUnits = new List<IDUnit>();
         }
 
@@ -22,12 +22,7 @@ namespace ClassLibrary.Player
             set;
         }
 
-        public string GetName()
-        {
-            return Name;
-        }
-
-        public Race.Race RaceImpl
+        public IDRace IDRace
         {
             get;
             set;
@@ -37,7 +32,7 @@ namespace ClassLibrary.Player
         {
             get
             {
-                return RaceImpl;
+                return IDRace;
             }
         }
 

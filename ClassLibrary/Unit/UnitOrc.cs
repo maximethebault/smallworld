@@ -1,5 +1,6 @@
 ﻿using ClassLibrary.Map;
 using ClassLibrary.Player;
+using ClassLibrary.Tile;
 
 namespace ClassLibrary.Unit
 {
@@ -7,7 +8,8 @@ namespace ClassLibrary.Unit
     {
         private int _bonusPoint;
 
-        public UnitOrc(IDPlayer player, IPosition position, Tile.Tile tile) : base(player, position, tile)
+        public UnitOrc(IDPlayer player, IPosition position, ITile tile)
+            : base(player, position, tile)
         {
             _bonusPoint = 0;
         }
@@ -25,7 +27,7 @@ namespace ClassLibrary.Unit
             return _bonusPoint + base.GetScore();
         }
 
-        protected override float GetNeededPointToMoveAt(Tile.Tile targetTile)
+        protected override float GetNeededPointToMoveAt(ITile targetTile)
         {
             if (targetTile.IsPlain())
             {
