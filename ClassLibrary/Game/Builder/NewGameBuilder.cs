@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using ClassLibrary.Difficulty;
-using ClassLibrary.GameEngine.Exception;
+using ClassLibrary.Game.Exception;
 using ClassLibrary.Map;
 using ClassLibrary.Player;
 using ClassLibrary.Tile;
 using Wrapper;
 
-namespace ClassLibrary.GameEngine.Builder
+namespace ClassLibrary.Game.Builder
 {
     public class NewGameBuilder : GameBuilder, INewGameBuilder
     {

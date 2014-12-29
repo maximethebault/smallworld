@@ -1,4 +1,4 @@
-﻿namespace ClassLibrary.GameEngine.Exception
+﻿namespace ClassLibrary.Game.Exception
 {
     public class SameRaceSelectedException : System.Exception
     {

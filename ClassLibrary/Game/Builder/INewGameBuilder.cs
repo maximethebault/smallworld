@@ -1,6 +1,6 @@
 ﻿using ClassLibrary.Difficulty;
 
-namespace ClassLibrary.GameEngine.Builder
+namespace ClassLibrary.Game.Builder
 {
     public interface INewGameBuilder : IGameBuilder
     {

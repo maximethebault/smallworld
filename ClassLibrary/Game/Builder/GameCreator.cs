@@ -1,4 +1,4 @@
-﻿namespace ClassLibrary.GameEngine.Builder
+﻿namespace ClassLibrary.Game.Builder
 {
     public class GameCreator
     {

@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using ClassLibrary;
 using ClassLibrary.Difficulty;
-using ClassLibrary.GameEngine;
-using ClassLibrary.GameEngine.Builder;
-using ClassLibrary.GameEngine.Exception;
+using ClassLibrary.Game;
+using ClassLibrary.Game.Builder;
+using ClassLibrary.Game.Exception;
 using ClassLibrary.Map;
 using ClassLibrary.Player;
 using ClassLibrary.Race;

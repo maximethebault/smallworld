@@ -114,18 +114,5 @@ namespace ClassLibrary.Unit
         {
             throw new NotImplementedException();
         }
-
-        public abstract IDUnit ShallowCopy();
-
-        protected void ShallowCopyProperties(IDUnit copy)
-        {
-            copy.HealthPoint = HealthPoint;
-            copy.AttackPoint = AttackPoint;
-            copy.DefensePoint = DefensePoint;
-            copy.MovePoint = MovePoint;
-            copy.Position = Position;
-            copy.Tile = Tile;
-            copy.IDPlayer = IDPlayer;
-        }
     }
 }

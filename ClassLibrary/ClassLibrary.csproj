@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,6 +45,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\Exception\NoFightException.cs" />
+    <Compile Include="Game\Exception\FightInProgressException.cs" />
     <Compile Include="Game\Exception\TooFewPlayersException.cs" />
     <Compile Include="Game\Exception\SameRaceSelectedException.cs" />
     <Compile Include="Game\Builder\GameCreator.cs" />
@@ -54,6 +57,11 @@
     <Compile Include="Map\IDMap.cs" />
     <Compile Include="Map\IMap.cs" />
     <Compile Include="Game\Builder\INewGameBuilder.cs" />
+    <Compile Include="Move\Fight\Fight.cs" />
+    <Compile Include="Move\Fight\IDFight.cs" />
+    <Compile Include="Move\Fight\IFight.cs" />
+    <Compile Include="Move\IMove.cs" />
+    <Compile Include="Move\Move.cs" />
     <Compile Include="Player\IDPlayer.cs" />
     <Compile Include="Player\IPlayer.cs" />
     <Compile Include="Race\IDRace.cs" />

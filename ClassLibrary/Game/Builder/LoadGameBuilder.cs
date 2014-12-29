@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ClassLibrary.GameEngine.Builder
+namespace ClassLibrary.Game.Builder
 {
     public class LoadGameBuilder : GameBuilder, ILoadGameBuilder
     {

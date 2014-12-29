@@ -50,12 +50,5 @@ namespace ClassLibrary.Unit
         /// Removes a life point from 
         /// </summary>
         void DecrementLifePoint();
-
-        /// <summary>
-        /// Performs a shallow copy of the unit
-        /// </summary>
-        /// <param name="other">The unit to copy the field from</param>
-        /// <returns>The newly created unit object</returns>
-        IDUnit ShallowCopy();
     }
 }

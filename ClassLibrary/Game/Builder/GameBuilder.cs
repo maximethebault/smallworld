@@ -1,8 +1,8 @@
-﻿namespace ClassLibrary.GameEngine.Builder
+﻿namespace ClassLibrary.Game.Builder
 {
     abstract public class GameBuilder : IGameBuilder
     {
-        public Game Game
+        public ClassLibrary.Game.Game Game
         {
             get;
             private set;
@@ -10,7 +10,7 @@
 
         public virtual void Create()
         {
-            Game = new Game();
+            Game = new ClassLibrary.Game.Game();
         }
 
         public abstract void BuildPlayer();

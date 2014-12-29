@@ -5,8 +5,6 @@
 
 #include <iostream>
 
-#pragma comment(lib, "../Algo/Release/Algo.lib")
-
 using namespace System;
 
 namespace Wrapper {

@@ -14,13 +14,6 @@ namespace ClassLibrary.Unit
             _bonusPoint = 0;
         }
 
-        public override IDUnit ShallowCopy()
-        {
-            var copy = new UnitOrc(IDPlayer, Position, Tile) {_bonusPoint = _bonusPoint};
-            ShallowCopyProperties(copy);
-            return copy;
-        }
-
         public override void Kill(Unit killed)
         {
             _bonusPoint++;
