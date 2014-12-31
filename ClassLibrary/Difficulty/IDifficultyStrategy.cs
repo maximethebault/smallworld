@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ClassLibrary.Difficulty
+﻿namespace ClassLibrary.Difficulty
 {
     public interface IDifficultyStrategy
     {
@@ -20,8 +18,5 @@ namespace ClassLibrary.Difficulty
         int GetMaxPlayer();
 
         bool IsMaxTurnNumberReached(int numberTurnPlayed);
-
-        // TODO: move somewhere else?
-        void PlaceUnitsOnMap(List<Unit.Unit> units, Map.Map map);
     }
 }

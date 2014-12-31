@@ -45,8 +45,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game\Exception\NoFightException.cs" />
-    <Compile Include="Game\Exception\FightInProgressException.cs" />
+    <Compile Include="Fight\Exception\FightInProgressException.cs" />
+    <Compile Include="Fight\Exception\NoFightException.cs" />
+    <Compile Include="Fight\Fight.cs" />
+    <Compile Include="Fight\IDFight.cs" />
+    <Compile Include="Fight\IFight.cs" />
+    <Compile Include="Fight\Strategy\DeterministicFightStrategy.cs" />
+    <Compile Include="Fight\Strategy\IFightStrategy.cs" />
+    <Compile Include="Fight\Strategy\RandomFightStrategy.cs" />
     <Compile Include="Game\Exception\TooFewPlayersException.cs" />
     <Compile Include="Game\Exception\SameRaceSelectedException.cs" />
     <Compile Include="Game\Builder\GameCreator.cs" />
@@ -57,9 +63,6 @@
     <Compile Include="Map\IDMap.cs" />
     <Compile Include="Map\IMap.cs" />
     <Compile Include="Game\Builder\INewGameBuilder.cs" />
-    <Compile Include="Move\Fight\Fight.cs" />
-    <Compile Include="Move\Fight\IDFight.cs" />
-    <Compile Include="Move\Fight\IFight.cs" />
     <Compile Include="Move\IMove.cs" />
     <Compile Include="Move\Move.cs" />
     <Compile Include="Player\IDPlayer.cs" />
@@ -109,6 +112,7 @@
     <None Include="ClassDiagramInterfaces.cd" />
     <None Include="ClassDiagramImpl.cd" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

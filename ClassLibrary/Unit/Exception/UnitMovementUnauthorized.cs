@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary.Unit.Exception
 {
-    class UnitMovementUnauthorized : System.Exception
+    public class UnitMovementUnauthorized : System.Exception
     {
         public UnitMovementUnauthorized(string message) : base(message)
         {

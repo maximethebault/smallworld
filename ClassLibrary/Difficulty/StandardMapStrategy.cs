@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ClassLibrary.Difficulty
+﻿namespace ClassLibrary.Difficulty
 {
     public class StandardMapStrategy : IDifficultyStrategy
     {
@@ -43,11 +40,6 @@ namespace ClassLibrary.Difficulty
         public bool IsMaxTurnNumberReached(int numberTurnPlayed)
         {
             return numberTurnPlayed >= GetNbTurns();
-        }
-
-        public void PlaceUnitsOnMap(List<Unit.Unit> units, Map.Map map)
-        {
-            throw new NotImplementedException();
         }
     }
 }

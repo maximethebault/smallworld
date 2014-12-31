@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using ClassLibrary.Fight;
 using ClassLibrary.Map;
-using ClassLibrary.Move.Fight;
 using ClassLibrary.Player;
 using ClassLibrary.Turn;
 

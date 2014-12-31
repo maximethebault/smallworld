@@ -1,7 +1,7 @@
 using System.Collections.Generic;
+using ClassLibrary.Fight;
 using ClassLibrary.Map;
 using ClassLibrary.Move;
-using ClassLibrary.Move.Fight;
 using ClassLibrary.Player;
 using ClassLibrary.Turn;
 using ClassLibrary.Unit;
@@ -17,7 +17,7 @@ namespace ClassLibrary.Game
         IMove MoveUnit(IUnit unit, IPosition targetPosition);
         void FinishUnitTurn();
         void FinishPlayerTurn();
-        void FinishFightRound();
+        void NextFightRound();
         List<IUnit> UnitsAt(IPosition position);
         void StartGame();
     }

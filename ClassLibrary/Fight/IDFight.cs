@@ -1,6 +1,6 @@
 ﻿using ClassLibrary.Unit;
 
-namespace ClassLibrary.Move.Fight
+namespace ClassLibrary.Fight
 {
     public interface IDFight : IFight
     {

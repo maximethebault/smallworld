@@ -1,4 +1,4 @@
-﻿namespace ClassLibrary.Game.Exception
+﻿namespace ClassLibrary.Fight.Exception
 {
     public class NoFightException : System.Exception
     {

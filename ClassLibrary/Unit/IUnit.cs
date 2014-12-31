@@ -7,8 +7,8 @@ namespace ClassLibrary.Unit
     public interface IUnit : IEquatable<IUnit>
     {
         int HealthPoint { get; }
-        int AttackPoint { get; }
-        int DefensePoint { get; }
+        float AttackPoint { get; }
+        float DefensePoint { get; }
         float MovePoint { get; }
         IPosition Position { get; }
 

@@ -9,8 +9,6 @@ namespace ClassLibrary.Unit
     public interface IDUnit : IUnit
     {
         new int HealthPoint { get; set; }
-        new int AttackPoint { get; set; }
-        new int DefensePoint { get; set; }
         new float MovePoint { get; set; }
         new IPosition Position { get; set; }
         ITile Tile { get; set; }
@@ -30,7 +28,7 @@ namespace ClassLibrary.Unit
         void MoveTo(IPosition targetPosition, ITile targetTile);
 
         int ComputeScore();
-        void Kill(Unit killed);
+        void Kill(IDUnit killed);
 
         /// <summary>
         /// Performs the following checks on the given movement :
@@ -43,7 +41,6 @@ namespace ClassLibrary.Unit
         /// <returns>A boolean indicating whether the movement is possible</returns>
         bool CanMoveTo(IPosition targetPosition, ITile targetTile, bool ennemyOnTargetTile);
 
-        void ComputeRoundWinner(Unit attackee);
         void ResetMovePoint();
 
         /// <summary>

@@ -1,6 +1,4 @@
-﻿using ClassLibrary.Move.Fight;
-
-namespace ClassLibrary.Move
+﻿namespace ClassLibrary.Move
 {
     public interface IMove
     {

@@ -18,7 +18,7 @@ namespace UnitTest
 
         public bool IsAdjacent(IPosition coordinate)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public bool Equals(IPosition other)
@@ -59,6 +59,76 @@ namespace UnitTest
             var pos2 = new Position(1, 2);
             Assert.IsTrue(pos1.Equals(pos2));
             Assert.IsTrue(pos2.Equals(pos1));
+        }
+
+        [TestMethod]
+        public void Adjacence()
+        {
+            var pos1 = new Position(0, 0);
+            var pos2 = new Position(0, 1);
+            Assert.IsTrue(pos1.IsAdjacent(pos2));
+            pos1 = new Position(0, 0);
+            pos2 = new Position(1, 0);
+            Assert.IsTrue(pos1.IsAdjacent(pos2));
+            pos1 = new Position(0, 0);
+            pos2 = new Position(1, 1);
+            Assert.IsFalse(pos1.IsAdjacent(pos2));
+
+            pos1 = new Position(2, 1);
+
+            pos2 = new Position(2, 0);
+            Assert.IsTrue(pos1.IsAdjacent(pos2));
+            pos2 = new Position(3, 0);
+            Assert.IsTrue(pos1.IsAdjacent(pos2));
+            pos2 = new Position(1, 1);
+            Assert.IsTrue(pos1.IsAdjacent(pos2));
+            pos2 = new Position(3, 1);
+            Assert.IsTrue(pos1.IsAdjacent(pos2));
+            pos2 = new Position(2, 2);
+            Assert.IsTrue(pos1.IsAdjacent(pos2));
+            pos2 = new Position(3, 2);
+            Assert.IsTrue(pos1.IsAdjacent(pos2));
+
+            pos2 = new Position(2, 1);
+            Assert.IsFalse(pos1.IsAdjacent(pos2));
+            pos2 = new Position(1, 0);
+            Assert.IsFalse(pos1.IsAdjacent(pos2));
+            pos2 = new Position(4, 2);
+            Assert.IsFalse(pos1.IsAdjacent(pos2));
+            pos2 = new Position(4, 0);
+            Assert.IsFalse(pos1.IsAdjacent(pos2));
+            pos2 = new Position(1, 2);
+            Assert.IsFalse(pos1.IsAdjacent(pos2));
+            pos2 = new Position(4, 1);
+            Assert.IsFalse(pos1.IsAdjacent(pos2));
+
+            pos1 = new Position(2, 2);
+
+            pos2 = new Position(1, 1);
+            Assert.IsTrue(pos1.IsAdjacent(pos2));
+            pos2 = new Position(2, 1);
+            Assert.IsTrue(pos1.IsAdjacent(pos2));
+            pos2 = new Position(3, 2);
+            Assert.IsTrue(pos1.IsAdjacent(pos2));
+            pos2 = new Position(2, 3);
+            Assert.IsTrue(pos1.IsAdjacent(pos2));
+            pos2 = new Position(1, 3);
+            Assert.IsTrue(pos1.IsAdjacent(pos2));
+            pos2 = new Position(1, 2);
+            Assert.IsTrue(pos1.IsAdjacent(pos2));
+
+            pos2 = new Position(0, 2);
+            Assert.IsFalse(pos1.IsAdjacent(pos2));
+            pos2 = new Position(3, 1);
+            Assert.IsFalse(pos1.IsAdjacent(pos2));
+            pos2 = new Position(3, 3);
+            Assert.IsFalse(pos1.IsAdjacent(pos2));
+            pos2 = new Position(4, 2);
+            Assert.IsFalse(pos1.IsAdjacent(pos2));
+            pos2 = new Position(1, 0);
+            Assert.IsFalse(pos1.IsAdjacent(pos2));
+            pos2 = new Position(4, 1);
+            Assert.IsFalse(pos1.IsAdjacent(pos2));
         }
     }
 }

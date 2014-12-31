@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using ClassLibrary.Difficulty;
+using ClassLibrary.Fight;
+using ClassLibrary.Fight.Exception;
+using ClassLibrary.Fight.Strategy;
 using ClassLibrary.Game.Exception;
 using ClassLibrary.Map;
 using ClassLibrary.Move;
-using ClassLibrary.Move.Fight;
 using ClassLibrary.Player;
 using ClassLibrary.Race;
 using ClassLibrary.Turn;
@@ -80,19 +82,15 @@ namespace ClassLibrary.Game
             var move = new Move.Move();
             if (isEnnemyOnTargetTile)
             {
-                IDFight = new Fight(targetUnit, Unit.Unit.GetBestUnit(unitsOnTile));
+                IDFight = new Fight.Fight(targetUnit, Unit.Unit.GetBestUnit(unitsOnTile), new RandomFightStrategy());
                 move.Fight = true;
             }
             else
             {
+                targetUnit.MoveTo(targetPosition, targetTile);
                 move.Success = true;
             }
             return move;
-        }
-
-        private void KillUnit(IDUnit killer, IDUnit killed)
-        {
-            throw new NotImplementedException();
         }
 
         public void FinishUnitTurn()
@@ -113,18 +111,32 @@ namespace ClassLibrary.Game
             throw new NotImplementedException();
         }
 
-        public void FinishFightRound()
+        public void NextFightRound()
         {
             if (IDFight == null)
             {
                 throw new NoFightException("No fight in progress!");
             }
-            throw new NotImplementedException();
+            IDFight.NextRound();
+            if (!IDFight.IsFinished()) return;
+            if (IDFight.Loser != null)
+            {
+                foreach (var player in IDPlayers)
+                {
+                    player.IDUnits.RemoveAll(IDFight.Loser.Equals);
+                }
+                CheckGameEnd();
+            }
+            IDFight = null;
         }
 
         private void CheckGameEnd()
         {
-            throw new NotImplementedException();
+            var nbDead = IDPlayers.Count(player => player.HasUnitLeft());
+            if (nbDead >= IDPlayers.Count - 1)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public bool CanMoveUnit(IUnit movedUnit, IPosition targetPosition)

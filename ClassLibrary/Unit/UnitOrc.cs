@@ -14,7 +14,7 @@ namespace ClassLibrary.Unit
             _bonusPoint = 0;
         }
 
-        public override void Kill(Unit killed)
+        public override void Kill(IDUnit killed)
         {
             _bonusPoint++;
             base.Kill(killed);

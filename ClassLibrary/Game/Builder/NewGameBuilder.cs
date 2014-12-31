@@ -98,21 +98,7 @@ namespace ClassLibrary.Game.Builder
                 for (var j = 0; j < difficulty.GetMapWidth(); ++j)
                 {
                     var tileType = mapTiles[i][j]++;
-                    switch (tileType)
-                    {
-                        case 0:
-                            map.AddTile(new Position(i, j), new Desert());
-                            break;
-                        case 1:
-                            map.AddTile(new Position(i, j), new Forest());
-                            break;
-                        case 2:
-                            map.AddTile(new Position(i, j), new Mountain());
-                            break;
-                        case 3:
-                            map.AddTile(new Position(i, j), new Plain());
-                            break;
-                    }
+                    map.AddTile(new Position(i, j), TileFlyweightFactory.CreateTile(tileType));
                 }
             }
 

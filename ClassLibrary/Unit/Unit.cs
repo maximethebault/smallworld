@@ -10,16 +10,33 @@ namespace ClassLibrary.Unit
     abstract public class Unit : IDUnit
     {
         // as we want to make the following constants overridable, we make them static
-        protected static float UnitDefaultMovementCost = 1;
-        protected static int UnitDefaultScore = 1;
-        protected static int UnitDefaultLifePoint = 1;
-        protected static int UnitDefaultAttackPoint = 1;
-        protected static int UnitDefaultDefensePoint = 1;
-        protected static float UnitDefaultMovePoint = 1;
+        public static float UnitDefaultMovementCost = 1;
+        public static int UnitDefaultScore = 1;
+        public static int UnitDefaultHealthPoint = 5;
+        public static int UnitDefaultAttackPoint = 2;
+        public static int UnitDefaultDefensePoint = 1;
+        public static float UnitDefaultMovePoint = 1;
 
         public int HealthPoint { get; set; }
-        public int AttackPoint { get; set; }
-        public int DefensePoint { get; set; }
+
+        public float AttackPoint
+        {
+            get
+            {
+                var healthLeft = (float) HealthPoint/UnitDefaultHealthPoint;
+                return UnitDefaultAttackPoint * healthLeft;
+            }
+        }
+
+        public float DefensePoint
+        {
+            get
+            {
+                var healthLeft = (float) HealthPoint / UnitDefaultHealthPoint;
+                return UnitDefaultDefensePoint * healthLeft;
+            }
+        }
+
         public float MovePoint { get; set; }
 
         public IPosition Position { get; set; }
@@ -33,9 +50,7 @@ namespace ClassLibrary.Unit
             IDPlayer = player;
             Position = position;
             Tile = tile;
-            HealthPoint = UnitDefaultLifePoint;
-            AttackPoint = UnitDefaultAttackPoint;
-            DefensePoint = UnitDefaultDefensePoint;
+            HealthPoint = UnitDefaultHealthPoint;
             MovePoint = UnitDefaultMovePoint;
         }
 
@@ -56,19 +71,13 @@ namespace ClassLibrary.Unit
             return UnitDefaultScore;
         }
 
-        public virtual void Kill(Unit killed)
+        public virtual void Kill(IDUnit killed)
         {
-            throw new NotImplementedException();
         }
 
         public bool CanMoveTo(IPosition targetPosition, ITile targetTile, bool ennemyOnTargetTile)
         {
             return IsMovementPossible(targetPosition, targetTile, ennemyOnTargetTile) && GetNeededPointToMoveAt(targetTile) <= MovePoint;
-        }
-
-        public void ComputeRoundWinner(Unit attackee)
-        {
-            throw new NotImplementedException();
         }
 
         public static IDUnit GetBestUnit(IEnumerable<IDUnit> units)
@@ -112,7 +121,15 @@ namespace ClassLibrary.Unit
 
         public override int GetHashCode()
         {
-            throw new NotImplementedException();
+            unchecked
+            {
+                var hashCode = HealthPoint;
+                hashCode = (hashCode * 397) ^ MovePoint.GetHashCode();
+                hashCode = (hashCode * 397) ^ (Position != null ? Position.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Tile != null ? Tile.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (IDPlayer != null ? IDPlayer.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 }
