@@ -62,9 +62,9 @@
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary\ClassLibrary.csproj">
+    <ProjectReference Include="..\ClassLibrary\Model.csproj">
       <Project>{6037D193-EE85-4387-9175-4A1E941F7834}</Project>
-      <Name>ClassLibrary</Name>
+      <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

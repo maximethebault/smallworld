@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{6037D193-EE85-4387-9175-4A1E941F7834}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "ClassLibrary\Model.csproj", "{6037D193-EE85-4387-9175-4A1E941F7834}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F4052EBB-D340-4D9C-8B5D-600E476DAC24} = {F4052EBB-D340-4D9C-8B5D-600E476DAC24}
 	EndProjectSection
 EndProject
-Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Modelisation", "Modelisation\Modelisation.modelproj", "{C813FE3D-2F0C-4EDB-A900-625A4E938B97}"
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "UML", "Modelisation\UML.modelproj", "{C813FE3D-2F0C-4EDB-A900-625A4E938B97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IHM", "IHM\IHM.csproj", "{7F160934-7FAC-46CA-990F-28C3D66F97CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "IHM\UI.csproj", "{7F160934-7FAC-46CA-990F-28C3D66F97CE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{6037D193-EE85-4387-9175-4A1E941F7834} = {6037D193-EE85-4387-9175-4A1E941F7834}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{FC898588-6E14-4983-B71C-5CBC2739593D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelTest", "UnitTest\ModelTest.csproj", "{FC898588-6E14-4983-B71C-5CBC2739593D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F4052EBB-D340-4D9C-8B5D-600E476DAC24} = {F4052EBB-D340-4D9C-8B5D-600E476DAC24}
 	EndProjectSection
