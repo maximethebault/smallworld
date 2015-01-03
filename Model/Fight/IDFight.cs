@@ -6,5 +6,7 @@ namespace Model.Fight
     {
         IDUnit IDAttacker { get; }
         IDUnit IDDefender { get; }
+        IDUnit IDWinner { get; }
+        IDUnit IDLoser { get; }
     }
 }

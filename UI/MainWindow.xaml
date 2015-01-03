@@ -1,31 +1,35 @@
-﻿<Window x:Class="IHM.MainWindow"
+﻿<Window x:Class="UI.MainWindow"
         xmlns:local="clr-namespace:IHM"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="clr-namespace:UI"
+        xmlns:home="clr-namespace:UI.Screen.Home"
+        xmlns:creation="clr-namespace:UI.Screen.Game.Creation"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         Title="MainWindow" Height="350" Width="525"
         WindowState="Maximized">
     <Window.Resources>
-        <Style TargetType="Rectangle" x:Key="selectionStyle" >
-            <Setter Property="Width" Value="20"/>
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="Stroke" Value="Blue"/>
-            <Setter Property="StrokeThickness" Value="1"/>
-            <Setter Property="Panel.ZIndex" Value="333"/>
-            <!-- pour avoir un affichage au premier plan -->
-            <Setter Property="Visibility" Value= "Collapsed"/>
-            <!-- visibilité par défaut = cachée -->
-        </Style>
+        <x:Array x:Key="Maps" Type="{x:Type ui:PathItem}">
+            <ui:PathItem Column="0" Path="Images/demo.png" />
+            <ui:PathItem Column="1" Path="Images/petite.png" />
+            <ui:PathItem Column="2" Path="Images/normale.png" />
+        </x:Array>
+        <x:Array x:Key="Races" Type="{x:Type ui:PathItem}">
+            <ui:PathItem Column="0" Path="Images/elf.png" />
+            <ui:PathItem Column="1" Path="Images/nain.png" />
+            <ui:PathItem Column="2" Path="Images/orc.png" />
+        </x:Array>
+        <system:Int32 x:Key="PlayerCount">
+            3
+        </system:Int32>
+        <DataTemplate DataType="{x:Type home:Home}">
+            <home:Home/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ui:MainWindow}">
+            <home:Home/>
+        </DataTemplate>
     </Window.Resources>
     <DockPanel>
-        <Grid Name="mapGrid" Background="White">
-            <Rectangle Style="{StaticResource selectionStyle}" Name="selectionRectangle" />
-            <ListBox HorizontalContentAlignment="Stretch">
-                <local:MapView></local:MapView>
-
-            </ListBox>
-            <Image Source="textures/homepage.jpg" Stretch="Fill" />
-
-        </Grid>
+        <ContentControl Content="{Binding}"/>
     </DockPanel>
-
 </Window>

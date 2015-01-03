@@ -22,9 +22,18 @@ namespace Model.Fight
             get { return IDDefender; }
         }
 
-        public IUnit Winner { get; set; }
+        public IDUnit IDWinner { get; private set; }
+        public IUnit Winner
+        {
+            get { return IDWinner; }
+        }
 
-        public IUnit Loser { get; set; }
+        public IDUnit IDLoser { get; private set; }
+
+        public IUnit Loser
+        {
+            get { return IDLoser; }
+        }
 
         public IFightStrategy FightStrategy { get; set; }
 
@@ -34,8 +43,8 @@ namespace Model.Fight
         {
             IDAttacker = attacker;
             IDDefender = defender;
-            Winner = null;
-            Loser = null;
+            IDWinner = null;
+            IDLoser = null;
             ElapsedRounds = 0;
             TotalRounds = 0;
             FightStrategy = fightStrategy;
@@ -63,9 +72,8 @@ namespace Model.Fight
                 IDDefender.DecrementLifePoint();
                 if (IDDefender.IsDead())
                 {
-                    Winner = IDAttacker;
-                    Loser = IDDefender;
-                    IDAttacker.Kill(IDDefender);
+                    IDWinner = IDAttacker;
+                    IDLoser = IDDefender;
                     FinishFight();
                     return;
                 }
@@ -76,9 +84,8 @@ namespace Model.Fight
                 IDAttacker.DecrementLifePoint();
                 if (IDAttacker.IsDead())
                 {
-                    Winner = IDDefender;
-                    Loser = IDAttacker;
-                    IDDefender.Kill(IDAttacker);
+                    IDWinner = IDDefender;
+                    IDLoser = IDAttacker;
                     FinishFight();
                     return;
                 }

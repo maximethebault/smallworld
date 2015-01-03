@@ -36,6 +36,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -53,6 +55,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ListBoxSelectionBehavior.cs" />
+    <Compile Include="Screen\Game\Creation\Player.cs" />
+    <Compile Include="PathItem.cs" />
+    <Compile Include="Screen\Game\Creation\RaceListBox.xaml.cs">
+      <DependentUpon>RaceListBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screen\Game\Creation\RaceSelector.cs" />
+    <Compile Include="SelectedMapToVisibility.cs" />
+    <Compile Include="ViewModelBase.cs" />
+    <Page Include="Screen\Game\Creation\GameCreation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screen\Game\Creation\RaceListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screen\Game\Loading\GameLoading.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screen\Intro\Intro.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screen\Home\Home.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -60,6 +91,18 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Screen\Game\Creation\GameCreation.xaml.cs">
+      <DependentUpon>GameCreation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screen\Game\Loading\GameLoading.xaml.cs">
+      <DependentUpon>GameLoading.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screen\Intro\Intro.xaml.cs">
+      <DependentUpon>Intro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screen\Home\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -99,6 +142,16 @@
       <Project>{6037D193-EE85-4387-9175-4A1E941F7834}</Project>
       <Name>Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Screen\Game\Creation\Images\demo.png" />
+    <Resource Include="Screen\Game\Creation\Images\normale.png" />
+    <Resource Include="Screen\Game\Creation\Images\petite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Screen\Game\Creation\Images\elf.png" />
+    <Resource Include="Screen\Game\Creation\Images\nain.png" />
+    <Resource Include="Screen\Game\Creation\Images\orc.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

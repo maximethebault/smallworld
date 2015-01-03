@@ -119,11 +119,15 @@ namespace Model.Game
             }
             IDFight.NextRound();
             if (!IDFight.IsFinished()) return;
-            if (IDFight.Loser != null)
+            if (IDFight.IDLoser != null)
             {
+                if (IDFight.IDWinner != null)
+                {
+                    IDFight.IDWinner.Kill(IDFight.IDLoser);
+                }
                 foreach (var player in IDPlayers)
                 {
-                    player.IDUnits.RemoveAll(IDFight.Loser.Equals);
+                    player.IDUnits.Remove(IDFight.IDLoser);
                 }
                 CheckGameEnd();
             }
@@ -132,7 +136,7 @@ namespace Model.Game
 
         private void CheckGameEnd()
         {
-            var nbDead = IDPlayers.Count(player => player.HasUnitLeft());
+            var nbDead = IDPlayers.Count(player => !player.HasUnitLeft());
             if (nbDead >= IDPlayers.Count - 1)
             {
                 throw new NotImplementedException();
