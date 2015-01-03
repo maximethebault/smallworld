@@ -1,5 +1,4 @@
 ﻿<Window x:Class="UI.MainWindow"
-        xmlns:local="clr-namespace:IHM"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ui="clr-namespace:UI"
@@ -30,6 +29,15 @@
         </DataTemplate>
     </Window.Resources>
     <DockPanel>
+        <!--<Grid Name="mapGrid" Background="White">
+            <Rectangle Style="{StaticResource selectionStyle}" Name="selectionRectangle" />
+            <ListBox HorizontalContentAlignment="Stretch">
+                <local:MapView></local:MapView>
+
+            </ListBox>
+            <Image Source="textures/homepage.jpg" Stretch="Fill" />
+
+        </Grid>-->
         <ContentControl Content="{Binding}"/>
     </DockPanel>
 </Window>
