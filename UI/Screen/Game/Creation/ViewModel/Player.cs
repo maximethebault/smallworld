@@ -63,7 +63,7 @@ namespace UI.Screen.Game.Creation.ViewModel
 
         public Race[] Races { get; set; }
 
-        public Player(int index, IReadOnlyList<PathItem> races)
+        public Player(int index, IReadOnlyList<String> races)
         {
             Name = "";
             Index = index;

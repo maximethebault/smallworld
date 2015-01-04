@@ -1,10 +1,12 @@
-﻿namespace UI.Screen.Game.Creation.ViewModel
+﻿using System;
+
+namespace UI.Screen.Game.Creation.ViewModel
 {
     public class Race : ViewModelBase
     {
         private bool _isEnabled;
 
-        public PathItem RaceInfo { get; set; }
+        public String Path { get; set; }
 
         public int Index { get; set; }
 
@@ -22,9 +24,9 @@
             }
         }
 
-        public Race(PathItem raceInfo, int i)
+        public Race(String path, int i)
         {
-            RaceInfo = raceInfo;
+            Path = path;
             Index = i;
             IsSelected = false;
             IsEnabled = true;

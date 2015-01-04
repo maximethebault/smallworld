@@ -61,7 +61,6 @@
     </Compile>
     <Compile Include="Screen\Game\Creation\ViewModel\GameConfiguration.cs" />
     <Compile Include="Screen\Game\Creation\ViewModel\Player.cs" />
-    <Compile Include="PathItem.cs" />
     <Compile Include="Screen\Game\Creation\RaceSelector.xaml.cs">
       <DependentUpon>RaceSelector.xaml</DependentUpon>
     </Compile>
@@ -164,7 +163,7 @@
   <ItemGroup>
     <Resource Include="Screen\Game\Core\Textures\desert.png" />
     <Resource Include="Screen\Game\Core\Textures\foret.png" />
-    <Resource Include="Screen\Game\Core\Textures\ocean.png" />
+    <Resource Include="Screen\Game\Core\Textures\montagne.png" />
     <Resource Include="Screen\Game\Core\Textures\plaine.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

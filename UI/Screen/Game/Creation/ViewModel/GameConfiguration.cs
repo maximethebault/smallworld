@@ -10,7 +10,7 @@ namespace UI.Screen.Game.Creation.ViewModel
 {
     public class GameConfiguration : ViewModelBase
     {
-        public PathItem[] Maps { get; set; }
+        public String[] Maps { get; set; }
 
         private int _selectedMap;
 
@@ -38,11 +38,11 @@ namespace UI.Screen.Game.Creation.ViewModel
             }
         }
 
-        private PathItem[] Races { get; set; }
+        private String[] Races { get; set; }
 
         public List<Player> Players { get; set; }
 
-        public GameConfiguration(PathItem[] maps, PathItem[] races, int playerCount)
+        public GameConfiguration(String[] maps, String[] races, int playerCount)
         {
             Maps = maps;
             SelectedMap = -1;

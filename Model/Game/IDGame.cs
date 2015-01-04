@@ -13,6 +13,6 @@ namespace Model.Game
         IDMap IDMap { get; set; }
         IDPlayerTurn CurrentIDPlayerTurn { get; }
         IDFight IDFight { get; set; }
-        IDifficultyStrategy DifficultyStrategy { get; set; }
+        new IDifficultyStrategy DifficultyStrategy { get; set; }
     }
 }
