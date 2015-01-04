@@ -5,8 +5,8 @@
         xmlns:home="clr-namespace:UI.Screen.Home"
         xmlns:creation="clr-namespace:UI.Screen.Game.Creation"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
-        Title="MainWindow" Height="350" Width="525"
-        WindowState="Maximized">
+        Title="Small World" Height="350" Width="525"
+        WindowState="Maximized" Icon="Screen/icone.png">
     <Window.Resources>
         <x:Array x:Key="Maps" Type="{x:Type ui:PathItem}">
             <ui:PathItem Column="0" Path="Images/demo.png" />
