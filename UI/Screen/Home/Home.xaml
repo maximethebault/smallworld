@@ -23,19 +23,10 @@
                             Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="DarkGray" />
-                                <Setter Property="Button.Effect">
-                                    <Setter.Value>
-                                        <DropShadowEffect Color="WhiteSmoke" Direction="0" ShadowDepth="0" BlurRadius="50" Opacity="1" />
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
                     </ControlTemplate>
-                </Setter.Value>
+                </Setter.Value> 
             </Setter>
+            
         </Style>
     </UserControl.Resources>
     <UserControl.Background>
@@ -63,7 +54,35 @@
             <Button.Background>
                 <ImageBrush ImageSource="Textures/button.png"/>
             </Button.Background>
+            <Button.BitmapEffect>
+                <DropShadowBitmapEffect x:Name="shadowEffect1"  Color="WhiteSmoke" Direction="0" ShadowDepth="0" Opacity="0" Softness="100"/>
+            </Button.BitmapEffect>
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard x:Name="shadowAnimation1">
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames
+                                  Storyboard.TargetName="shadowEffect1"
+                                  Storyboard.TargetProperty="Opacity" AutoReverse="True"
+                                   RepeatBehavior="Forever">
+                                    <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0"/>
+                                    <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5"/>
+                                    <LinearDoubleKeyFrame Value="0" KeyTime="0:0:1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Button.MouseLeave">
+                    <EventTrigger.Actions>
+                        <RemoveStoryboard BeginStoryboardName="shadowAnimation1"></RemoveStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Button.Triggers>
         </Button>
+        
+        
         <Button Grid.Row="3" Grid.Column="1" Click="Load_Game" Style="{StaticResource btnStyle}">
             <Viewbox>
                 <TextBlock Margin="20,0,20,0" TextAlignment="Center" Name="tbLonger">Charger une partie</TextBlock>
@@ -71,7 +90,35 @@
             <Button.Background>
                 <ImageBrush ImageSource="Textures/button.png"/>
             </Button.Background>
+            <Button.BitmapEffect>
+                <DropShadowBitmapEffect x:Name="shadowEffect2"  Color="WhiteSmoke" Direction="0" ShadowDepth="0" Opacity="0" Softness="100"/>
+            </Button.BitmapEffect>
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard x:Name="shadowAnimation2">
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames
+                                  Storyboard.TargetName="shadowEffect2"
+                                  Storyboard.TargetProperty="Opacity" AutoReverse="True"
+                                   RepeatBehavior="Forever">
+                                    <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0"/>
+                                    <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5"/>
+                                    <LinearDoubleKeyFrame Value="0" KeyTime="0:0:1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Button.MouseLeave">
+                    <EventTrigger.Actions>
+                        <RemoveStoryboard BeginStoryboardName="shadowAnimation2"></RemoveStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Button.Triggers>
         </Button>
+        
+        
         <Button Grid.Row="5" Grid.Column="1" Click="Exit" Style="{StaticResource btnStyle}">
             <Viewbox>
                 <TextBlock TextAlignment="Center" Width="{Binding ElementName=tbLonger,Path=ActualWidth}">Quitter le jeu</TextBlock>
@@ -79,6 +126,32 @@
             <Button.Background>
                 <ImageBrush ImageSource="Textures/button.png"/>
             </Button.Background>
+            <Button.BitmapEffect>
+                <DropShadowBitmapEffect x:Name="shadowEffect3"  Color="WhiteSmoke" Direction="0" ShadowDepth="0" Opacity="0" Softness="100"/>
+            </Button.BitmapEffect>
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard x:Name="shadowAnimation3">
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames
+                                  Storyboard.TargetName="shadowEffect3"
+                                  Storyboard.TargetProperty="Opacity" AutoReverse="True"
+                                   RepeatBehavior="Forever">
+                                    <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0"/>
+                                    <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5"/>
+                                    <LinearDoubleKeyFrame Value="0" KeyTime="0:0:1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Button.MouseLeave">
+                    <EventTrigger.Actions>
+                        <RemoveStoryboard BeginStoryboardName="shadowAnimation3"></RemoveStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Button.Triggers>
         </Button>
     </Grid>
 </UserControl>
