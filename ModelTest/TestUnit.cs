@@ -22,11 +22,11 @@ namespace ModelTest
         public void MoveUnit()
         {
             var difficulty = new SmallMapStrategy();
-            INewGameBuilder newGameBuilder = new NewGameBuilder();
+            INewGameBuilder newGameBuilder = BuilderFactory.GetNewGameBuilder();
             newGameBuilder.AddPlayer("Kikou", new RaceDwarf());
             newGameBuilder.AddPlayer("Mama", new RaceElf());
             newGameBuilder.SetDifficulty(difficulty);
-            var gameCreator = new GameCreator(newGameBuilder);
+            var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = (Game) gameCreator.CreateGame().GetGame();
             var units = game.UnitsAt(new Position(0, 0));
             var unit = units.ElementAt(0);
@@ -40,11 +40,11 @@ namespace ModelTest
         public void MoveUnitUnauthorized()
         {
             var difficulty = new SmallMapStrategy();
-            INewGameBuilder newGameBuilder = new NewGameBuilder();
-            newGameBuilder.AddPlayer("Kikou", new RaceDwarf());
+            INewGameBuilder newGameBuilder = BuilderFactory.GetNewGameBuilder();
+            newGameBuilder.AddPlayer("Kikou", new RaceOrc());
             newGameBuilder.AddPlayer("Mama", new RaceElf());
             newGameBuilder.SetDifficulty(difficulty);
-            var gameCreator = new GameCreator(newGameBuilder);
+            var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = (Game)gameCreator.CreateGame().GetGame();
             var units = game.UnitsAt(new Position(0, 0));
             var unit = units.ElementAt(0);
@@ -58,11 +58,11 @@ namespace ModelTest
         public void MoveUnexistingUnit()
         {
             var difficulty = new SmallMapStrategy();
-            INewGameBuilder newGameBuilder = new NewGameBuilder();
+            INewGameBuilder newGameBuilder = BuilderFactory.GetNewGameBuilder();
             newGameBuilder.AddPlayer("Kikou", new RaceDwarf());
             newGameBuilder.AddPlayer("Mama", new RaceElf());
             newGameBuilder.SetDifficulty(difficulty);
-            var gameCreator = new GameCreator(newGameBuilder);
+            var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = (Game)gameCreator.CreateGame().GetGame();
             IUnit unit = new UnitDwarf(new Player("Ha", new RaceDwarf()), new Position(1, 2), TileFlyweightFactory.CreateTile(0));
             game.MoveUnit(unit, new Position(1, 0));
@@ -74,11 +74,11 @@ namespace ModelTest
         public void MoveUnitSimple()
         {
             var difficulty = new SmallMapStrategy();
-            INewGameBuilder newGameBuilder = new NewGameBuilder();
+            INewGameBuilder newGameBuilder = BuilderFactory.GetNewGameBuilder();
             newGameBuilder.AddPlayer("Kikou", new RaceOrc());
             newGameBuilder.AddPlayer("Mama", new RaceDwarf());
             newGameBuilder.SetDifficulty(difficulty);
-            var gameCreator = new GameCreator(newGameBuilder);
+            var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = (Game)gameCreator.CreateGame().GetGame();
             var units = game.UnitsAt(new Position(0, 0));
             var unit = (Unit) units.ElementAt(0);

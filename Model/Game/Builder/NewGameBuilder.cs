@@ -5,12 +5,13 @@ using Model.Difficulty;
 using Model.Game.Exception;
 using Model.Map;
 using Model.Player;
+using Model.Race;
 using Model.Tile;
 using Wrapper;
 
 namespace Model.Game.Builder
 {
-    public class NewGameBuilder : GameBuilder, INewGameBuilder
+    class NewGameBuilder : GameBuilder, INewGameBuilder
     {
         private readonly List<String> _playerNames;
         private readonly List<Race.IDRace> _playerRaces;
@@ -41,7 +42,7 @@ namespace Model.Game.Builder
 
         public override void BuildPlayer()
         {
-            var difficulty = Game.DifficultyStrategy;
+            var difficulty = IDGame.DifficultyStrategy;
             if (_playerNames.Count > difficulty.GetMaxPlayer())
                 throw new TooManyPlayersException("Cette carte ne supporte pas plus de " + difficulty.GetMaxPlayer() + " joueurs, " + _playerNames.Count + " donnés");
             if (_playerNames.Count < difficulty.GetMinPlayer())
@@ -68,20 +69,20 @@ namespace Model.Game.Builder
                     }
             }
             }
-            Game.IDPlayers = players;
+            IDGame.IDPlayers = players;
         }
 
         public unsafe override void BuildUnits()
         {
-            var difficulty = Game.DifficultyStrategy;
+            var difficulty = IDGame.DifficultyStrategy;
             var players = _wrapperAlgo.placePlayers();
-            for (var i = 0; i < Game.Players.Count; ++i)
+            for (var i = 0; i < IDGame.Players.Count; ++i)
             {
-                var player = Game.IDPlayers.ElementAt(i);
+                var player = IDGame.IDPlayers.ElementAt(i);
                 for (var j = 0; j < difficulty.GetNbUnitsPerRace(); ++j)
                 {
                     var position = new Position(players[i][0], players[i][1]);
-                    var unit = player.IDRace.CreateUnit(player, position, Game.Map.TileAtPosition(position));
+                    var unit = player.IDRace.CreateUnit(player, position, IDGame.Map.TileAtPosition(position));
                     player.IDUnits.Add(unit);
                 }
             }
@@ -89,7 +90,7 @@ namespace Model.Game.Builder
 
         public unsafe override void BuildMap()
         {
-            var difficulty = Game.DifficultyStrategy;
+            var difficulty = IDGame.DifficultyStrategy;
             var map = new Map.Map(difficulty.GetMapWidth());
             var mapTiles = _wrapperAlgo.createMap();
 
@@ -102,20 +103,21 @@ namespace Model.Game.Builder
                 }
             }
 
-            Game.IDMap = map;
+            IDGame.IDMap = map;
         }
 
         public override void BuildDifficulty()
         {
-            Game.DifficultyStrategy = Difficulty;
+            IDGame.DifficultyStrategy = Difficulty;
         }
 
-        public void AddPlayer(string name, Race.IDRace race)
+        public void AddPlayer(string name, int raceID)
         {
-            if (name == null || race == null || name.Length < 1)
+            if (string.IsNullOrEmpty(name))
             {
                 return;
             }
+            var race = RaceFactory.GetRaceByID(raceID);
             _playerNames.Add(name);
             _playerRaces.Add(race);
         }

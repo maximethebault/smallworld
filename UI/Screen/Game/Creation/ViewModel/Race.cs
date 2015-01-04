@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-
-namespace UI.Screen.Game.Creation
+﻿namespace UI.Screen.Game.Creation.ViewModel
 {
-    public class RaceSelector : ViewModelBase
+    public class Race : ViewModelBase
     {
-
         private bool _isEnabled;
-        public PathItem Race { get; set; }
+
+        public PathItem RaceInfo { get; set; }
 
         public int Index { get; set; }
 
@@ -31,9 +22,9 @@ namespace UI.Screen.Game.Creation
             }
         }
 
-        public RaceSelector(PathItem race, int i)
+        public Race(PathItem raceInfo, int i)
         {
-            Race = race;
+            RaceInfo = raceInfo;
             Index = i;
             IsSelected = false;
             IsEnabled = true;

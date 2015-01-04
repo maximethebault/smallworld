@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -13,7 +10,7 @@ using Model.Game.Builder;
 using Model.Map;
 using Model.Race;
 
-namespace UI
+namespace UI.Screen.Game.Core
 {
     internal class MapView : Panel
     {
@@ -29,11 +26,11 @@ namespace UI
             dc.DrawImage(imag, myRect);*/
 
             var difficulty = new SmallMapStrategy();
-            INewGameBuilder newGameBuilder = new NewGameBuilder();
-            newGameBuilder.AddPlayer("Kikou", new RaceDwarf());
-            newGameBuilder.AddPlayer("Mama", new RaceElf());
+            var newGameBuilder = BuilderFactory.GetNewGameBuilder();
+            newGameBuilder.AddPlayer("Kikou", 1);
+            newGameBuilder.AddPlayer("Mama", 0);
             newGameBuilder.SetDifficulty(difficulty);
-            var gameCreator = new GameCreator(newGameBuilder);
+            var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = gameCreator.CreateGame().GetGame();
             var map = game.Map;
 

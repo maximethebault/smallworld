@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Model.Difficulty;
+using Model.Game.Builder;
+using UI.Screen.Game.Creation.ViewModel;
 
 namespace UI.Screen.Game.Creation
 {
@@ -20,59 +14,43 @@ namespace UI.Screen.Game.Creation
     /// </summary>
     public partial class GameCreation : UserControl
     {
-        public PathItem[] Maps { get; set; }
+        public event BackHomeEventHandler OnBackHome;
+        public delegate void BackHomeEventHandler(GameCreation i, EventArgs e);
 
-        private PathItem[] Races { get; set; }
+        public event NewGameEventHandler OnNewGame;
+        public delegate void NewGameEventHandler(GameCreation i, GameEventArgs e);
 
-        public List<Player> Players { get; set; }
+        public GameConfiguration Configuration { get; private set; }
 
         public GameCreation(PathItem[] maps, PathItem[] races, int playerCount)
         {
-            Maps = maps;
-            Races = races;
-            Players = new List<Player>();
-            for (var i = 0; i < playerCount; i++)
-            {
-                Players.Add(new Player(i, Races));
-            }
+            Configuration = new GameConfiguration(maps, races, playerCount);
             InitializeComponent();
-        }
-
-        private void OnClickNext(object sender, MouseButtonEventArgs e)
-        {
-            var selectedMap = -1;
-            for (var i = 0; i < MapListBox.SelectedItems.Count; i++)
-            {
-                selectedMap = i;
-                break;
-            }
         }
 
         private void OnRaceSelection(object sender, SelectionChangedEventArgs e)
         {
-            var listbox = sender as RaceListBox;
-            if (listbox == null) return;
-            var currentPlayer = listbox.DataContext as Player;
-            RaceSelector unselected = null;
-            if (e.RemovedItems.Count > 0)
+            Configuration.OnRaceSelection(sender, e);
+        }
+
+        private void Back_Home(object sender, RoutedEventArgs e)
+        {
+            if (OnBackHome != null)
             {
-                unselected = e.RemovedItems[0] as RaceSelector;
+                OnBackHome(this, null);
             }
-            RaceSelector selected = null;
-            if (e.AddedItems.Count > 0)
+        }
+
+        private void Start_Game(object sender, RoutedEventArgs e)
+        {
+            if (OnNewGame == null)
             {
-                selected = e.AddedItems[0] as RaceSelector;
+                return;
             }
-            foreach(var player in Players.Where(player => !Object.ReferenceEquals(player, currentPlayer)))
+            var game = Configuration.BuildGame();
+            if (game != null)
             {
-                if (unselected != null)
-                {
-                    player.Races[unselected.Index].IsEnabled = true;
-                }
-                if (selected != null)
-                {
-                    player.Races[selected.Index].IsEnabled = false;
-                }
+                OnNewGame(this, new GameEventArgs(game));
             }
         }
     }

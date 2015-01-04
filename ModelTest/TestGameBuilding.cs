@@ -18,11 +18,11 @@ namespace ModelTest
         [TestMethod]
         public void PlayerCreation()
         {
-            INewGameBuilder newGameBuilder = new NewGameBuilder();
+            var newGameBuilder = BuilderFactory.GetNewGameBuilder();
             newGameBuilder.AddPlayer("Kikou", new RaceDwarf());
             newGameBuilder.AddPlayer("salut", new RaceOrc());
             newGameBuilder.SetDifficulty(new SmallMapStrategy());
-            var gameCreator = new GameCreator(newGameBuilder);
+            var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = gameCreator.CreateGame().GetGame();
             IEnumerable<IPlayer> actualPlayersList = game.Players;
             Assert.IsFalse(actualPlayersList.IsNullOrEmpty());
@@ -34,13 +34,13 @@ namespace ModelTest
         [ExpectedException(typeof(TooFewPlayersException))]
         public void PlayerCreationTooFew()
         {
-            INewGameBuilder newGameBuilder = new NewGameBuilder();
+            INewGameBuilder newGameBuilder = BuilderFactory.GetNewGameBuilder();
             newGameBuilder.AddPlayer("Kikou", new RaceDwarf());
             newGameBuilder.AddPlayer("", new RaceElf());
             newGameBuilder.AddPlayer("Haha", null);
             newGameBuilder.AddPlayer(null, new RaceElf());
             newGameBuilder.SetDifficulty(new SmallMapStrategy());
-            var gameCreator = new GameCreator(newGameBuilder);
+            var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = gameCreator.CreateGame().GetGame();
         }
 
@@ -48,12 +48,12 @@ namespace ModelTest
         [ExpectedException(typeof(TooManyPlayersException))]
         public void PlayerCreationTooMany()
         {
-            INewGameBuilder newGameBuilder = new NewGameBuilder();
+            INewGameBuilder newGameBuilder = BuilderFactory.GetNewGameBuilder();
             newGameBuilder.AddPlayer("Kikou", new RaceDwarf());
             newGameBuilder.AddPlayer("salut", new RaceOrc());
             newGameBuilder.AddPlayer("trois", new RaceElf());
             newGameBuilder.SetDifficulty(new SmallMapStrategy());
-            var gameCreator = new GameCreator(newGameBuilder);
+            var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = gameCreator.CreateGame().GetGame();
         }
 
@@ -61,11 +61,11 @@ namespace ModelTest
         [ExpectedException(typeof(SameRaceSelectedException))]
         public void PlayerCreationSameRaceSelected()
         {
-            INewGameBuilder newGameBuilder = new NewGameBuilder();
+            INewGameBuilder newGameBuilder = BuilderFactory.GetNewGameBuilder();
             newGameBuilder.AddPlayer("Kikou", new RaceDwarf());
             newGameBuilder.AddPlayer("salut", new RaceDwarf());
             newGameBuilder.SetDifficulty(new SmallMapStrategy());
-            var gameCreator = new GameCreator(newGameBuilder);
+            var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = gameCreator.CreateGame().GetGame();
         }
 
@@ -115,11 +115,11 @@ namespace ModelTest
         public unsafe void MapCreation()
         {
             var difficulty = new SmallMapStrategy();
-            INewGameBuilder newGameBuilder = new NewGameBuilder();
+            var newGameBuilder = BuilderFactory.GetNewGameBuilder();
             newGameBuilder.AddPlayer("Kikou", new RaceDwarf());
             newGameBuilder.AddPlayer("Mama", new RaceElf());
             newGameBuilder.SetDifficulty(difficulty);
-            var gameCreator = new GameCreator(newGameBuilder);
+            var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = gameCreator.CreateGame().GetGame();
             var map = game.Map;
 
@@ -200,11 +200,11 @@ namespace ModelTest
         {
             // we're only going to test a 2-players game, because there are never more!
             var difficulty = new SmallMapStrategy();
-            INewGameBuilder newGameBuilder = new NewGameBuilder();
+            var newGameBuilder = BuilderFactory.GetNewGameBuilder();
             newGameBuilder.AddPlayer("Kikou", new RaceDwarf());
             newGameBuilder.AddPlayer("Mama", new RaceElf());
             newGameBuilder.SetDifficulty(difficulty);
-            var gameCreator = new GameCreator(newGameBuilder);
+            var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = (Game) gameCreator.CreateGame().GetGame();
             var players = game.IDPlayers;
             var playerNo = 0;

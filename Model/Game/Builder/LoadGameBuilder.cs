@@ -2,7 +2,7 @@
 
 namespace Model.Game.Builder
 {
-    public class LoadGameBuilder : GameBuilder, ILoadGameBuilder
+    class LoadGameBuilder : GameBuilder, ILoadGameBuilder
     {
         private string SaveFilepath
         {

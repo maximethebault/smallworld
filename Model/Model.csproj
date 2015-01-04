@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Difficulty\DifficultyFactory.cs" />
     <Compile Include="Fight\Exception\FightInProgressException.cs" />
     <Compile Include="Fight\Exception\NoFightException.cs" />
     <Compile Include="Fight\Fight.cs" />
@@ -53,6 +54,8 @@
     <Compile Include="Fight\Strategy\DeterministicFightStrategy.cs" />
     <Compile Include="Fight\Strategy\IFightStrategy.cs" />
     <Compile Include="Fight\Strategy\RandomFightStrategy.cs" />
+    <Compile Include="Game\Builder\BuilderFactory.cs" />
+    <Compile Include="Game\Builder\IGameCreator.cs" />
     <Compile Include="Game\Exception\TooFewPlayersException.cs" />
     <Compile Include="Game\Exception\SameRaceSelectedException.cs" />
     <Compile Include="Game\Builder\GameCreator.cs" />

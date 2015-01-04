@@ -19,25 +19,10 @@
             <ui:PathItem Column="2" Path="Images/orc.png" />
         </x:Array>
         <system:Int32 x:Key="PlayerCount">
-            3
+            2
         </system:Int32>
-        <DataTemplate DataType="{x:Type home:Home}">
-            <home:Home/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type ui:MainWindow}">
-            <home:Home/>
-        </DataTemplate>
     </Window.Resources>
     <DockPanel>
-        <!--<Grid Name="mapGrid" Background="White">
-            <Rectangle Style="{StaticResource selectionStyle}" Name="selectionRectangle" />
-            <ListBox HorizontalContentAlignment="Stretch">
-                <local:MapView></local:MapView>
-
-            </ListBox>
-            <Image Source="textures/homepage.jpg" Stretch="Fill" />
-
-        </Grid>-->
         <ContentControl Content="{Binding}"/>
     </DockPanel>
 </Window>

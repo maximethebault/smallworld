@@ -1,16 +1,21 @@
 ﻿namespace Model.Game.Builder
 {
-    abstract public class GameBuilder : IGameBuilder
+    abstract class GameBuilder : IGameBuilder
     {
-        public Game Game
+        protected IDGame IDGame
         {
             get;
-            private set;
+            set;
+        }
+
+        public IGame Game
+        {
+            get { return IDGame; }
         }
 
         public virtual void Create()
         {
-            Game = new Game();
+            IDGame = new Game();
         }
 
         public abstract void BuildPlayer();

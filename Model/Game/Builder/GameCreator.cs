@@ -1,8 +1,8 @@
 ﻿namespace Model.Game.Builder
 {
-    public class GameCreator
+    class GameCreator : IGameCreator
     {
-        private GameBuilder Builder
+        private IGameBuilder Builder
         {
             get;
             set;
@@ -10,10 +10,10 @@
 
         public GameCreator(IGameBuilder gameBuilder)
         {
-            Builder = (GameBuilder)gameBuilder;
+            Builder = gameBuilder;
         }
 
-        public GameCreator CreateGame()
+        public IGameCreator CreateGame()
         {
             Builder.Create();
             Builder.BuildDifficulty();

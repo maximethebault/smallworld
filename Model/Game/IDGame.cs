@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Model.Difficulty;
 using Model.Fight;
 using Model.Map;
 using Model.Player;
@@ -12,5 +13,6 @@ namespace Model.Game
         IDMap IDMap { get; set; }
         IDPlayerTurn CurrentIDPlayerTurn { get; }
         IDFight IDFight { get; set; }
+        IDifficultyStrategy DifficultyStrategy { get; set; }
     }
 }

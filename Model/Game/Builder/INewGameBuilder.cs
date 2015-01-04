@@ -7,6 +7,6 @@ namespace Model.Game.Builder
 
         void SetDifficulty(IDifficultyStrategy value);
 
-        void AddPlayer(string name, Race.IDRace race);
+        void AddPlayer(string name, int race);
     }
 }

@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Model.Game;
+using UI.Screen.Game;
+using UI.Screen.Game.Core;
 using UI.Screen.Game.Creation;
 using UI.Screen.Home;
 using UI.Screen.Intro;
@@ -50,30 +53,48 @@ namespace UI
             var races = FindResource("Races") as PathItem[];
             var playerCount = (int) FindResource("PlayerCount");
             var newGame = new GameCreation(maps, races, playerCount);
-            //newGame.On += OnIntroEnd;
+            newGame.OnNewGame += OnStartGame;
+            newGame.OnBackHome += OnBackHome;
             DataContext = newGame;
         }
 
         private void StartLoadGame()
         {
-            var newGame = new Intro();
-            newGame.OnIntroEnd += OnIntroEnd;
-            DataContext = newGame;
+            var loadGame = new Intro();
+            loadGame.OnIntroEnd += OnIntroEnd;
+            DataContext = loadGame;
         }
 
-        public void OnIntroEnd(Intro i, EventArgs e)
+        private void StartGame(IGame game)
+        {
+            var gameCore = new GameCore();
+            //gameCore.OnIntroEnd += OnIntroEnd;
+            DataContext = gameCore;
+        }
+
+        private void OnIntroEnd(Intro i, EventArgs e)
         {
             StartHome();
         }
 
-        public void OnNewGame(Home i, EventArgs e)
+        private void OnBackHome(GameCreation i, EventArgs e)
+        {
+            StartHome();
+        }
+
+        private void OnNewGame(Home i, EventArgs e)
         {
             StartNewGame();
         }
 
-        public void OnLoadGame(Home i, EventArgs e)
+        private void OnLoadGame(Home i, EventArgs e)
         {
             StartLoadGame();
+        }
+
+        private void OnStartGame(GameCreation i, GameEventArgs e)
+        {
+            StartGame(e.Game);
         }
     }
 }

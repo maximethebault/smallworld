@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UI.Screen.Game.Creation
+namespace UI.Screen.Game.Core
 {
     /// <summary>
-    /// Logique d'interaction pour RaceListBox.xaml
+    /// Logique d'interaction pour GameCore.xaml
     /// </summary>
-    public partial class RaceListBox : ListBox
+    public partial class GameCore : UserControl
     {
-        public RaceListBox()
+        public GameCore()
         {
             InitializeComponent();
         }

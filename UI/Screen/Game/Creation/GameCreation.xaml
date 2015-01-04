@@ -6,10 +6,13 @@
              xmlns:creation="clr-namespace:UI.Screen.Game.Creation"
              xmlns:ui="clr-namespace:UI"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:viewModel="clr-namespace:UI.Screen.Game.Creation.ViewModel"
+             Name="GameCreationUserControl"
              Background="White"
              d:DesignHeight="500" d:DesignWidth="600"
              mc:Ignorable="d">
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
         <Style x:Key="PlaceHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -41,14 +44,15 @@
         </Style>
     </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel>
+        <StackPanel DataContext="{Binding Configuration, ElementName=GameCreationUserControl}">
             <!--
             Map selection
             -->
-            <StackPanel Margin="10, 0, 0, 0">
-                <Label Content="Carte" FontSize="25" FontWeight="Heavy"></Label>
+            <StackPanel Margin="10, 0, 0, 0" Orientation="Vertical">
+                <Label Content="Carte" FontSize="25" FontWeight="Heavy" />
+                <Label Foreground="Red" Margin="0, -10, 0, 0" Content="Aucune carte n'est sélectionnée !" Visibility="{Binding MapErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
             </StackPanel>
-            <ListBox Name="MapListBox" ItemsSource="{Binding Maps}" d:DataContext="{d:DesignData Source}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
+            <ListBox Name="MapListBox" SelectedIndex="{Binding SelectedMap}" ItemsSource="{Binding Maps}" d:DataContext="{d:DesignData Source}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="{Binding Items.Count, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}" />
@@ -61,8 +65,6 @@
                 </ListBox.ItemTemplate>
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}">
-                        <Setter Property="Grid.Row" Value="0"/>
-                        <Setter Property="Grid.Column" Value="{Binding Column}"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
@@ -87,8 +89,7 @@
             <StackPanel Margin="10, 0, 0, 0">
                 <Label Content="Joueurs" FontSize="25" FontWeight="Heavy"></Label>
             </StackPanel>
-            <ItemsControl Name="PlayerListBox" ItemsSource="{Binding Players}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                          d:DataContext="{d:DesignInstance creation:GameCreation}">
+            <ItemsControl Name="PlayerListBox" ItemsSource="{Binding Players}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsTabStop="False">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="{Binding Items.Count, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}}" />
@@ -98,21 +99,29 @@
                     <DataTemplate>
                         <StackPanel Margin="10, 10, 10, 10">
                             <Label Content="Nom :" FontSize="12" />
-                            <TextBox Style="{StaticResource PlaceHolder}" Tag="{Binding PlaceHolder}" IsTabStop="False" />
+                            <TextBox Style="{StaticResource PlaceHolder}" Tag="{Binding PlaceHolder}" Text="{Binding Name}" IsTabStop="False" />
+                            <Label Foreground="Red" Content="Veuillez entrer un nom !" Visibility="{Binding NameErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
                             <Label Content="Race :" FontSize="12" Margin="0, 10, 0, 0" />
                             <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <creation:RaceListBox HorizontalContentAlignment="Center" ItemsSource="{Binding Races}" SelectionChanged="OnRaceSelection" />
+                                <creation:RaceSelector HorizontalContentAlignment="Center" ItemsSource="{Binding Races}" SelectionChanged="OnRaceSelection" SelectedIndex="{Binding SelectedRace}" />
                             </WrapPanel>
+                            <Label Foreground="Red" Margin="0, -10, 0, 0" Content="Veuillez sélectionner une race !" Visibility="{Binding RaceErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemContainerStyle>
-                    <Style TargetType="{x:Type ContentPresenter}">
-                        <Setter Property="Grid.Row" Value="0"/>
-                        <Setter Property="Grid.Column" Value="{Binding Index}"/>
-                    </Style>
-                </ItemsControl.ItemContainerStyle>
             </ItemsControl>
+            <!--
+            Control button
+            -->
+            <Grid Margin="50, 20, 50, 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="Retour" Padding="5" FontSize="25" Click="Back_Home" HorizontalAlignment="Left"/>
+                <Button Grid.Column="2" Content="Commencer" Padding="5" FontSize="25" Click="Start_Game" HorizontalAlignment="Right"/>
+            </Grid>
         </StackPanel>
     </ScrollViewer>
 </UserControl>
