@@ -8,15 +8,21 @@
         Title="Small World" Height="350" Width="525"
         WindowState="Maximized" Icon="Screen/icone.png">
     <Window.Resources>
-        <x:Array x:Key="Maps" Type="{x:Type ui:PathItem}">
-            <ui:PathItem Column="0" Path="Images/demo.png" />
-            <ui:PathItem Column="1" Path="Images/petite.png" />
-            <ui:PathItem Column="2" Path="Images/normale.png" />
+        <x:Array x:Key="Maps" Type="{x:Type system:String}">
+            <system:String>Images/demo.png</system:String>
+            <system:String>Images/petite.png</system:String>
+            <system:String>Images/normale.png</system:String>
         </x:Array>
-        <x:Array x:Key="Races" Type="{x:Type ui:PathItem}">
-            <ui:PathItem Column="0" Path="Images/elf.png" />
-            <ui:PathItem Column="1" Path="Images/nain.png" />
-            <ui:PathItem Column="2" Path="Images/orc.png" />
+        <x:Array x:Key="Races" Type="{x:Type system:String}">
+            <system:String>Images/elf.png</system:String>
+            <system:String>Images/nain.png</system:String>
+            <system:String>Images/orc.png</system:String>
+        </x:Array>
+        <x:Array x:Key="Tiles" Type="{x:Type BitmapImage}">
+            <BitmapImage UriSource="/Screen/Game/Core/Textures/desert.png"/>
+            <BitmapImage UriSource="/Screen/Game/Core/Textures/foret.png"/>
+            <BitmapImage UriSource="/Screen/Game/Core/Textures/montagne.png"/>
+            <BitmapImage UriSource="/Screen/Game/Core/Textures/plaine.png"/>
         </x:Array>
         <system:Int32 x:Key="PlayerCount">
             2

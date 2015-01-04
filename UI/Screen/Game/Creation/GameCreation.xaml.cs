@@ -22,7 +22,7 @@ namespace UI.Screen.Game.Creation
 
         public GameConfiguration Configuration { get; private set; }
 
-        public GameCreation(PathItem[] maps, PathItem[] races, int playerCount)
+        public GameCreation(String[] maps, String[] races, int playerCount)
         {
             Configuration = new GameConfiguration(maps, races, playerCount);
             InitializeComponent();

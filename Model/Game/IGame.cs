@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Model.Difficulty;
 using Model.Turn;
 using Model.Fight;
 using Model.Map;
@@ -13,6 +14,8 @@ namespace Model.Game
         List<IPlayer> Players { get; }
         IMap Map { get; }
         IFight Fight { get; }
+        IDifficultyStrategy DifficultyStrategy { get; }
+
         bool CanMoveUnit(IUnit unit, IPosition targetPosition);
         IMove MoveUnit(IUnit unit, IPosition targetPosition);
         void FinishUnitTurn();

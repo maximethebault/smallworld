@@ -60,7 +60,7 @@
                 </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding Path}" Margin="10, 10, 10, 10"/>
+                        <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding}" Margin="10, 10, 10, 10"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
                 <ListBox.ItemContainerStyle>

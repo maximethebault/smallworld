@@ -49,8 +49,8 @@ namespace UI
 
         private void StartNewGame()
         {
-            var maps = FindResource("Maps") as PathItem[];
-            var races = FindResource("Races") as PathItem[];
+            var maps = FindResource("Maps") as String[];
+            var races = FindResource("Races") as String[];
             var playerCount = (int) FindResource("PlayerCount");
             var newGame = new GameCreation(maps, races, playerCount);
             newGame.OnNewGame += OnStartGame;
@@ -67,7 +67,8 @@ namespace UI
 
         private void StartGame(IGame game)
         {
-            var gameCore = new GameCore();
+            var tiles = FindResource("Tiles") as BitmapImage[];
+            var gameCore = new GameCore(game, tiles);
             //gameCore.OnIntroEnd += OnIntroEnd;
             DataContext = gameCore;
         }

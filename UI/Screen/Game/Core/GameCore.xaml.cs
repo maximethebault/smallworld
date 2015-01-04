@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Model.Game;
 
 namespace UI.Screen.Game.Core
 {
@@ -20,8 +21,14 @@ namespace UI.Screen.Game.Core
     /// </summary>
     public partial class GameCore : UserControl
     {
-        public GameCore()
+        public BitmapImage[] Tiles { get; set; }
+
+        public IGame Game { get; set; }
+
+        public GameCore(IGame game, BitmapImage[] tiles)
         {
+            Game = game;
+            Tiles = tiles;
             InitializeComponent();
         }
     }
