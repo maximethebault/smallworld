@@ -23,17 +23,6 @@ namespace Model.Game.Builder
             _playerNames = new List<string>();
         }
 
-        private IDifficultyStrategy Difficulty
-        {
-            get;
-            set;
-        }
-
-        public void SetDifficulty(IDifficultyStrategy value)
-        {
-            Difficulty = value;
-        }
-
         public override void Create()
         {
             base.Create();
@@ -81,7 +70,7 @@ namespace Model.Game.Builder
                 var player = IDGame.IDPlayers.ElementAt(i);
                 for (var j = 0; j < difficulty.GetNbUnitsPerRace(); ++j)
                 {
-                    var position = new Position(players[i][0], players[i][1]);
+                    var position = PositionFactory.GetHexaPosition(players[i][0], players[i][1]);
                     var unit = player.IDRace.CreateUnit(player, position, IDGame.Map.TileAtPosition(position));
                     player.IDUnits.Add(unit);
                 }
@@ -99,7 +88,7 @@ namespace Model.Game.Builder
                 for (var j = 0; j < difficulty.GetMapWidth(); ++j)
                 {
                     var tileType = mapTiles[i][j]++;
-                    map.AddTile(new Position(i, j), TileFlyweightFactory.CreateTile(tileType));
+                    map.AddTile(PositionFactory.GetHexaPosition(i, j), TileFlyweightFactory.CreateTile(tileType));
                 }
             }
 

@@ -1,4 +1,6 @@
-﻿namespace Model.Game.Builder
+﻿using Model.Difficulty;
+
+namespace Model.Game.Builder
 {
     abstract class GameBuilder : IGameBuilder
     {
@@ -11,6 +13,12 @@
         public IGame Game
         {
             get { return IDGame; }
+        }
+
+        public IDifficultyStrategy Difficulty
+        {
+            get;
+            set;
         }
 
         public virtual void Create()

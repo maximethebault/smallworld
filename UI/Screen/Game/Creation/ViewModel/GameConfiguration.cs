@@ -91,7 +91,7 @@ namespace UI.Screen.Game.Creation.ViewModel
                 return null;
             }
             var builder = BuilderFactory.GetNewGameBuilder();
-            builder.SetDifficulty(DifficultyFactory.GetDifficultyByID(SelectedMap));
+            builder.Difficulty = DifficultyFactory.GetDifficultyByID(SelectedMap);
             foreach (var player in Players)
             {
                 if (String.IsNullOrEmpty(player.Name))

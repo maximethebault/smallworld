@@ -2,7 +2,7 @@
 
 namespace Model.Map
 {
-    public class Position : IPosition
+    public class HexaPosition : IPosition
     {
         public int Y
         {
@@ -16,7 +16,7 @@ namespace Model.Map
             set;
         }
 
-        public Position(int x, int y)
+        public HexaPosition(int x, int y)
         {
             X = x;
             Y = y;

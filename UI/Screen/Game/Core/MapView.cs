@@ -15,7 +15,7 @@ namespace UI.Screen.Game.Core
 {
     internal class MapView : Panel
     {
-        public static readonly DependencyProperty TilesProperty = DependencyProperty.Register
+        /*public static readonly DependencyProperty TilesProperty = DependencyProperty.Register
             (
                  "Tiles",
                  typeof(BitmapImage[]),
@@ -41,18 +41,14 @@ namespace UI.Screen.Game.Core
         {
             get { return (IGame)GetValue(GameProperty); }
             set { SetValue(GameProperty, value); }
-        }
+        }*/
 
         //méthode pour aficher les tiles
-        protected override void OnRender(DrawingContext dc)
+        /*protected override void OnRender(DrawingContext dc)
         {
             //condition pour éviter d'avoir des erreurs à cause du bin/debug
             if (DesignerProperties.GetIsInDesignMode(this))
                 return;
-
-            /*Rect myRect = new Rect(0, 0, 700, 700);
-            BitmapImage imag = new BitmapImage(new Uri("textures\\homepage.jpg", UriKind.Relative));
-            dc.DrawImage(imag, myRect);*/
 
             var map = Game.Map;
             var difficulty = Game.DifficultyStrategy;
@@ -82,7 +78,7 @@ namespace UI.Screen.Game.Core
                     }
                     posY -= decalageVertical;
 
-                    var tile = map.TileAtPosition(new Position(i, j));
+                    var tile = map.TileAtPosition(new HexaPosition(i, j));
 
                     if (tile.IsDesert())
                     {
@@ -103,6 +99,6 @@ namespace UI.Screen.Game.Core
                     }
                 }
             }
-        }
+        }*/
     }
 }

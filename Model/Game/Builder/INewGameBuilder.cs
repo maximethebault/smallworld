@@ -4,8 +4,7 @@ namespace Model.Game.Builder
 {
     public interface INewGameBuilder : IGameBuilder
     {
-
-        void SetDifficulty(IDifficultyStrategy value);
+        IDifficultyStrategy Difficulty { set; }
 
         void AddPlayer(string name, int race);
     }

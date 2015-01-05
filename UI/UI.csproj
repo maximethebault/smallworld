@@ -59,6 +59,11 @@
     <Compile Include="Screen\Game\Core\GameCore.xaml.cs">
       <DependentUpon>GameCore.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screen\Game\Core\Map\Map.xaml.cs">
+      <DependentUpon>Map.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screen\Game\Core\Map\HexagonGrid.cs" />
+    <Compile Include="Screen\Game\Core\Map\Tile.cs" />
     <Compile Include="Screen\Game\Creation\ViewModel\GameConfiguration.cs" />
     <Compile Include="Screen\Game\Creation\ViewModel\Player.cs" />
     <Compile Include="Screen\Game\Creation\RaceSelector.xaml.cs">
@@ -68,6 +73,10 @@
     <Compile Include="Screen\Game\GameEventArgs.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Page Include="Screen\Game\Core\GameCore.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screen\Game\Core\Map\Map.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,10 +170,10 @@
     <Resource Include="Screen\Game\Creation\Images\orc.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Screen\Game\Core\Textures\desert.png" />
-    <Resource Include="Screen\Game\Core\Textures\foret.png" />
-    <Resource Include="Screen\Game\Core\Textures\montagne.png" />
-    <Resource Include="Screen\Game\Core\Textures\plaine.png" />
+    <Resource Include="Screen\Game\Core\Map\Textures\desert.png" />
+    <Resource Include="Screen\Game\Core\Map\Textures\foret.png" />
+    <Resource Include="Screen\Game\Core\Map\Textures\montagne.png" />
+    <Resource Include="Screen\Game\Core\Map\Textures\plaine.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

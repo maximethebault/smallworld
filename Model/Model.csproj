@@ -66,6 +66,7 @@
     <Compile Include="Map\IDMap.cs" />
     <Compile Include="Map\IMap.cs" />
     <Compile Include="Game\Builder\INewGameBuilder.cs" />
+    <Compile Include="Map\PositionFactory.cs" />
     <Compile Include="Move\IMove.cs" />
     <Compile Include="Move\Move.cs" />
     <Compile Include="Player\IDPlayer.cs" />
@@ -85,7 +86,7 @@
     <Compile Include="Race\RaceFactory.cs" />
     <Compile Include="Race\RaceOrc.cs" />
     <Compile Include="Difficulty\SmallMapStrategy.cs" />
-    <Compile Include="Map\Position.cs" />
+    <Compile Include="Map\HexaPosition.cs" />
     <Compile Include="Difficulty\DemoMapStrategy.cs" />
     <Compile Include="Tile\Desert.cs" />
     <Compile Include="Difficulty\IDifficultyStrategy.cs" />

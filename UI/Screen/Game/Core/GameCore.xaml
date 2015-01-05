@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ui="clr-namespace:UI"
              xmlns:core="clr-namespace:UI.Screen.Game.Core"
+             xmlns:map="clr-namespace:UI.Screen.Game.Core.Map"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              Name="GameCoreControl">
@@ -12,7 +13,7 @@
         <Grid Name="MapGrid" Background="White">
             <Rectangle Name="SelectionRectangle" />
             <ListBox HorizontalContentAlignment="Stretch">
-                <core:MapView Game="{Binding Game}"  Tiles="{Binding Tiles}"></core:MapView>
+                <map:Map Game="{Binding Game}"  Tiles="{Binding Tiles}"></map:Map>
             </ListBox>
         </Grid>
     </DockPanel>

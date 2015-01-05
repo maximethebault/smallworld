@@ -21,7 +21,7 @@ namespace ModelTest
             var newGameBuilder = BuilderFactory.GetNewGameBuilder();
             newGameBuilder.AddPlayer("Kikou", new RaceDwarf());
             newGameBuilder.AddPlayer("salut", new RaceOrc());
-            newGameBuilder.SetDifficulty(new SmallMapStrategy());
+            newGameBuilder.Difficulty = new SmallMapStrategy();
             var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = gameCreator.CreateGame().GetGame();
             IEnumerable<IPlayer> actualPlayersList = game.Players;
@@ -39,7 +39,7 @@ namespace ModelTest
             newGameBuilder.AddPlayer("", new RaceElf());
             newGameBuilder.AddPlayer("Haha", null);
             newGameBuilder.AddPlayer(null, new RaceElf());
-            newGameBuilder.SetDifficulty(new SmallMapStrategy());
+            newGameBuilder.Difficulty = new SmallMapStrategy();
             var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = gameCreator.CreateGame().GetGame();
         }
@@ -52,7 +52,7 @@ namespace ModelTest
             newGameBuilder.AddPlayer("Kikou", new RaceDwarf());
             newGameBuilder.AddPlayer("salut", new RaceOrc());
             newGameBuilder.AddPlayer("trois", new RaceElf());
-            newGameBuilder.SetDifficulty(new SmallMapStrategy());
+            newGameBuilder.Difficulty = new SmallMapStrategy();
             var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = gameCreator.CreateGame().GetGame();
         }
@@ -64,7 +64,7 @@ namespace ModelTest
             INewGameBuilder newGameBuilder = BuilderFactory.GetNewGameBuilder();
             newGameBuilder.AddPlayer("Kikou", new RaceDwarf());
             newGameBuilder.AddPlayer("salut", new RaceDwarf());
-            newGameBuilder.SetDifficulty(new SmallMapStrategy());
+            newGameBuilder.Difficulty = new SmallMapStrategy();
             var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = gameCreator.CreateGame().GetGame();
         }
@@ -118,7 +118,7 @@ namespace ModelTest
             var newGameBuilder = BuilderFactory.GetNewGameBuilder();
             newGameBuilder.AddPlayer("Kikou", new RaceDwarf());
             newGameBuilder.AddPlayer("Mama", new RaceElf());
-            newGameBuilder.SetDifficulty(difficulty);
+            newGameBuilder.Difficulty = difficulty;
             var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = gameCreator.CreateGame().GetGame();
             var map = game.Map;
@@ -129,7 +129,7 @@ namespace ModelTest
             {
                 for (var j = 0; j < difficulty.GetMapWidth(); ++j)
                 {
-                    var tile = map.TileAtPosition(new Position(i, j));
+                    var tile = map.TileAtPosition(new HexaPosition(i, j));
                     if (tile.IsDesert())
                     {
                         nbTilesForType[0]++;
@@ -203,7 +203,7 @@ namespace ModelTest
             var newGameBuilder = BuilderFactory.GetNewGameBuilder();
             newGameBuilder.AddPlayer("Kikou", new RaceDwarf());
             newGameBuilder.AddPlayer("Mama", new RaceElf());
-            newGameBuilder.SetDifficulty(difficulty);
+            newGameBuilder.Difficulty = difficulty;
             var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = (Game) gameCreator.CreateGame().GetGame();
             var players = game.IDPlayers;
