@@ -4,23 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:map="clr-namespace:UI.Screen.Game.Core.Map"
+             xmlns:viewModel="clr-namespace:UI.Screen.Game.Core.Map.ViewModel"
              mc:Ignorable="d" 
+             Name="MapControl"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <x:Array x:Key="Cells" Type="{x:Type map:Tile}">
-            <map:Tile Row="0" Column="0" Content="0,0" />
-            <map:Tile Row="0" Column="1" Content="0,1" />
-            <map:Tile Row="0" Column="2" Content="0,2" />
-            <map:Tile Row="0" Column="3" Content="0,3" />
-            <map:Tile Row="1" Column="0" Content="1,0" />
-            <map:Tile Row="1" Column="1" Content="1,1" />
-            <map:Tile Row="1" Column="2" Content="1,2" />
-            <map:Tile Row="1" Column="3" Content="1,3" />
-            <map:Tile Row="2" Column="0" Content="2,0" />
-            <map:Tile Row="2" Column="1" Content="2,1" />
-            <map:Tile Row="2" Column="2" Content="2,2" />
-            <map:Tile Row="2" Column="3" Content="2,3" />
-        </x:Array>
         <DrawingImage x:Key="HexagonImage">
             <DrawingImage.Drawing>
                 <DrawingGroup>
@@ -64,15 +52,25 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
-                            <Image x:Name="img" Source="{StaticResource HexagonImage}"/>
+                            <Image x:Name="img" Source="{Binding Texture}"/>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="img" Property="Source" Value="{StaticResource HexagonHoverImage}"/>
+                                <!--<Setter TargetName="img" Property="Source" Value="{StaticResource HexagonHoverImage}"/>-->
+                                <Setter TargetName="img" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="DarkGray" />
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="img" Property="Source" Value="{StaticResource HexagonPressedImage}"/>
+                                <!--<Setter TargetName="img" Property="Source" Value="{StaticResource HexagonPressedImage}"/>-->
+                                <Setter TargetName="img" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="Gray" />
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -80,11 +78,10 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-
-    <ItemsControl Name="MapListBox" ItemsSource="{Binding Source={StaticResource Cells}}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+    <ItemsControl Name="MapListBox" ItemsSource="{Binding Path=Tiles, ElementName=MapControl}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <map:HexagonGrid Rows="3" Columns="4" HexagonSideLength="40" Name="HexagonGrid">
+                <map:HexagonGrid Rows="3" Columns="4" HexagonSideLength="30" Name="HexagonGrid">
                     <map:HexagonGrid.Resources>
                         <Style TargetType="{x:Type Button}" BasedOn="{StaticResource HexagonButtonStyle}"/>
                     </map:HexagonGrid.Resources>
@@ -92,8 +89,10 @@
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
-            <DataTemplate DataType="map:Tile">
-                <Button Width="70" Height="80" Content="{Binding Content}" Clip="{Binding Clipping, ElementName=HexagonGrid}" />
+            <DataTemplate DataType="viewModel:Tile">
+                <StackPanel Clip="{Binding Clipping, ElementName=HexagonGrid}" Background="LightGray">
+                    <Button Margin="2" Content="Unit" />
+                </StackPanel>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
         <ItemsControl.ItemContainerStyle>

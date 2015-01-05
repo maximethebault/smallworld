@@ -12,7 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Model.Difficulty;
 using Model.Game;
+using Model.Game.Builder;
+using Model.Race;
 using UI.Screen.Game;
 using UI.Screen.Game.Core;
 using UI.Screen.Game.Creation;
@@ -29,7 +32,15 @@ namespace UI
     {
         public MainWindow()
         {
-            StartIntro();
+            InitializeComponent();
+            //StartIntro();
+            var newGameBuilder = BuilderFactory.GetNewGameBuilder();
+            newGameBuilder.AddPlayer("Kikou", 0);
+            newGameBuilder.AddPlayer("salut", 1);
+            newGameBuilder.Difficulty = new SmallMapStrategy();
+            var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
+            var game = gameCreator.CreateGame().GetGame();
+            StartGame(game);
         }
 
         private void StartIntro()
@@ -67,8 +78,8 @@ namespace UI
 
         private void StartGame(IGame game)
         {
-            var tiles = FindResource("Tiles") as BitmapImage[];
-            var gameCore = new GameCore(game, tiles);
+            var tilesTexture = FindResource("TilesTexture") as BitmapImage[];
+            var gameCore = new GameCore(game, tilesTexture);
             //gameCore.OnIntroEnd += OnIntroEnd;
             DataContext = gameCore;
         }

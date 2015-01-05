@@ -21,15 +21,20 @@ namespace UI.Screen.Game.Core
     /// </summary>
     public partial class GameCore : UserControl
     {
-        public BitmapImage[] Tiles { get; set; }
+        public BitmapImage[] TilesTexture { get; set; }
 
         public IGame Game { get; set; }
 
-        public GameCore(IGame game, BitmapImage[] tiles)
+        public GameCore(IGame game, BitmapImage[] tilesTexture)
         {
             Game = game;
-            Tiles = tiles;
+            TilesTexture = tilesTexture;
             InitializeComponent();
+
+            // we inject the required dependencies into the children
+            Map.Game = Game;
+            Map.TilesTexture = TilesTexture;
+            Map.StartLoading();
         }
     }
 }

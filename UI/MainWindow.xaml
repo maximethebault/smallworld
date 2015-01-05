@@ -18,11 +18,11 @@
             <system:String>Images/nain.png</system:String>
             <system:String>Images/orc.png</system:String>
         </x:Array>
-        <x:Array x:Key="Tiles" Type="{x:Type BitmapImage}">
-            <BitmapImage UriSource="/Screen/Game/Core/Map/Textures/desert.png"/>
-            <BitmapImage UriSource="/Screen/Game/Core/Map/Textures/foret.png"/>
-            <BitmapImage UriSource="/Screen/Game/Core/Map/Textures/montagne.png"/>
-            <BitmapImage UriSource="/Screen/Game/Core/Map/Textures/plaine.png"/>
+        <x:Array x:Key="TilesTexture" Type="{x:Type BitmapImage}">
+            <BitmapImage UriSource="/Screen/Game/Core/Map/Textures/Alt/desert.png"/>
+            <BitmapImage UriSource="/Screen/Game/Core/Map/Textures/Alt/foret.png"/>
+            <BitmapImage UriSource="/Screen/Game/Core/Map/Textures/Alt/montagne.png"/>
+            <BitmapImage UriSource="/Screen/Game/Core/Map/Textures/Alt/plaine.png"/>
         </x:Array>
         <system:Int32 x:Key="PlayerCount">
             2

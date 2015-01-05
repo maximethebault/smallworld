@@ -63,7 +63,7 @@
       <DependentUpon>Map.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screen\Game\Core\Map\HexagonGrid.cs" />
-    <Compile Include="Screen\Game\Core\Map\Tile.cs" />
+    <Compile Include="Screen\Game\Core\Map\ViewModel\Tile.cs" />
     <Compile Include="Screen\Game\Creation\ViewModel\GameConfiguration.cs" />
     <Compile Include="Screen\Game\Creation\ViewModel\Player.cs" />
     <Compile Include="Screen\Game\Creation\RaceSelector.xaml.cs">
@@ -183,6 +183,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Screen\Home\Textures\button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Screen\Game\Core\Map\Textures\Alt\desert.png" />
+    <Resource Include="Screen\Game\Core\Map\Textures\Alt\foret.png" />
+    <Resource Include="Screen\Game\Core\Map\Textures\Alt\montagne.png" />
+    <Resource Include="Screen\Game\Core\Map\Textures\Alt\plaine.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

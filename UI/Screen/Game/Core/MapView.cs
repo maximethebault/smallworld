@@ -17,13 +17,13 @@ namespace UI.Screen.Game.Core
     {
         /*public static readonly DependencyProperty TilesProperty = DependencyProperty.Register
             (
-                 "Tiles",
+                 "tilesTexture",
                  typeof(BitmapImage[]),
                  typeof(MapView),
                  new PropertyMetadata(default(ItemCollection))
             );
 
-        public BitmapImage[] Tiles
+        public BitmapImage[] tilesTexture
         {
             get { return (BitmapImage[])GetValue(TilesProperty); }
             set { SetValue(TilesProperty, value); }
@@ -54,8 +54,8 @@ namespace UI.Screen.Game.Core
             var difficulty = Game.DifficultyStrategy;
 
             //Taille des tiles
-            var tileWidth = Tiles[0].Width;
-            var tileHeight = Tiles[0].Height;
+            var tileWidth = tilesTexture[0].Width;
+            var tileHeight = tilesTexture[0].Height;
 
             //Décalage pour les lignes impaires
             var decalageVertical = (tileHeight - ((Math.Sqrt(Math.Pow(tileHeight / 2, 2) - Math.Pow(tileWidth / 2, 2))) * 2)) / 2;
@@ -82,20 +82,20 @@ namespace UI.Screen.Game.Core
 
                     if (tile.IsDesert())
                     {
-                        dc.DrawImage(Tiles[2], new Rect(posX, posY, tileWidth, tileHeight));
+                        dc.DrawImage(tilesTexture[2], new Rect(posX, posY, tileWidth, tileHeight));
                     }
                     else if (tile.IsForest())
                     {
-                        dc.DrawImage(Tiles[1], new Rect(posX, posY, tileWidth, tileHeight));
+                        dc.DrawImage(tilesTexture[1], new Rect(posX, posY, tileWidth, tileHeight));
                     }
                     else if (tile.IsMountain())
                     {
                         //Ocean ?
-                        dc.DrawImage(Tiles[3], new Rect(posX, posY, tileWidth, tileHeight));
+                        dc.DrawImage(tilesTexture[3], new Rect(posX, posY, tileWidth, tileHeight));
                     }
                     else if (tile.IsPlain())
                     {
-                        dc.DrawImage(Tiles[0], new Rect(posX, posY, tileWidth, tileHeight));
+                        dc.DrawImage(tilesTexture[0], new Rect(posX, posY, tileWidth, tileHeight));
                     }
                 }
             }

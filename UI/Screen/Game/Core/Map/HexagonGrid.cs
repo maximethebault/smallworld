@@ -103,7 +103,7 @@ namespace UI.Screen.Game.Core.Map
             var side = HexagonSideLength;
             var width = side * Math.Sqrt(3.0);
             var height = 2 * side;
-            var rowHeight = 0.75 * height;
+            var rowHeight = 0.75 * height - 1;
 
             var availableChildSize = new Size(width, height);
 
@@ -128,7 +128,7 @@ namespace UI.Screen.Game.Core.Map
             var width = side * Math.Sqrt(3.0);
             var height = 2 * side;
             var colWidth = width - 2;
-            var rowHeight = 0.75 * height;
+            var rowHeight = 0.75 * height - 1;
 
             var childSize = new Size(width, height);
 

@@ -13,7 +13,7 @@
         <Grid Name="MapGrid" Background="White">
             <Rectangle Name="SelectionRectangle" />
             <ListBox HorizontalContentAlignment="Stretch">
-                <map:Map Game="{Binding Game}"  Tiles="{Binding Tiles}"></map:Map>
+                <map:Map x:Name="Map" />
             </ListBox>
         </Grid>
     </DockPanel>
