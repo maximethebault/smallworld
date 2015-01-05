@@ -175,6 +175,15 @@
     <Resource Include="Screen\Game\Core\Map\Textures\montagne.png" />
     <Resource Include="Screen\Game\Core\Map\Textures\plaine.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Screen\icone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Screen\Home\Textures\background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Screen\Home\Textures\button.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
