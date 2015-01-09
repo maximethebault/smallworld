@@ -2,44 +2,44 @@
 {
     class SmallMapStrategy : IDifficultyStrategy
     {
-        public int GetNbUnitsPerRace()
+        public int NbUnitsPerRace
         {
-            return 6;
+            get { return 6; }
         }
 
-        public int GetNbTurns()
+        public int NbTurns
         {
-            return 20;
+            get { return 20; }
         }
 
-        public int GetMapWidth()
+        public int MapWidth
         {
-            return 10;
+            get { return 10; }
         }
 
-        public int GetNbTiles()
+        public int NbTiles
         {
-            return GetMapWidth() * GetMapWidth();
+            get { return MapWidth*MapWidth; }
         }
 
-        public int GetNbTileTypes()
+        public int NbTileTypes
         {
-            return 4;
+            get { return 4; }
         }
 
-        public int GetMinPlayer()
+        public int MinPlayer
         {
-            return 2;
+            get { return 2; }
         }
 
-        public int GetMaxPlayer()
+        public int MaxPlayer
         {
-            return 2;
+            get { return 2; }
         }
 
         public bool IsMaxTurnNumberReached(int numberTurnPlayed)
         {
-            return numberTurnPlayed >= GetNbTurns();
+            return numberTurnPlayed >= NbTurns;
         }
     }
 }

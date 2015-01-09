@@ -93,43 +93,45 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <ItemsControl Name="MapListBox" ItemsSource="{Binding Path=Tiles}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <map:HexagonGrid Rows="3" Columns="4" HexagonSideLength="30" Name="HexagonGrid">
-                    <map:HexagonGrid.Resources>
-                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource HexagonButtonStyle}"/>
-                    </map:HexagonGrid.Resources>
-                </map:HexagonGrid>
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-        <ItemsControl.ItemTemplate>
-            <DataTemplate DataType="viewModel:TileViewModel">
-                <StackPanel Name="TileContainer" Clip="{Binding Clipping, ElementName=HexagonGrid}" Style="{StaticResource BorderStyle}">
-                    <Button Margin="2">
-                        <Button.InputBindings>
-                            <MouseBinding Gesture="LeftClick" Command="{Binding Path=DataContext.SelectTileCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}" />
-                            <MouseBinding Gesture="RightClick" Command="{Binding Path=DataContext.MoveToTileCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}" />
-                        </Button.InputBindings>
-                        <Button.Content>
-                            <Grid>
-                                <TextBlock FontSize="10" Text="{Binding Units.Count}"  />
-                            </Grid>
-                        </Button.Content>
-                    </Button>
-                </StackPanel>
-                <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
-                        <Setter TargetName="TileContainer" Property="Background" Value="Red"/>
-                    </DataTrigger>
-                </DataTemplate.Triggers>
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-        <ItemsControl.ItemContainerStyle>
-            <Style>
-                <Setter Property="Grid.Row" Value="{Binding Row}" />
-                <Setter Property="Grid.Column" Value="{Binding Column}" />
-            </Style>
-        </ItemsControl.ItemContainerStyle>
-    </ItemsControl>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <ItemsControl Name="MapListBox" ItemsSource="{Binding Path=Tiles}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <map:HexagonGrid Rows="{Binding Path=Game.DifficultyStrategy.MapWidth}" Columns="{Binding Path=Game.DifficultyStrategy.MapWidth}" HexagonSideLength="30" Name="HexagonGrid">
+                        <map:HexagonGrid.Resources>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource HexagonButtonStyle}"/>
+                        </map:HexagonGrid.Resources>
+                    </map:HexagonGrid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="viewModel:TileViewModel">
+                    <StackPanel Name="TileContainer" Clip="{Binding Clipping, ElementName=HexagonGrid}" Style="{StaticResource BorderStyle}">
+                        <Button Margin="2">
+                            <Button.InputBindings>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding Path=DataContext.SelectTileCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}" />
+                                <MouseBinding Gesture="RightClick" Command="{Binding Path=DataContext.MoveToTileCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}" />
+                            </Button.InputBindings>
+                            <Button.Content>
+                                <Grid>
+                                    <TextBlock FontSize="10" Text="{Binding Units.Count}"  />
+                                </Grid>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                            <Setter TargetName="TileContainer" Property="Background" Value="Red"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Grid.Row" Value="{Binding Row}" />
+                    <Setter Property="Grid.Column" Value="{Binding Column}" />
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+        </ItemsControl>
+    </ScrollViewer>
 </UserControl>

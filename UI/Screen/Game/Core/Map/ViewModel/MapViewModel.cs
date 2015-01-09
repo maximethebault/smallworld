@@ -61,9 +61,9 @@ namespace UI.Screen.Game.Core.Map.ViewModel
         public void StartLoading()
         {
             var difficulty = Game.DifficultyStrategy;
-            for (var i = 0; i < difficulty.GetMapWidth(); ++i) // i -> y
+            for (var i = 0; i < difficulty.MapWidth; ++i) // i -> y
             {
-                for (var j = 0; j < difficulty.GetMapWidth(); ++j) // j -> x
+                for (var j = 0; j < difficulty.MapWidth; ++j) // j -> x
                 {
                     var tileObject = Game.Map.TileAtPosition(PositionFactory.GetHexaPosition(i, j));
                     var tileTextureIndex = 0;

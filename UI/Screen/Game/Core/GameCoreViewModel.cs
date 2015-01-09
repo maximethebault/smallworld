@@ -2,7 +2,9 @@
 using System.Windows.Media.Imaging;
 using Model.Game;
 using Model.Map;
+using Model.Unit.Exception;
 using UI.Screen.Game.Core.Map.ViewModel;
+using UI.Screen.Game.Core.Player.ViewModel;
 using UI.Screen.Game.Core.Unit.ViewModel;
 
 namespace UI.Screen.Game.Core
@@ -16,6 +18,18 @@ namespace UI.Screen.Game.Core
 
         public MapViewModel MapViewModel { get; set; }
         public UnitsViewModel UnitsViewModel { get; set; }
+        public PlayersViewModel PlayersViewModel { get; set; }
+
+        private bool _moveErrorVisibility;
+        public bool MoveErrorVisibility
+        {
+            get { return _moveErrorVisibility; }
+            set
+            {
+                _moveErrorVisibility = value;
+                RaisePropertyChanged("MoveErrorVisibility");
+            }
+        }
 
         public GameCoreViewModel(IGame game, BitmapImage[] tilesTexture, BitmapImage[] racesTexture)
         {
@@ -25,6 +39,7 @@ namespace UI.Screen.Game.Core
 
             MapViewModel = new MapViewModel(game, tilesTexture, racesTexture);
             UnitsViewModel = new UnitsViewModel(game);
+            PlayersViewModel = new PlayersViewModel(game);
 
             MapViewModel.OnSelectTile += SelectTile;
             MapViewModel.OnMoveToTile += MoveToTile;
@@ -46,10 +61,17 @@ namespace UI.Screen.Game.Core
             var unit = UnitsViewModel.SelectedUnit;
             if (unit == null)
             {
-                // TODO: Error handling, no unit selected
+                // no unit is selected, cancel the action
                 return;
             }
-            Game.MoveUnit(unit.Model, PositionFactory.GetHexaPosition(tile.Column, tile.Row));
+            try
+            {
+                Game.MoveUnit(unit.Model, PositionFactory.GetHexaPosition(tile.Column, tile.Row));
+            }
+            catch (UnitMovementUnauthorized ex)
+            {
+                MoveErrorVisibility = true;
+            }
             if (Game.Fight != null)
             {
                 //TODO

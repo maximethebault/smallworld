@@ -37,6 +37,7 @@ namespace UI.Screen.Game.Core.Unit.ViewModel
                     Visible = false;
                 }
                 RaisePropertyChanged("Units");
+                RaisePropertyChanged("Visible");
                 UnitListUpdated();
             }
         }
@@ -76,6 +77,7 @@ namespace UI.Screen.Game.Core.Unit.ViewModel
 
         public void UnitListUpdated()
         {
+            Visible = Units.Count != 0;
             if (Units.Count > 0 && SelectedIndex == -1 && Units.First().IsPlayable)
             {
                 SelectedIndex = 0;

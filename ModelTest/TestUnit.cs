@@ -83,7 +83,7 @@ namespace ModelTest
             var units = game.UnitsAt(PositionFactory.GetHexaPosition(0, 0));
             var unit = (Unit) units.ElementAt(0);
             IMove move;
-            for (var i = 1; i < difficulty.GetMapWidth()-1; i++)
+            for (var i = 1; i < difficulty.MapWidth-1; i++)
             {
                 move = game.MoveUnit(unit, PositionFactory.GetHexaPosition(i, i-1));
                 Assert.IsTrue(move.Success);
@@ -98,11 +98,11 @@ namespace ModelTest
                 Assert.AreEqual(i, unit.Position.Y);
                 unit.ResetMovePoint();
             }
-            move = game.MoveUnit(unit, PositionFactory.GetHexaPosition(difficulty.GetMapWidth() - 1, difficulty.GetMapWidth() - 2));
+            move = game.MoveUnit(unit, PositionFactory.GetHexaPosition(difficulty.MapWidth - 1, difficulty.MapWidth - 2));
             Assert.IsTrue(move.Success);
             Assert.IsFalse(move.Fight);
             unit.ResetMovePoint();
-            move = game.MoveUnit(unit, PositionFactory.GetHexaPosition(difficulty.GetMapWidth() - 1, difficulty.GetMapWidth() - 1));
+            move = game.MoveUnit(unit, PositionFactory.GetHexaPosition(difficulty.MapWidth - 1, difficulty.MapWidth - 1));
             Assert.IsFalse(move.Success);
             Assert.IsTrue(move.Fight);
             var fight = (Fight) game.IDFight;
@@ -128,8 +128,8 @@ namespace ModelTest
             {
                 Assert.AreEqual(2, fight.IDAttacker.ComputeScore());
             }
-            Assert.AreEqual(difficulty.GetMapWidth() - 1, fight.IDAttacker.Position.X);
-            Assert.AreEqual(difficulty.GetMapWidth() - 2, fight.IDAttacker.Position.Y);
+            Assert.AreEqual(difficulty.MapWidth - 1, fight.IDAttacker.Position.X);
+            Assert.AreEqual(difficulty.MapWidth - 2, fight.IDAttacker.Position.Y);
         }
     }
 }

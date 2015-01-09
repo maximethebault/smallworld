@@ -7,22 +7,35 @@
              xmlns:core="clr-namespace:UI.Screen.Game.Core"
              xmlns:map="clr-namespace:UI.Screen.Game.Core.Map"
              xmlns:unit="clr-namespace:UI.Screen.Game.Core.Unit"
+             xmlns:player="clr-namespace:UI.Screen.Game.Core.Player"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              Name="GameCoreControl"
              d:DataContext="{d:DesignInstance core:GameCoreViewModel}">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
     <DockPanel>
         <Grid Name="MapGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <ContentControl x:Name="Map" Grid.Column="0" DataContext="{Binding Path=MapViewModel}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ContentControl x:Name="Map" Grid.Column="0" Grid.Row="0" DataContext="{Binding Path=MapViewModel}">
                 <map:MapView />
             </ContentControl>
-            <ContentControl x:Name="Unit" Grid.Column="1" DataContext="{Binding Path=UnitsViewModel}">
+            <ContentControl x:Name="Unit" Grid.Column="1" Grid.Row="0" DataContext="{Binding Path=UnitsViewModel}">
                 <unit:UnitsView />
             </ContentControl>
+            <ContentControl x:Name="Players" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding Path=PlayersViewModel}">
+                <player:PlayersView />
+            </ContentControl>
+            <Label Content="Mouvement non autorisé !" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Visibility="{Binding Path=MoveErrorVisibility, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
     </DockPanel>
 </UserControl>

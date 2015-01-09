@@ -124,10 +124,10 @@ namespace ModelTest
             var map = game.Map;
 
             // we're going to check if the number of tiles for each type is well-distributed
-            var nbTilesForType = new int[difficulty.GetNbTileTypes()];
-            for (var i = 0; i < difficulty.GetMapWidth(); ++i)
+            var nbTilesForType = new int[difficulty.NbTileTypes];
+            for (var i = 0; i < difficulty.MapWidth; ++i)
             {
-                for (var j = 0; j < difficulty.GetMapWidth(); ++j)
+                for (var j = 0; j < difficulty.MapWidth; ++j)
                 {
                     var tile = map.TileAtPosition(PositionFactory.GetHexaPosition(i, j));
                     if (tile.IsDesert())
@@ -153,10 +153,10 @@ namespace ModelTest
                 }
             }
 
-            var minNbTilesForType = Math.Floor(((decimal)difficulty.GetMapWidth() * difficulty.GetMapWidth() / difficulty.GetNbTileTypes()));
-            var maxNbTilesForType = Math.Ceiling(((decimal)difficulty.GetMapWidth() * difficulty.GetMapWidth() / difficulty.GetNbTileTypes()));
+            var minNbTilesForType = Math.Floor(((decimal)difficulty.MapWidth * difficulty.MapWidth / difficulty.NbTileTypes));
+            var maxNbTilesForType = Math.Ceiling(((decimal)difficulty.MapWidth * difficulty.MapWidth / difficulty.NbTileTypes));
 
-            for (var i = 0; i < difficulty.GetNbTileTypes(); ++i)
+            for (var i = 0; i < difficulty.NbTileTypes; ++i)
             {
                 Assert.IsTrue(nbTilesForType[i] >= minNbTilesForType);
                 Assert.IsTrue(nbTilesForType[i] <= maxNbTilesForType);
@@ -214,7 +214,7 @@ namespace ModelTest
                 {
                     var player = playersIterator.Current;
                     var units = player.IDUnits;
-                    Assert.AreEqual(difficulty.GetNbUnitsPerRace(), units.Count);
+                    Assert.AreEqual(difficulty.NbUnitsPerRace, units.Count);
                     using (var unitsIterator = units.GetEnumerator())
                     {
                         while (unitsIterator.MoveNext())
@@ -228,8 +228,8 @@ namespace ModelTest
                             }
                             else
                             {
-                                Assert.AreEqual(difficulty.GetMapWidth()-1, unitPosition.X);
-                                Assert.AreEqual(difficulty.GetMapWidth() - 1, unitPosition.Y);
+                                Assert.AreEqual(difficulty.MapWidth-1, unitPosition.X);
+                                Assert.AreEqual(difficulty.MapWidth - 1, unitPosition.Y);
                             }
                         }
                     }

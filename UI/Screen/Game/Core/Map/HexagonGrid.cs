@@ -8,11 +8,11 @@ namespace UI.Screen.Game.Core.Map
     {
         /**
          * If the length of 1 side of the hexagon = S, then:
-         * Width = 2 x S
-         * Height = S x SQRT(3)
-         * Column C starts at C x (0.75 x Width)
-         * Row R starts at R x Height
-         * A row's uneven columns have an vertical offset of 0.5 x Height 
+         * Width = S x SQRT(3)
+         * Height = 2 x S
+         * Column C starts at C x Width
+         * Row R starts at R x (0.75 x Height)
+         * A column's uneven rows have an vertical offset of 0.5 x Width 
          **/
         #region HexagonSideLength
 
@@ -99,6 +99,7 @@ namespace UI.Screen.Game.Core.Map
             var side = HexagonSideLength;
             var width = side * Math.Sqrt(3.0);
             var height = 2 * side;
+            var colWidth = width - 1;
             var rowHeight = 0.75 * height;
 
             var availableChildSize = new Size(width, height);
@@ -109,9 +110,11 @@ namespace UI.Screen.Game.Core.Map
             }
 
             var totalHeight = Rows * rowHeight;
-            if (Columns > 1)
+            if (Rows > 1)
                 totalHeight += (0.5 * rowHeight);
-            var totalWidth = Columns + (0.5 * side);
+            var totalWidth = Columns * colWidth;
+            if (Columns > 1)
+                totalWidth += (0.5 * colWidth);
 
             var totalSize = new Size(totalWidth, totalHeight);
 

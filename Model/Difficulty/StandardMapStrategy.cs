@@ -2,44 +2,44 @@
 {
     class StandardMapStrategy : IDifficultyStrategy
     {
-        public int GetNbUnitsPerRace()
+        public int NbUnitsPerRace
         {
-            return 8;
+            get { return 8; }
         }
 
-        public int GetNbTurns()
+        public int NbTurns
         {
-            return 30;
+            get { return 30; }
         }
 
-        public int GetMapWidth()
+        public int MapWidth
         {
-            return 14;
+            get { return 14; }
         }
 
-        public int GetNbTiles()
+        public int NbTiles
         {
-            return GetMapWidth() * GetMapWidth();
+            get { return MapWidth*MapWidth; }
         }
 
-        public int GetNbTileTypes()
+        public int NbTileTypes
         {
-            return 4;
+            get { return 4; }
         }
 
-        public int GetMinPlayer()
+        public int MinPlayer
         {
-            return 2;
+            get { return 2; }
         }
 
-        public int GetMaxPlayer()
+        public int MaxPlayer
         {
-            return 2;
+            get { return 2; }
         }
 
         public bool IsMaxTurnNumberReached(int numberTurnPlayed)
         {
-            return numberTurnPlayed >= GetNbTurns();
+            return numberTurnPlayed >= NbTurns;
         }
     }
 }

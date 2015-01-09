@@ -12,7 +12,5 @@ namespace UI.Screen.Game.Core.Map
         {
             InitializeComponent();
         }
-
-        public event MapViewModel.MoveToTileEventHandler OnMoveUnit;
     }
 }

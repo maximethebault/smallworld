@@ -78,6 +78,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="Screen\Game\Core\Player\PlayersView.xaml.cs">
+      <DependentUpon>PlayersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screen\Game\Core\Player\ViewModel\PlayersViewModel.cs" />
+    <Compile Include="Screen\Game\Core\Player\ViewModel\PlayerViewModel.cs" />
     <Compile Include="Screen\Game\Core\Unit\ViewModel\UnitsViewModel.cs" />
     <Compile Include="Screen\Game\Creation\ViewModel\GameCreationViewModel.cs" />
     <Compile Include="Screen\Home\HomeViewModel.cs" />
@@ -111,6 +116,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Screen\Game\Core\Map\MapView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screen\Game\Core\Player\PlayersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

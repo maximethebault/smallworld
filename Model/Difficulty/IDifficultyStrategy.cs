@@ -2,20 +2,19 @@
 {
     public interface IDifficultyStrategy
     {
+        int NbUnitsPerRace { get; }
 
-        int GetNbUnitsPerRace();
+        int NbTurns { get; }
 
-        int GetNbTurns();
+        int MapWidth { get; }
 
-        int GetMapWidth();
+        int NbTiles { get; }
 
-        int GetNbTiles();
+        int NbTileTypes { get; }
 
-        int GetNbTileTypes();
+        int MinPlayer { get; }
 
-        int GetMinPlayer();
-
-        int GetMaxPlayer();
+        int MaxPlayer { get; }
 
         bool IsMaxTurnNumberReached(int numberTurnPlayed);
     }
