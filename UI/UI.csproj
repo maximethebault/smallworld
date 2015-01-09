@@ -228,6 +228,22 @@
     <Resource Include="Screen\Game\Core\Map\Textures\Alt\montagne.png" />
     <Resource Include="Screen\Game\Core\Map\Textures\Alt\plaine.png" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Screen\Game\Images\orc_race.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Screen\Game\Images\elf_race.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Screen\Game\Images\dwarf_race.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Screen\Game\Images\dwarf.png" />
     <Resource Include="Screen\Game\Images\elf.png" />
