@@ -2,7 +2,7 @@
 
 namespace Model.Map
 {
-    public class HexaPosition : IPosition
+    class HexaPosition : IPosition
     {
         public int Y
         {

@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using Model.Fight.Strategy;
 using Model.Unit;
 
 namespace Model.Fight
 {
-    public class Fight : IDFight
+    class Fight : IDFight
     {
         public int ElapsedRounds { get; set; }
         public int TotalRounds { get; set; }

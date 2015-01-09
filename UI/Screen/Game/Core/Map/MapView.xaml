@@ -1,14 +1,16 @@
-﻿<UserControl x:Class="UI.Screen.Game.Core.Map.Map"
+﻿<UserControl x:Class="UI.Screen.Game.Core.Map.MapView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:map="clr-namespace:UI.Screen.Game.Core.Map"
              xmlns:viewModel="clr-namespace:UI.Screen.Game.Core.Map.ViewModel"
+             xmlns:interactivity="http://www.codeplex.com/prism"
              mc:Ignorable="d" 
              Name="MapControl"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance viewModel:MapViewModel}">
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
         <DrawingImage x:Key="HexagonImage">
             <DrawingImage.Drawing>
                 <DrawingGroup>
@@ -51,22 +53,27 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
-                            <Image x:Name="img" Source="{Binding Texture}"/>
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Grid d:DataContext="{d:DesignInstance viewModel:TileViewModel}">
+                            <Image x:Name="Img" Source="{Binding Texture}"/>
+                            <Image x:Name="Img2" MaxHeight="30" Source="{Binding UnitTexture}"/>
+
+                            <Border Margin="0, 10, 5, 0" Padding="5, 2, 5, 2"
+                                    BorderThickness="1" BorderBrush="Red" Background="AntiqueWhite" CornerRadius="10"
+                                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                                    Visibility="{Binding Path=HasUnit, Converter={StaticResource BoolToVisibility}}">
+                                <ContentPresenter />
+                            </Border>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <!--<Setter TargetName="img" Property="Source" Value="{StaticResource HexagonHoverImage}"/>-->
-                                <Setter TargetName="img" Property="Effect">
+                                <Setter TargetName="Img" Property="Effect">
                                     <Setter.Value>
                                         <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="DarkGray" />
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <!--<Setter TargetName="img" Property="Source" Value="{StaticResource HexagonPressedImage}"/>-->
-                                <Setter TargetName="img" Property="Effect">
+                                <Setter TargetName="Img" Property="Effect">
                                     <Setter.Value>
                                         <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="Gray" />
                                     </Setter.Value>
@@ -77,8 +84,16 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="BorderStyle" TargetType="{x:Type StackPanel}">
+            <Setter Property="Background" Value="LightGray"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
-    <ItemsControl Name="MapListBox" ItemsSource="{Binding Path=Tiles, ElementName=MapControl}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+    <ItemsControl Name="MapListBox" ItemsSource="{Binding Path=Tiles}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
                 <map:HexagonGrid Rows="3" Columns="4" HexagonSideLength="30" Name="HexagonGrid">
@@ -89,10 +104,25 @@
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
-            <DataTemplate DataType="viewModel:Tile">
-                <StackPanel Clip="{Binding Clipping, ElementName=HexagonGrid}" Background="LightGray">
-                    <Button Margin="2" Content="Unit" />
+            <DataTemplate DataType="viewModel:TileViewModel">
+                <StackPanel Name="TileContainer" Clip="{Binding Clipping, ElementName=HexagonGrid}" Style="{StaticResource BorderStyle}">
+                    <Button Margin="2">
+                        <Button.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding Path=DataContext.SelectTileCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}" />
+                            <MouseBinding Gesture="RightClick" Command="{Binding Path=DataContext.MoveToTileCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}" />
+                        </Button.InputBindings>
+                        <Button.Content>
+                            <Grid>
+                                <TextBlock FontSize="10" Text="{Binding Units.Count}"  />
+                            </Grid>
+                        </Button.Content>
+                    </Button>
                 </StackPanel>
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                        <Setter TargetName="TileContainer" Property="Background" Value="Red"/>
+                    </DataTrigger>
+                </DataTemplate.Triggers>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
         <ItemsControl.ItemContainerStyle>

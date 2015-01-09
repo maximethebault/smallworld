@@ -4,7 +4,7 @@ using Model.Tile;
 
 namespace Model.Unit
 {
-    public class UnitOrc : Unit
+    class UnitOrc : Unit
     {
         private int _bonusPoint;
 

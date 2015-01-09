@@ -79,7 +79,6 @@
     <Compile Include="Unit\Exception\UnitNotFoundException.cs" />
     <Compile Include="Unit\IDUnit.cs" />
     <Compile Include="Unit\IUnit.cs" />
-    <Compile Include="Turn\IDUnitTurn.cs" />
     <Compile Include="Race\IRace.cs" />
     <Compile Include="Race\RaceDwarf.cs" />
     <Compile Include="Race\RaceElf.cs" />
@@ -99,7 +98,6 @@
     <Compile Include="Game\Builder\NewGameBuilder.cs" />
     <Compile Include="Tile\Plain.cs" />
     <Compile Include="Player\Player.cs" />
-    <Compile Include="Turn\UnitTurn.cs" />
     <Compile Include="Difficulty\StandardMapStrategy.cs" />
     <Compile Include="Game\Exception\TooManyPlayersException.cs" />
     <Compile Include="Turn\PlayerTurn.cs" />

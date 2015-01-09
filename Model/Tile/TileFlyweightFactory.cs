@@ -1,7 +1,4 @@
-﻿using System;
-using Model.Map;
-
-namespace Model.Tile
+﻿namespace Model.Tile
 {
     public class TileFlyweightFactory
     {

@@ -1,7 +1,4 @@
-﻿using System;
-using Model.Difficulty;
-
-namespace Model.Race
+﻿namespace Model.Race
 {
     public class RaceFactory
     {

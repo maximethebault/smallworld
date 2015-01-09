@@ -10,7 +10,7 @@
              Background="White"
              d:DesignHeight="500" d:DesignWidth="600"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance viewModel:Race}"
+             d:DataContext="{d:DesignInstance viewModel:RaceViewModel}"
              ui:ListBoxSelectionBehavior.ClickSelection="True"
              SelectionMode="Multiple">
     <ListBox.ItemsPanel>
@@ -21,7 +21,7 @@
     <ListBox.ItemTemplate>
         <DataTemplate>
             <StackPanel>
-                <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding Path}"/>
+                <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding Image}"/>
             </StackPanel>
         </DataTemplate>
     </ListBox.ItemTemplate>

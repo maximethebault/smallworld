@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Model.Map
+﻿namespace Model.Map
 {
-    class PositionFactory
+    public class PositionFactory
     {
         public static IPosition GetHexaPosition(int x, int y)
         {

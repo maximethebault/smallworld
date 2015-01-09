@@ -5,7 +5,7 @@ using Model.Tile;
 
 namespace Model.Unit
 {
-    public class UnitElf : Unit
+    class UnitElf : Unit
     {
         public UnitElf(IDPlayer player, IPosition position, ITile tile)
             : base(player, position, tile)

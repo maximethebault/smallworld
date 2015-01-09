@@ -4,7 +4,7 @@ using Model.Tile;
 
 namespace Model.Unit
 {
-    public class UnitDwarf : Unit
+    class UnitDwarf : Unit
     {
         public UnitDwarf(IDPlayer player, IPosition position, ITile tile)
             : base(player, position, tile)

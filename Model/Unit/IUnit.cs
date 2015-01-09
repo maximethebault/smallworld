@@ -1,6 +1,6 @@
 ﻿using System;
-using Model.Player;
 using Model.Map;
+using Model.Player;
 
 namespace Model.Unit
 {
@@ -11,6 +11,7 @@ namespace Model.Unit
         float DefensePoint { get; }
         float MovePoint { get; }
         IPosition Position { get; }
+        IPlayer Player { get; }
 
         /// <summary>
         /// Equality tests for two Unit instances

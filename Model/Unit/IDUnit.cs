@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Model.Map;
+﻿using Model.Map;
 using Model.Player;
 using Model.Tile;
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Model.Map;
 using Model.Player;
@@ -7,7 +6,7 @@ using Model.Tile;
 
 namespace Model.Unit
 {
-    abstract public class Unit : IDUnit
+    abstract class Unit : IDUnit
     {
         // as we want to make the following constants overridable, we make them static
         public static float UnitDefaultMovementCost = 1;
@@ -42,6 +41,11 @@ namespace Model.Unit
         public IPosition Position { get; set; }
 
         public ITile Tile { get; set; }
+
+        public IPlayer Player
+        {
+            get { return IDPlayer; }
+        }
 
         public IDPlayer IDPlayer { get; set; }
 
@@ -103,7 +107,7 @@ namespace Model.Unit
 
         protected virtual float GetNeededPointToMoveAt(ITile targetTile)
         {
-            return (float) UnitDefaultMovementCost;
+            return UnitDefaultMovementCost;
         }
 
         public bool Equals(IUnit other)

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Model.Difficulty
+﻿namespace Model.Difficulty
 {
     public class DifficultyFactory
     {

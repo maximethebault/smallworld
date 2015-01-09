@@ -21,16 +21,16 @@ namespace ModelTest
         [TestMethod]
         public void MoveUnit()
         {
-            var difficulty = new SmallMapStrategy();
+            var difficulty = DifficultyFactory.GetDifficultyByID(1);
             INewGameBuilder newGameBuilder = BuilderFactory.GetNewGameBuilder();
-            newGameBuilder.AddPlayer("Kikou", new RaceDwarf());
-            newGameBuilder.AddPlayer("Mama", new RaceElf());
+            newGameBuilder.AddPlayer("Kikou", 1);
+            newGameBuilder.AddPlayer("Mama", 0);
             newGameBuilder.Difficulty = difficulty;
             var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = (Game) gameCreator.CreateGame().GetGame();
-            var units = game.UnitsAt(new HexaPosition(0, 0));
+            var units = game.UnitsAt(PositionFactory.GetHexaPosition(0, 0));
             var unit = units.ElementAt(0);
-            game.MoveUnit(unit, new HexaPosition(1, 0));
+            game.MoveUnit(unit, PositionFactory.GetHexaPosition(1, 0));
             Assert.AreEqual(1, unit.Position.X);
             Assert.AreEqual(0, unit.Position.Y);
         }
@@ -39,16 +39,16 @@ namespace ModelTest
         [ExpectedException(typeof(UnitMovementUnauthorized))]
         public void MoveUnitUnauthorized()
         {
-            var difficulty = new SmallMapStrategy();
+            var difficulty = DifficultyFactory.GetDifficultyByID(1);
             INewGameBuilder newGameBuilder = BuilderFactory.GetNewGameBuilder();
-            newGameBuilder.AddPlayer("Kikou", new RaceOrc());
-            newGameBuilder.AddPlayer("Mama", new RaceElf());
+            newGameBuilder.AddPlayer("Kikou", 1);
+            newGameBuilder.AddPlayer("Mama", 0);
             newGameBuilder.Difficulty = difficulty;
             var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = (Game)gameCreator.CreateGame().GetGame();
-            var units = game.UnitsAt(new HexaPosition(0, 0));
+            var units = game.UnitsAt(PositionFactory.GetHexaPosition(0, 0));
             var unit = units.ElementAt(0);
-            game.MoveUnit(unit, new HexaPosition(2, 0));
+            game.MoveUnit(unit, PositionFactory.GetHexaPosition(2, 0));
             Assert.AreEqual(1, unit.Position.X);
             Assert.AreEqual(0, unit.Position.Y);
         }
@@ -57,15 +57,15 @@ namespace ModelTest
         [ExpectedException(typeof(UnitNotFoundException))]
         public void MoveUnexistingUnit()
         {
-            var difficulty = new SmallMapStrategy();
+            var difficulty = DifficultyFactory.GetDifficultyByID(1);
             INewGameBuilder newGameBuilder = BuilderFactory.GetNewGameBuilder();
-            newGameBuilder.AddPlayer("Kikou", new RaceDwarf());
-            newGameBuilder.AddPlayer("Mama", new RaceElf());
+            newGameBuilder.AddPlayer("Kikou", 1);
+            newGameBuilder.AddPlayer("Mama", 0);
             newGameBuilder.Difficulty = difficulty;
             var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = (Game)gameCreator.CreateGame().GetGame();
-            IUnit unit = new UnitDwarf(new Player("Ha", new RaceDwarf()), new HexaPosition(1, 2), TileFlyweightFactory.CreateTile(0));
-            game.MoveUnit(unit, new HexaPosition(1, 0));
+            IUnit unit = new UnitDwarf(new Player("Ha", new RaceDwarf()), PositionFactory.GetHexaPosition(1, 2), TileFlyweightFactory.CreateTile(0));
+            game.MoveUnit(unit, PositionFactory.GetHexaPosition(1, 0));
             Assert.AreEqual(1, unit.Position.X);
             Assert.AreEqual(0, unit.Position.Y);
         }
@@ -73,36 +73,36 @@ namespace ModelTest
         [TestMethod]
         public void MoveUnitSimple()
         {
-            var difficulty = new SmallMapStrategy();
+            var difficulty = DifficultyFactory.GetDifficultyByID(1);
             INewGameBuilder newGameBuilder = BuilderFactory.GetNewGameBuilder();
-            newGameBuilder.AddPlayer("Kikou", new RaceOrc());
-            newGameBuilder.AddPlayer("Mama", new RaceDwarf());
+            newGameBuilder.AddPlayer("Kikou", 2);
+            newGameBuilder.AddPlayer("Mama", 1);
             newGameBuilder.Difficulty = difficulty;
             var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = (Game)gameCreator.CreateGame().GetGame();
-            var units = game.UnitsAt(new HexaPosition(0, 0));
+            var units = game.UnitsAt(PositionFactory.GetHexaPosition(0, 0));
             var unit = (Unit) units.ElementAt(0);
             IMove move;
             for (var i = 1; i < difficulty.GetMapWidth()-1; i++)
             {
-                move = game.MoveUnit(unit, new HexaPosition(i, i-1));
+                move = game.MoveUnit(unit, PositionFactory.GetHexaPosition(i, i-1));
                 Assert.IsTrue(move.Success);
                 Assert.IsFalse(move.Fight);
                 Assert.AreEqual(i, unit.Position.X);
                 Assert.AreEqual(i-1, unit.Position.Y);
                 unit.ResetMovePoint();
-                move = game.MoveUnit(unit, new HexaPosition(i, i));
+                move = game.MoveUnit(unit, PositionFactory.GetHexaPosition(i, i));
                 Assert.IsTrue(move.Success);
                 Assert.IsFalse(move.Fight);
                 Assert.AreEqual(i, unit.Position.X);
                 Assert.AreEqual(i, unit.Position.Y);
                 unit.ResetMovePoint();
             }
-            move = game.MoveUnit(unit, new HexaPosition(difficulty.GetMapWidth() - 1, difficulty.GetMapWidth() - 2));
+            move = game.MoveUnit(unit, PositionFactory.GetHexaPosition(difficulty.GetMapWidth() - 1, difficulty.GetMapWidth() - 2));
             Assert.IsTrue(move.Success);
             Assert.IsFalse(move.Fight);
             unit.ResetMovePoint();
-            move = game.MoveUnit(unit, new HexaPosition(difficulty.GetMapWidth() - 1, difficulty.GetMapWidth() - 1));
+            move = game.MoveUnit(unit, PositionFactory.GetHexaPosition(difficulty.GetMapWidth() - 1, difficulty.GetMapWidth() - 1));
             Assert.IsFalse(move.Success);
             Assert.IsTrue(move.Fight);
             var fight = (Fight) game.IDFight;

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -47,7 +43,7 @@ namespace UI.Screen.Game.Core.Map
         /// </summary>
         public static readonly DependencyProperty RowsProperty =
             DependencyProperty.Register("Rows", typeof(int), typeof(HexagonGrid),
-                new FrameworkPropertyMetadata((int)1,
+                new FrameworkPropertyMetadata(1,
                     FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         /// <summary>
@@ -68,7 +64,7 @@ namespace UI.Screen.Game.Core.Map
         /// </summary>
         public static readonly DependencyProperty ColumnsProperty =
             DependencyProperty.Register("Columns", typeof(int), typeof(HexagonGrid),
-                new FrameworkPropertyMetadata((int)1,
+                new FrameworkPropertyMetadata(1,
                     FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         /// <summary>
@@ -103,11 +99,11 @@ namespace UI.Screen.Game.Core.Map
             var side = HexagonSideLength;
             var width = side * Math.Sqrt(3.0);
             var height = 2 * side;
-            var rowHeight = 0.75 * height - 1;
+            var rowHeight = 0.75 * height;
 
             var availableChildSize = new Size(width, height);
 
-            foreach (FrameworkElement child in this.InternalChildren)
+            foreach (FrameworkElement child in InternalChildren)
             {
                 child.Measure(availableChildSize);
             }
@@ -127,12 +123,12 @@ namespace UI.Screen.Game.Core.Map
             var side = HexagonSideLength;
             var width = side * Math.Sqrt(3.0);
             var height = 2 * side;
-            var colWidth = width - 2;
-            var rowHeight = 0.75 * height - 1;
+            var colWidth = width - 1;
+            var rowHeight = 0.75 * height;
 
             var childSize = new Size(width, height);
 
-            foreach (FrameworkElement child in this.InternalChildren)
+            foreach (FrameworkElement child in InternalChildren)
             {
                 var row = GetRow(child);
                 var col = GetColumn(child);

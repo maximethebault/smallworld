@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -30,7 +25,7 @@ namespace UI
             ListBox listBox = dpo as ListBox;
             if (listBox != null)
             {
-                if ((bool)e.NewValue == true)
+                if ((bool)e.NewValue)
                 {
                     listBox.SelectionMode = SelectionMode.Multiple;
                     listBox.SelectionChanged += OnSelectionChanged;

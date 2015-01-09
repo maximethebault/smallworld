@@ -9,7 +9,7 @@ namespace Model.Player
 {
     public class Player : IDPlayer
     {
-        public Player(string name, Race.IDRace race)
+        public Player(string name, IDRace race)
         {
             Name = name;
             IDRace = race;

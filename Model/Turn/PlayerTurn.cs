@@ -13,12 +13,6 @@ namespace Model.Turn
             _playerOrderIterator = playerOrderIterator;
         }
 
-        public IDUnitTurn CurrentIDUnitTurn
-        {
-            get;
-            set;
-        }
-
         public IPlayer CurrentPlayer
         {
             get;

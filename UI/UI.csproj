@@ -34,10 +34,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.Prism.Composition">
+      <HintPath>..\packages\Prism.Composition.5.0.0\lib\NET45\Microsoft.Practices.Prism.Composition.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Interactivity">
+      <HintPath>..\packages\Prism.Interactivity.5.0.0\lib\NET45\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Mvvm">
+      <HintPath>..\packages\Prism.Mvvm.1.0.0\lib\net45\Microsoft.Practices.Prism.Mvvm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Mvvm.Desktop">
+      <HintPath>..\packages\Prism.Mvvm.1.0.0\lib\net45\Microsoft.Practices.Prism.Mvvm.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.PubSubEvents">
+      <HintPath>..\packages\Prism.PubSubEvents.1.0.0\lib\portable-sl4+wp7+windows8+net40\Microsoft.Practices.Prism.PubSubEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.SharedInterfaces">
+      <HintPath>..\packages\Prism.Mvvm.1.0.0\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.2\lib\portable-windows8+net40+sl5+windowsphone8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,32 +77,48 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ListBoxSelectionBehavior.cs" />
-    <Compile Include="Screen\Game\Core\GameCore.xaml.cs">
-      <DependentUpon>GameCore.xaml</DependentUpon>
+    <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="Screen\Game\Core\Unit\ViewModel\UnitsViewModel.cs" />
+    <Compile Include="Screen\Game\Creation\ViewModel\GameCreationViewModel.cs" />
+    <Compile Include="Screen\Home\HomeViewModel.cs" />
+    <Compile Include="Screen\Intro\IntroViewModel.cs" />
+    <Compile Include="Utils\ListBoxSelectionBehavior.cs" />
+    <Compile Include="Utils\DelegateCommand.cs" />
+    <Compile Include="Screen\Game\Core\GameCoreView.xaml.cs">
+      <DependentUpon>GameCoreView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Screen\Game\Core\Map\Map.xaml.cs">
-      <DependentUpon>Map.xaml</DependentUpon>
+    <Compile Include="Screen\Game\Core\GameCoreViewModel.cs" />
+    <Compile Include="Screen\Game\Core\Map\MapView.xaml.cs">
+      <DependentUpon>MapView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screen\Game\Core\Map\HexagonGrid.cs" />
-    <Compile Include="Screen\Game\Core\Map\ViewModel\Tile.cs" />
-    <Compile Include="Screen\Game\Creation\ViewModel\GameConfiguration.cs" />
-    <Compile Include="Screen\Game\Creation\ViewModel\Player.cs" />
+    <Compile Include="Screen\Game\Core\Map\ViewModel\MapViewModel.cs" />
+    <Compile Include="Screen\Game\Core\Map\ViewModel\TileViewModel.cs" />
+    <Compile Include="Screen\Game\Core\Unit\ViewModel\UnitViewModel.cs" />
+    <Compile Include="Screen\Game\Core\Unit\UnitsView.xaml.cs">
+      <DependentUpon>UnitsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screen\Game\Creation\ViewModel\PlayerViewModel.cs" />
     <Compile Include="Screen\Game\Creation\RaceSelector.xaml.cs">
       <DependentUpon>RaceSelector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Screen\Game\Creation\ViewModel\Race.cs" />
+    <Compile Include="Screen\Game\Creation\ViewModel\RaceViewModel.cs" />
     <Compile Include="Screen\Game\GameEventArgs.cs" />
-    <Compile Include="ViewModelBase.cs" />
-    <Page Include="Screen\Game\Core\GameCore.xaml">
+    <Compile Include="Utils\ListExtension.cs" />
+    <Compile Include="Utils\ViewModelBase.cs" />
+    <Page Include="Screen\Game\Core\GameCoreView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Screen\Game\Core\Map\Map.xaml">
+    <Page Include="Screen\Game\Core\Map\MapView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Screen\Game\Creation\GameCreation.xaml">
+    <Page Include="Screen\Game\Core\Unit\UnitsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screen\Game\Creation\GameCreationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -92,15 +130,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Screen\Intro\Intro.xaml">
+    <Page Include="Screen\Intro\IntroView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Screen\Home\Home.xaml">
+    <Page Include="Screen\Home\HomeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -108,25 +146,24 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Screen\Game\Creation\GameCreation.xaml.cs">
-      <DependentUpon>GameCreation.xaml</DependentUpon>
+    <Compile Include="Screen\Game\Creation\GameCreationView.xaml.cs">
+      <DependentUpon>GameCreationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screen\Game\Loading\GameLoading.xaml.cs">
       <DependentUpon>GameLoading.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Screen\Intro\Intro.xaml.cs">
-      <DependentUpon>Intro.xaml</DependentUpon>
+    <Compile Include="Screen\Intro\IntroView.xaml.cs">
+      <DependentUpon>IntroView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Screen\Home\Home.xaml.cs">
-      <DependentUpon>Home.xaml</DependentUpon>
+    <Compile Include="Screen\Home\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="MainWindowView.xaml.cs">
+      <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Screen\Game\Core\MapView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -144,6 +181,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -190,6 +228,12 @@
     <Resource Include="Screen\Game\Core\Map\Textures\Alt\montagne.png" />
     <Resource Include="Screen\Game\Core\Map\Textures\Alt\plaine.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Screen\Game\Images\dwarf.png" />
+    <Resource Include="Screen\Game\Images\elf.png" />
+    <Resource Include="Screen\Game\Images\orc.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

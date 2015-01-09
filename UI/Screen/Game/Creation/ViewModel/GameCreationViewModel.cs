@@ -1,16 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using Model.Difficulty;
 using Model.Game;
 using Model.Game.Builder;
+using UI.Screen.Game.Creation.ViewModel;
 
-namespace UI.Screen.Game.Creation.ViewModel
+namespace UI.Screen.Game.Creation
 {
-    public class GameConfiguration : ViewModelBase
+    class GameCreationViewModel : ViewModelBase
     {
-        public String[] Maps { get; set; }
+        public event BackHomeEventHandler OnBackHome;
+        public delegate void BackHomeEventHandler(GameCreationViewModel i, EventArgs e);
+
+        public event NewGameEventHandler OnNewGame;
+        public delegate void NewGameEventHandler(GameCreationViewModel i, GameEventArgs e);
+
+        public BitmapImage[] Maps { get; set; }
 
         private int _selectedMap;
 
@@ -38,47 +50,59 @@ namespace UI.Screen.Game.Creation.ViewModel
             }
         }
 
-        private String[] Races { get; set; }
+        private BitmapImage[] Races { get; set; }
 
-        public List<Player> Players { get; set; }
+        public List<PlayerViewModel> Players { get; set; }
 
-        public GameConfiguration(String[] maps, String[] races, int playerCount)
+        public ICommand BackHomeCommand { get; private set; }
+        public ICommand StartGameCommand { get; private set; }
+
+        public GameCreationViewModel(BitmapImage[] maps, BitmapImage[] races, int playerCount)
         {
             Maps = maps;
             SelectedMap = -1;
             MapErrorVisibility = false;
             Races = races;
-            Players = new List<Player>();
+            Players = new List<PlayerViewModel>();
             for (var i = 0; i < playerCount; i++)
             {
-                Players.Add(new Player(i, Races));
+                Players.Add(new PlayerViewModel(this, i, Races));
+            }
+            BackHomeCommand = new DelegateCommand(o => BackHome());
+            StartGameCommand = new DelegateCommand(o => StartGame());
+        }
+
+        private void BackHome()
+        {
+            if (OnBackHome != null)
+            {
+                OnBackHome(this, null);
             }
         }
 
-        public void OnRaceSelection(object sender, SelectionChangedEventArgs e)
+        private void StartGame()
         {
-            var listbox = sender as RaceSelector;
-            if (listbox == null) return;
-            var currentPlayer = listbox.DataContext as Player;
-            Race unselected = null;
-            if (e.RemovedItems.Count > 0)
+            if (OnNewGame == null)
             {
-                unselected = e.RemovedItems[0] as Race;
+                return;
             }
-            Race selected = null;
-            if (e.AddedItems.Count > 0)
+            var game = BuildGame();
+            if (game != null)
             {
-                selected = e.AddedItems[0] as Race;
+                OnNewGame(this, new GameEventArgs(game));
             }
-            foreach (var player in Players.Where(player => !ReferenceEquals(player, currentPlayer)))
+        }
+        public void RaceSelected(PlayerViewModel sourcePlayer, int unselected, int selected)
+        {
+            foreach (var player in Players.Where(player => !ReferenceEquals(player, sourcePlayer)))
             {
-                if (unselected != null)
+                if (unselected > -1)
                 {
-                    player.Races[unselected.Index].IsEnabled = true;
+                    player.RacesViewModel[unselected].IsEnabled = true;
                 }
-                if (selected != null)
+                if (selected > -1)
                 {
-                    player.Races[selected.Index].IsEnabled = false;
+                    player.RacesViewModel[selected].IsEnabled = false;
                 }
             }
         }

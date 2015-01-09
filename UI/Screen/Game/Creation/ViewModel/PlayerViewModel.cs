@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Windows.Media.Imaging;
 
 namespace UI.Screen.Game.Creation.ViewModel
 {
-    public class Player : ViewModelBase
+    class PlayerViewModel : ViewModelBase
     {
         private string _name;
 
@@ -16,6 +17,8 @@ namespace UI.Screen.Game.Creation.ViewModel
                 NameErrorVisibility = false;
             }
         }
+
+        public GameCreationViewModel GameCreationViewModel { get; set; }
 
         private bool _nameErrorVisibility;
 
@@ -30,7 +33,6 @@ namespace UI.Screen.Game.Creation.ViewModel
                 RaisePropertyChanged("NameErrorVisibility");
             }
         }
-
         public int Index { get; set; }
 
         private int _selectedRace;
@@ -40,6 +42,7 @@ namespace UI.Screen.Game.Creation.ViewModel
             get { return _selectedRace; }
             set
             {
+                GameCreationViewModel.RaceSelected(this, _selectedRace, value);
                 _selectedRace = value;
                 RaceErrorVisibility = false;
             }
@@ -61,18 +64,19 @@ namespace UI.Screen.Game.Creation.ViewModel
 
         public String PlaceHolder { get; private set; }
 
-        public Race[] Races { get; set; }
+        public RaceViewModel[] RacesViewModel { get; set; }
 
-        public Player(int index, IReadOnlyList<String> races)
+        public PlayerViewModel(GameCreationViewModel gameCreationViewModel, int index, IReadOnlyList<BitmapImage> races)
         {
             Name = "";
+            GameCreationViewModel = gameCreationViewModel;
             Index = index;
             SelectedRace = -1;
             PlaceHolder = "Joueur " + (index + 1);
-            Races = new Race[races.Count];
+            RacesViewModel = new RaceViewModel[races.Count];
             for (var i = 0; i < races.Count; i++)
             {
-                Races[i] = new Race(races[i], i);
+                RacesViewModel[i] = new RaceViewModel(races[i], i);
             }
         }
     }

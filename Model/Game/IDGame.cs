@@ -14,5 +14,6 @@ namespace Model.Game
         IDPlayerTurn CurrentIDPlayerTurn { get; }
         IDFight IDFight { get; set; }
         new IDifficultyStrategy DifficultyStrategy { get; set; }
+        IEnumerator<IDPlayer> PlayerTurnOrder { get; set; }
     }
 }

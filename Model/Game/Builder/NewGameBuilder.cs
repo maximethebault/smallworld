@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Model.Difficulty;
+using System.Security.Cryptography;
 using Model.Game.Exception;
 using Model.Map;
 using Model.Player;
@@ -14,12 +14,12 @@ namespace Model.Game.Builder
     class NewGameBuilder : GameBuilder, INewGameBuilder
     {
         private readonly List<String> _playerNames;
-        private readonly List<Race.IDRace> _playerRaces;
+        private readonly List<IDRace> _playerRaces;
         private WrapperAlgo _wrapperAlgo;
 
         public NewGameBuilder()
         {
-            _playerRaces = new List<Race.IDRace>();
+            _playerRaces = new List<IDRace>();
             _playerNames = new List<string>();
         }
 
@@ -58,7 +58,10 @@ namespace Model.Game.Builder
                     }
             }
             }
+            players.Shuffle();
             IDGame.IDPlayers = players;
+            IDGame.PlayerTurnOrder = IDGame.IDPlayers.GetEnumerator();
+            IDGame.PlayerTurnOrder.MoveNext();
         }
 
         public unsafe override void BuildUnits()
@@ -107,8 +110,32 @@ namespace Model.Game.Builder
                 return;
             }
             var race = RaceFactory.GetRaceByID(raceID);
+            if (race == null)
+            {
+                return;
+            }
             _playerNames.Add(name);
             _playerRaces.Add(race);
+        }
+    }
+
+    static class ListExtension
+    {
+        public static void Shuffle<T>(this IList<T> list)
+        {
+            var provider = new RNGCryptoServiceProvider();
+            var n = list.Count;
+            while (n > 1)
+            {
+                var box = new byte[1];
+                do provider.GetBytes(box);
+                while (!(box[0] < n * (Byte.MaxValue / n)));
+                var k = (box[0] % n);
+                n--;
+                var value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
         }
     }
 }

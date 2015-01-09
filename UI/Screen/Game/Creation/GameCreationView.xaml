@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="UI.Screen.Game.Creation.GameCreation"
+﻿<UserControl x:Class="UI.Screen.Game.Creation.GameCreationView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,9 +7,10 @@
              xmlns:ui="clr-namespace:UI"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:viewModel="clr-namespace:UI.Screen.Game.Creation.ViewModel"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              Name="GameCreationUserControl"
              Background="White"
-             d:DesignHeight="500" d:DesignWidth="600"
+             d:DesignHeight="500" d:DesignWidth="600" d:DataContext="{d:DesignInstance creation:GameCreationViewModel}"
              mc:Ignorable="d">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
@@ -44,7 +45,7 @@
         </Style>
     </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel DataContext="{Binding Configuration, ElementName=GameCreationUserControl}">
+        <StackPanel>
             <!--
             Map selection
             -->
@@ -52,7 +53,7 @@
                 <Label Content="Carte" FontSize="25" FontWeight="Heavy" />
                 <Label Foreground="Red" Margin="0, -10, 0, 0" Content="Aucune carte n'est sélectionnée !" Visibility="{Binding MapErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
             </StackPanel>
-            <ListBox Name="MapListBox" SelectedIndex="{Binding SelectedMap}" ItemsSource="{Binding Maps}" d:DataContext="{d:DesignData Source}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
+            <ListBox Name="MapListBox" SelectedIndex="{Binding SelectedMap}" ItemsSource="{Binding Maps}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="{Binding Items.Count, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}" />
@@ -73,8 +74,7 @@
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsSelected" Value="true">
-                                            <Setter TargetName="Border" Property="Background"
-                                            Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
@@ -103,7 +103,7 @@
                             <Label Foreground="Red" Content="Veuillez entrer un nom !" Visibility="{Binding NameErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
                             <Label Content="Race :" FontSize="12" Margin="0, 10, 0, 0" />
                             <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <creation:RaceSelector HorizontalContentAlignment="Center" ItemsSource="{Binding Races}" SelectionChanged="OnRaceSelection" SelectedIndex="{Binding SelectedRace}" />
+                                <creation:RaceSelector HorizontalContentAlignment="Center" ItemsSource="{Binding RacesViewModel}" SelectedIndex="{Binding SelectedRace}" />
                             </WrapPanel>
                             <Label Foreground="Red" Margin="0, -10, 0, 0" Content="Veuillez sélectionner une race !" Visibility="{Binding RaceErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
                         </StackPanel>
@@ -119,8 +119,8 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="Retour" Padding="5" FontSize="25" Click="Back_Home" HorizontalAlignment="Left"/>
-                <Button Grid.Column="2" Content="Commencer" Padding="5" FontSize="25" Click="Start_Game" HorizontalAlignment="Right"/>
+                <Button Grid.Column="0" Content="Retour" Padding="5" FontSize="25" Command="{Binding BackHomeCommand}" HorizontalAlignment="Left"/>
+                <Button Grid.Column="2" Content="Commencer" Padding="5" FontSize="25" Command="{Binding StartGameCommand}" HorizontalAlignment="Right"/>
             </Grid>
         </StackPanel>
     </ScrollViewer>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Model.Game.Exception;
 using Model.Difficulty;
 using Model.Fight;
 using Model.Fight.Exception;
@@ -18,8 +17,16 @@ namespace Model.Game
 {
     public class Game : IDGame
     {
-        private int elapsedTurns;
-        private IEnumerable<IDPlayer> playerTurnOrder;
+        public int ElapsedTurns { get; private set; }
+
+        public bool Finished { get; private set; }
+
+        public IEnumerator<IDPlayer> PlayerTurnOrder { get; set; }
+
+        public IPlayer CurrentPlayer
+        {
+            get { return PlayerTurnOrder.Current; }
+        }
 
         public List<IDPlayer> IDPlayers { get; set; }
 
@@ -48,7 +55,24 @@ namespace Model.Game
 
         public Game()
         {
+            ElapsedTurns = 0;
+            Finished = false;
             IDFight = null;
+        }
+
+        private IRace GetRaceTypeAt(IPosition position)
+        {
+            throw new NotImplementedException();
+        }
+
+        private List<IDUnit> IDUnitsAt(IPosition position)
+        {
+            return IDPlayers.Select(player => player.IDUnitsAt(position)).SingleOrDefault(units => units.Count > 0) ?? new List<IDUnit>();
+        }
+
+        public List<IUnit> UnitsAt(IPosition position)
+        {
+            return Players.Select(player => player.UnitsAt(position)).SingleOrDefault(units => units.Count > 0) ?? new List<IUnit>();
         }
 
         public IMove MoveUnit(IUnit movedUnit, IPosition targetPosition)
@@ -74,7 +98,7 @@ namespace Model.Game
             }
             var targetTile = Map.TileAtPosition(targetPosition);
             var unitsOnTile = IDUnitsAt(targetPosition);
-            var isEnnemyOnTargetTile = unitsOnTile != null && !unitsOnTile.First().IDPlayer.Equals(targetPlayer);
+            var isEnnemyOnTargetTile = unitsOnTile != null && unitsOnTile.Count > 0 && !unitsOnTile.First().IDPlayer.Equals(targetPlayer);
             if (!targetUnit.CanMoveTo(targetPosition, targetTile, isEnnemyOnTargetTile))
             {
                 throw new UnitMovementUnauthorized("The given unit can't be moved to the given position.");
@@ -91,24 +115,6 @@ namespace Model.Game
                 move.Success = true;
             }
             return move;
-        }
-
-        public void FinishUnitTurn()
-        {
-            if (IDFight != null)
-            {
-                throw new FightInProgressException("Cannot finish turn because a fight is in progress!");
-            }
-            throw new NotImplementedException();
-        }
-
-        public void FinishPlayerTurn()
-        {
-            if (IDFight != null)
-            {
-                throw new FightInProgressException("Cannot finish turn because a fight is in progress!");
-            }
-            throw new NotImplementedException();
         }
 
         public void NextFightRound()
@@ -139,7 +145,7 @@ namespace Model.Game
             var nbDead = IDPlayers.Count(player => !player.HasUnitLeft());
             if (nbDead >= IDPlayers.Count - 1)
             {
-                throw new NotImplementedException();
+                Finished = true;
             }
         }
 
@@ -166,29 +172,22 @@ namespace Model.Game
             return targetUnit.CanMoveTo(targetPosition, targetTile, isEnnemyOnTargetTile);
         }
 
-        private IRace GetRaceTypeAt(IPosition position)
+        public void PropelGame()
         {
-            throw new NotImplementedException();
-        }
-
-        private void StartNewTurn()
-        {
-            throw new NotImplementedException();
-        }
-
-        private List<IDUnit> IDUnitsAt(IPosition position)
-        {
-            return IDPlayers.Select(player => player.IDUnitsAt(position)).FirstOrDefault(playerUnits => playerUnits.Count > 0);
-        }
-
-        public List<IUnit> UnitsAt(IPosition position)
-        {
-            return Players.Select(player => player.UnitsAt(position)).FirstOrDefault(playerUnits => playerUnits.Count > 0);
-        }
-
-        public void StartGame()
-        {
-            throw new NotImplementedException();
+            if (IDFight != null)
+            {
+                throw new FightInProgressException("Cannot finish turn because a fight is in progress!");
+            }
+            if (PlayerTurnOrder.MoveNext()) return;
+            if (DifficultyStrategy.IsMaxTurnNumberReached(ElapsedTurns))
+            {
+                Finished = true;
+                return;
+            }
+            ElapsedTurns++;
+            // let's reset the cursor to the first Player
+            PlayerTurnOrder.Reset();
+            PlayerTurnOrder.MoveNext();
         }
     }
 }

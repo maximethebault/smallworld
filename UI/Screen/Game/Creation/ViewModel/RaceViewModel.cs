@@ -1,12 +1,12 @@
-﻿using System;
+﻿using System.Windows.Media.Imaging;
 
 namespace UI.Screen.Game.Creation.ViewModel
 {
-    public class Race : ViewModelBase
+    public class RaceViewModel : ViewModelBase
     {
         private bool _isEnabled;
 
-        public String Path { get; set; }
+        public BitmapImage Image { get; set; }
 
         public int Index { get; set; }
 
@@ -24,9 +24,9 @@ namespace UI.Screen.Game.Creation.ViewModel
             }
         }
 
-        public Race(String path, int i)
+        public RaceViewModel(BitmapImage image, int i)
         {
-            Path = path;
+            Image = image;
             Index = i;
             IsSelected = false;
             IsEnabled = true;

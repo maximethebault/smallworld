@@ -1,6 +1,6 @@
 ﻿namespace Model.Difficulty
 {
-    public class StandardMapStrategy : IDifficultyStrategy
+    class StandardMapStrategy : IDifficultyStrategy
     {
         public int GetNbUnitsPerRace()
         {
