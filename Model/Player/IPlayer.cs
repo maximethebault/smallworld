@@ -9,6 +9,7 @@ namespace Model.Player
     {
         string Name { get; }
         IRace Race { get; }
+        int Score { get; set; }
         List<IUnit> UnitsAt(IPosition position);
     }
 }

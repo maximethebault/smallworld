@@ -87,7 +87,7 @@ namespace UI.Screen.Game.Core.Map.ViewModel
                     Tiles.Add(tile);
                 }
             }
-            UpdateUnitOnTile();
+            Refresh();
         }
 
         public int ConvertRaceNameToID(string name)
@@ -105,7 +105,7 @@ namespace UI.Screen.Game.Core.Map.ViewModel
             }
         }
 
-        public void UpdateUnitOnTile()
+        public void Refresh()
         {
             foreach (var tile in Tiles)
             {
@@ -129,6 +129,7 @@ namespace UI.Screen.Game.Core.Map.ViewModel
                 var unit = tile.Units.First();
                 var raceID = ConvertRaceNameToID(unit.Model.Player.Race.GetName());
                 tile.UnitTexture = raceID == -1 ? null : RacesTexture[raceID];
+                tile.Refresh();
             }
         }
 

@@ -109,6 +109,7 @@
     <Compile Include="Unit\UnitElf.cs" />
     <Compile Include="Unit\UnitFactory.cs" />
     <Compile Include="Unit\UnitOrc.cs" />
+    <Compile Include="Utils\PropertyChangedNotifier.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagramInterfaces.cd" />

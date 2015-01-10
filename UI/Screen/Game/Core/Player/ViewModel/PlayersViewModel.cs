@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,6 +48,11 @@ namespace UI.Screen.Game.Core.Player.ViewModel
             }
         }
 
+        public ICommand EndTurnCommand { get; private set; }
+
+        public event CurrentPlayerChangeEventHandler OnCurrentPlayerChange;
+        public delegate void CurrentPlayerChangeEventHandler(PlayersViewModel t, EventArgs e);
+
         public PlayersViewModel(IGame game)
         {
             Game = game;
@@ -57,6 +63,25 @@ namespace UI.Screen.Game.Core.Player.ViewModel
             foreach (var player in Game.Players)
             {
                 Players.Add(new PlayerViewModel(Game, player, i++));
+            }
+
+            EndTurnCommand = new DelegateCommand(o => EndTurn());
+        }
+
+        public void EndTurn()
+        {
+            Game.PropelGame();
+            if (OnCurrentPlayerChange != null)
+            {
+                OnCurrentPlayerChange(this, null);
+            }
+        }
+
+        public void Refresh()
+        {
+            foreach (var player in Players)
+            {
+                player.Refresh();
             }
         }
     }

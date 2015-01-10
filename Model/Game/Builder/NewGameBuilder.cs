@@ -78,6 +78,7 @@ namespace Model.Game.Builder
                     player.IDUnits.Add(unit);
                 }
             }
+            IDGame.ComputeScore();
         }
 
         public unsafe override void BuildMap()

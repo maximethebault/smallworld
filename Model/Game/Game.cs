@@ -12,6 +12,7 @@ using Model.Race;
 using Model.Turn;
 using Model.Unit;
 using Model.Unit.Exception;
+using Model.Utils;
 
 namespace Model.Game
 {
@@ -178,16 +179,40 @@ namespace Model.Game
             {
                 throw new FightInProgressException("Cannot finish turn because a fight is in progress!");
             }
-            if (PlayerTurnOrder.MoveNext()) return;
+            if (PlayerTurnOrder.MoveNext())
+            {
+                return;
+            }
             if (DifficultyStrategy.IsMaxTurnNumberReached(ElapsedTurns))
             {
                 Finished = true;
                 return;
             }
+            NextTurn();
+        }
+
+        public void ComputeScore()
+        {
+            foreach (var player in IDPlayers)
+            {
+                player.ComputeScore();
+            }
+        }
+
+        private void NextTurn()
+        {
             ElapsedTurns++;
             // let's reset the cursor to the first Player
             PlayerTurnOrder.Reset();
             PlayerTurnOrder.MoveNext();
+            foreach (var player in IDPlayers)
+            {
+                player.ComputeScore();
+                foreach (var unit in player.IDUnits)
+                {
+                    unit.ResetMovePoint();
+                }
+            }
         }
     }
 }

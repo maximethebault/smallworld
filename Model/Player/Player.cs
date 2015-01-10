@@ -4,42 +4,42 @@ using System.Linq;
 using Model.Map;
 using Model.Race;
 using Model.Unit;
+using Model.Utils;
 
 namespace Model.Player
 {
-    public class Player : IDPlayer
+    public class Player : PropertyChangedNotifier, IDPlayer
     {
+        #region Properties
+        public String Name { get; set; }
+
+        private int _score;
+        public int Score
+        {
+            get { return _score; }
+            set
+            {
+                _score = value;
+                RaisePropertyChanged("Score");
+            }
+        }
+
+        public IDRace IDRace { get; set; }
+
+        public IRace Race
+        {
+            get { return IDRace; }
+        }
+
+        public List<IDUnit> IDUnits { get; set; }
+        #endregion Properties
+
         public Player(string name, IDRace race)
         {
             Name = name;
             IDRace = race;
             IDUnits = new List<IDUnit>();
-        }
-
-        public String Name
-        {
-            get;
-            set;
-        }
-
-        public IDRace IDRace
-        {
-            get;
-            set;
-        }
-
-        public IRace Race
-        {
-            get
-            {
-                return IDRace;
-            }
-        }
-
-        public List<IDUnit> IDUnits
-        {
-            get;
-            set;
+            Score = 0;
         }
 
         public void RemoveUnit(IUnit unit)
@@ -47,9 +47,9 @@ namespace Model.Player
             IDUnits.RemoveAll(itUnit => itUnit.Equals(unit));
         }
 
-        public int ComputeScore()
+        public void ComputeScore()
         {
-            return IDUnits.Sum(unit => unit.ComputeScore());
+            Score = IDUnits.Sum(unit => unit.ComputeScore());
         }
 
         public bool HasUnitLeft()

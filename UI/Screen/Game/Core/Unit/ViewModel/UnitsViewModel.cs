@@ -83,5 +83,21 @@ namespace UI.Screen.Game.Core.Unit.ViewModel
                 SelectedIndex = 0;
             }
         }
+
+        public void Refresh()
+        {
+            foreach (var unit in Units)
+            {
+                unit.Refresh();
+                if (!unit.IsPlayable)
+                {
+                    SelectedIndex = -1;
+                }
+                else if (SelectedIndex == -1)
+                {
+                    SelectedIndex = 0;
+                }
+            }
+        }
     }
 }

@@ -43,17 +43,13 @@ namespace UI.Screen.Game.Core
 
             MapViewModel.OnSelectTile += SelectTile;
             MapViewModel.OnMoveToTile += MoveToTile;
+
+            PlayersViewModel.OnCurrentPlayerChange += CurrentPlayerChange;
         }
 
         private void SelectTile(TileViewModel t, EventArgs e)
         {
             UnitsViewModel.Units = t.Units;
-            t.PropertyChanged += (sender, args) =>
-            {
-                if (!args.PropertyName.Equals("Units")) return;
-                UnitsViewModel.Units = ((TileViewModel)sender).Units;
-                UnitsViewModel.UnitListUpdated();
-            };
         }
 
         private void MoveToTile(TileViewModel tile, EventArgs e)
@@ -77,7 +73,14 @@ namespace UI.Screen.Game.Core
                 //TODO
                 return;
             }
-            MapViewModel.UpdateUnitOnTile();
+            MapViewModel.Refresh();
+        }
+
+        private void CurrentPlayerChange(PlayersViewModel t, EventArgs e)
+        {
+            PlayersViewModel.Refresh();
+            MapViewModel.Refresh();
+            UnitsViewModel.Refresh();
         }
     }
 }

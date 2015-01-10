@@ -15,5 +15,6 @@ namespace Model.Game
         IDFight IDFight { get; set; }
         new IDifficultyStrategy DifficultyStrategy { get; set; }
         IEnumerator<IDPlayer> PlayerTurnOrder { get; set; }
+        void ComputeScore();
     }
 }

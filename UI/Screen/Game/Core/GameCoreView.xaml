@@ -15,6 +15,9 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Key="Space" Command="{Binding PlayersViewModel.EndTurnCommand}"/>
+    </UserControl.InputBindings>
     <DockPanel>
         <Grid Name="MapGrid">
             <Grid.ColumnDefinitions>

@@ -62,5 +62,13 @@ namespace UI.Screen.Game.Core.Map.ViewModel
             RaisePropertyChanged("HasUnit");
             RaisePropertyChanged("Units.Count");
         }
+
+        public void Refresh()
+        {
+            foreach (var unit in Units)
+            {
+                unit.Refresh();
+            }
+        }
     }
 }

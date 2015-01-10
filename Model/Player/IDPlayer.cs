@@ -10,7 +10,7 @@ namespace Model.Player
         List<IDUnit> IDUnits { get; set; }
         IDRace IDRace { get; }
         void RemoveUnit(IUnit unit);
-        int ComputeScore();
+        void ComputeScore();
         bool HasUnitLeft();
         List<IDUnit> IDUnitsAt(IPosition position);
     }

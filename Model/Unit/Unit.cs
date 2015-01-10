@@ -3,10 +3,11 @@ using System.Linq;
 using Model.Map;
 using Model.Player;
 using Model.Tile;
+using Model.Utils;
 
 namespace Model.Unit
 {
-    abstract class Unit : IDUnit
+    abstract class Unit : PropertyChangedNotifier, IDUnit
     {
         // as we want to make the following constants overridable, we make them static
         public static float UnitDefaultMovementCost = 1;
@@ -16,7 +17,19 @@ namespace Model.Unit
         public static int UnitDefaultDefensePoint = 1;
         public static float UnitDefaultMovePoint = 1;
 
-        public int HealthPoint { get; set; }
+        private int _healthPoint;
+
+        public int HealthPoint
+        {
+            get { return _healthPoint; }
+            set
+            {
+                _healthPoint = value;
+                RaisePropertyChanged("HealthPoint");
+                RaisePropertyChanged("AttackPoint");
+                RaisePropertyChanged("DefensePoint");
+            }
+        }
 
         public float AttackPoint
         {
@@ -36,7 +49,16 @@ namespace Model.Unit
             }
         }
 
-        public float MovePoint { get; set; }
+        private float _movePoint;
+        public float MovePoint
+        {
+            get { return _movePoint; }
+            set
+            {
+                _movePoint = value;
+                RaisePropertyChanged("MovePoint");
+            }
+        }
 
         public IPosition Position { get; set; }
 
@@ -97,7 +119,6 @@ namespace Model.Unit
         public virtual void DecrementLifePoint()
         {
             HealthPoint--;
-            // TODO: something else? check dead?
         }
 
         protected virtual bool IsMovementPossible(IPosition targetPosition, ITile targetTile, bool ennemyOnTargetTile)
