@@ -4,6 +4,7 @@ using Model.Unit;
 
 namespace Model.Fight.Strategy
 {
+    [Serializable()]
     public class RandomFightStrategy : IFightStrategy
     {
         public IDUnit IDAttacker { get; set; }

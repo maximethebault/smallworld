@@ -2,6 +2,7 @@
 
 namespace Model.Map
 {
+    [Serializable()]
     class HexaPosition : IPosition
     {
         public int Y

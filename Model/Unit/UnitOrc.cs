@@ -1,9 +1,11 @@
-﻿using Model.Map;
+﻿using System;
+using Model.Map;
 using Model.Player;
 using Model.Tile;
 
 namespace Model.Unit
 {
+    [Serializable()]
     class UnitOrc : Unit
     {
         private int _bonusPoint;

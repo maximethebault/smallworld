@@ -8,6 +8,8 @@
              xmlns:map="clr-namespace:UI.Screen.Game.Core.Map"
              xmlns:unit="clr-namespace:UI.Screen.Game.Core.Unit"
              xmlns:player="clr-namespace:UI.Screen.Game.Core.Player"
+             xmlns:fight="clr-namespace:UI.Screen.Game.Core.Fight"
+             xmlns:menu="clr-namespace:UI.Screen.Game.Core.Menu"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              Name="GameCoreControl"
@@ -17,8 +19,9 @@
     </UserControl.Resources>
     <UserControl.InputBindings>
         <KeyBinding Key="Space" Command="{Binding PlayersViewModel.EndTurnCommand}"/>
+        <KeyBinding Key="Escape" Command="{Binding MenuCommand}"/>
     </UserControl.InputBindings>
-    <DockPanel>
+    <Grid>
         <Grid Name="MapGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -29,16 +32,79 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <ContentControl x:Name="Map" Grid.Column="0" Grid.Row="0" DataContext="{Binding Path=MapViewModel}">
-                <map:MapView />
-            </ContentControl>
-            <ContentControl x:Name="Unit" Grid.Column="1" Grid.Row="0" DataContext="{Binding Path=UnitsViewModel}">
-                <unit:UnitsView />
-            </ContentControl>
-            <ContentControl x:Name="Players" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding Path=PlayersViewModel}">
-                <player:PlayersView />
-            </ContentControl>
+            <map:MapView x:Name="Map" Grid.Column="0" Grid.Row="0" DataContext="{Binding Path=MapViewModel}" />
+            <unit:UnitsView x:Name="Unit" Grid.Column="1" Grid.Row="0" DataContext="{Binding Path=UnitsViewModel}" />
+            <player:PlayersView x:Name="Players" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding Path=PlayersViewModel}" />
             <Label Content="Mouvement non autorisé !" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Visibility="{Binding Path=MoveErrorVisibility, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
-    </DockPanel>
+
+        <!-- Overlay fight -->
+        <Grid>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding FightViewModel.InProgress}" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Border HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="DarkGray"
+                Opacity=".7" />
+            <Border HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="White"
+                Padding="20"
+                BorderBrush="Orange"
+                BorderThickness="4">
+                <fight:FightView />
+            </Border>
+        </Grid>
+
+        <!-- Overlay menu -->
+        <Grid>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding MenuViewModel.Visible}" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <menu:MenuView DataContext="{Binding Path=MenuViewModel}" />
+            </Border>
+        </Grid>
+
+        <!-- Overlay end -->
+        <Grid>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding FightViewModel.InProgress}" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Border HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="DarkGray"
+                Opacity=".7" />
+            <Border HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="White"
+                Padding="20"
+                BorderBrush="Orange"
+                BorderThickness="4">
+                <!-- TODO -->
+            </Border>
+        </Grid>
+    </Grid>
 </UserControl>

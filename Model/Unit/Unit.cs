@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Model.Map;
 using Model.Player;
@@ -7,6 +8,7 @@ using Model.Utils;
 
 namespace Model.Unit
 {
+    [Serializable()]
     abstract class Unit : PropertyChangedNotifier, IDUnit
     {
         // as we want to make the following constants overridable, we make them static

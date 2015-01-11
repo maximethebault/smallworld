@@ -78,6 +78,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="Screen\Game\Core\Fight\FightView.xaml.cs">
+      <DependentUpon>FightView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screen\Game\Core\Fight\ViewModel\FightViewModel.cs" />
+    <Compile Include="Screen\Game\Core\Menu\MenuView.xaml.cs">
+      <DependentUpon>MenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screen\Game\Core\Menu\ViewModel\MenuViewModel.cs" />
     <Compile Include="Screen\Game\Core\Player\PlayersView.xaml.cs">
       <DependentUpon>PlayersView.xaml</DependentUpon>
     </Compile>
@@ -111,6 +119,10 @@
     <Compile Include="Screen\Game\GameEventArgs.cs" />
     <Compile Include="Utils\ListExtension.cs" />
     <Compile Include="Utils\ViewModelBase.cs" />
+    <Page Include="Screen\Game\Core\Fight\FightView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Screen\Game\Core\GameCoreView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -118,6 +130,10 @@
     <Page Include="Screen\Game\Core\Map\MapView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screen\Game\Core\Menu\MenuView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Screen\Game\Core\Player\PlayersView.xaml">
       <SubType>Designer</SubType>

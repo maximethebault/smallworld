@@ -9,13 +9,13 @@ using Model.Map;
 using Model.Move;
 using Model.Player;
 using Model.Race;
-using Model.Turn;
 using Model.Unit;
 using Model.Unit.Exception;
 using Model.Utils;
 
 namespace Model.Game
 {
+    [Serializable()]
     public class Game : IDGame
     {
         public int ElapsedTurns { get; private set; }
@@ -49,8 +49,6 @@ namespace Model.Game
         {
             get { return IDFight; }
         }
-
-        public IDPlayerTurn CurrentIDPlayerTurn { get; set; }
 
         public IDifficultyStrategy DifficultyStrategy { get; set; }
 

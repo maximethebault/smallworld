@@ -8,6 +8,7 @@ using Model.Utils;
 
 namespace Model.Player
 {
+    [Serializable()]
     public class Player : PropertyChangedNotifier, IDPlayer
     {
         #region Properties

@@ -1,5 +1,8 @@
-﻿namespace Model.Difficulty
+﻿using System;
+
+namespace Model.Difficulty
 {
+    [Serializable()]
     class DemoMapStrategy : IDifficultyStrategy
     {
         public int NbUnitsPerRace

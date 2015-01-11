@@ -1,5 +1,8 @@
-﻿namespace Model.Move
+﻿using System;
+
+namespace Model.Move
 {
+    [Serializable()]
     class Move : IMove
     {
         public bool Success { get; set; }

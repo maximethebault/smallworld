@@ -1,7 +1,9 @@
-﻿using Model.Unit;
+﻿using System;
+using Model.Unit;
 
 namespace Model.Fight.Strategy
 {
+    [Serializable()]
     public class DeterministicFightStrategy : IFightStrategy
     {
         public IDUnit IDAttacker { get; set; }

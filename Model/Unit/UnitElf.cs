@@ -5,6 +5,7 @@ using Model.Tile;
 
 namespace Model.Unit
 {
+    [Serializable()]
     class UnitElf : Unit
     {
         public UnitElf(IDPlayer player, IPosition position, ITile tile)

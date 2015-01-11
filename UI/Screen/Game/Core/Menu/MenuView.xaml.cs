@@ -1,17 +1,15 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 
-namespace UI.Screen.Home
+namespace UI.Screen.Game.Core.Menu
 {
     /// <summary>
-    /// Logique d'interaction pour HomeView.xaml
+    /// Logique d'interaction pour FightView.xaml
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class MenuView : UserControl
     {
-        public HomeView()
+        public MenuView()
         {
             InitializeComponent();
         }
@@ -30,11 +28,6 @@ namespace UI.Screen.Home
             var storyBoard = (Storyboard)button.TryFindResource("Storyboard");
             if (storyBoard == null) return;
             storyBoard.Stop();
-        }
-
-        private void Exit(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
         }
     }
 }

@@ -9,6 +9,8 @@ using UI.Screen.Game.Creation;
 using UI.Screen.Home;
 using UI.Screen.Intro;
 
+// TODO: event unsubscription to avoid memory leak
+
 namespace UI
 {
     class MainWindowViewModel : ViewModelBase
@@ -57,11 +59,11 @@ namespace UI
             var newGameBuilder = BuilderFactory.GetNewGameBuilder();
             newGameBuilder.AddPlayer("Kikou", 0);
             newGameBuilder.AddPlayer("salut", 1);
-            newGameBuilder.Difficulty = DifficultyFactory.GetDifficultyByID(2);
+            newGameBuilder.Difficulty = DifficultyFactory.GetDifficultyByID(0);
             var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
             var game = gameCreator.CreateGame().GetGame();
-            StartGame(game);
-            //StartIntro();
+            //StartGame(game);
+            StartIntro();
         }
 
         private void StartIntro()
@@ -87,15 +89,10 @@ namespace UI
             CurrentViewModel = newGame;
         }
 
-        private void StartLoadGame()
-        {
-            throw new NotImplementedException();
-        }
-
         private void StartGame(IGame game)
         {
             var gameCore = new GameCoreViewModel(game, TilesTexture, RacesTexture);
-            //gameCore.OnIntroEnd += OnIntroEnd;
+            gameCore.OnGameExit += OnGameExit;
             CurrentViewModel = gameCore;
         }
 
@@ -114,14 +111,19 @@ namespace UI
             StartNewGame();
         }
 
-        private void OnLoadGame(HomeViewModel i, EventArgs e)
+        private void OnLoadGame(HomeViewModel i, GameEventArgs e)
         {
-            StartLoadGame();
+            StartGame(e.Game);
         }
 
         private void OnStartGame(GameCreationViewModel i, GameEventArgs e)
         {
             StartGame(e.Game);
+        }
+
+        private void OnGameExit(GameCoreViewModel t, EventArgs e)
+        {
+            StartHome();
         }
     }
 }

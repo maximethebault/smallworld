@@ -1,7 +1,9 @@
-﻿using Model.Tile;
+﻿using System;
+using Model.Tile;
 
 namespace Model.Map
 {
+    [Serializable()]
     public class Map : IDMap
     {
         public Tile.Tile[,] TileMap
@@ -9,14 +11,10 @@ namespace Model.Map
             get;
             set;
         }
-        private int _mapWidth;
-
-
 
         public Map(int mapWidth)
         {
             TileMap = new Tile.Tile[mapWidth, mapWidth];
-            _mapWidth = mapWidth;
         }
 
         public void AddTile(IPosition position, Tile.Tile tile)

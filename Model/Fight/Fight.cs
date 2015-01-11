@@ -4,6 +4,7 @@ using Model.Unit;
 
 namespace Model.Fight
 {
+    [Serializable()]
     class Fight : IDFight
     {
         public int ElapsedRounds { get; set; }

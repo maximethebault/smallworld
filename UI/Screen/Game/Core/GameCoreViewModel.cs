@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Model.Game;
 using Model.Map;
 using Model.Unit.Exception;
+using UI.Screen.Game.Core.Fight.ViewModel;
 using UI.Screen.Game.Core.Map.ViewModel;
+using UI.Screen.Game.Core.Menu.ViewModel;
 using UI.Screen.Game.Core.Player.ViewModel;
 using UI.Screen.Game.Core.Unit.ViewModel;
 
@@ -19,6 +22,8 @@ namespace UI.Screen.Game.Core
         public MapViewModel MapViewModel { get; set; }
         public UnitsViewModel UnitsViewModel { get; set; }
         public PlayersViewModel PlayersViewModel { get; set; }
+        public FightViewModel FightViewModel { get; set; }
+        public MenuViewModel MenuViewModel { get; set; }
 
         private bool _moveErrorVisibility;
         public bool MoveErrorVisibility
@@ -31,20 +36,37 @@ namespace UI.Screen.Game.Core
             }
         }
 
+        public ICommand MenuCommand { get; private set; }
+
+        public event GameExitEventHandler OnGameExit;
+        public delegate void GameExitEventHandler(GameCoreViewModel t, EventArgs e);
+
         public GameCoreViewModel(IGame game, BitmapImage[] tilesTexture, BitmapImage[] racesTexture)
         {
             Game = game;
             TilesTexture = TilesTexture;
             RacesTexture = RacesTexture;
 
+            MenuCommand = new DelegateCommand(o => ToggleMenu());
+
             MapViewModel = new MapViewModel(game, tilesTexture, racesTexture);
             UnitsViewModel = new UnitsViewModel(game);
             PlayersViewModel = new PlayersViewModel(game);
+            FightViewModel = new FightViewModel(game);
+            MenuViewModel = new MenuViewModel(game);
 
             MapViewModel.OnSelectTile += SelectTile;
             MapViewModel.OnMoveToTile += MoveToTile;
 
             PlayersViewModel.OnCurrentPlayerChange += CurrentPlayerChange;
+
+            MenuViewModel.OnGameExit += GameExit;
+        }
+
+        private void ToggleMenu()
+        {
+            // TODO: check for game end overlay presence first
+            MenuViewModel.Visible = !MenuViewModel.Visible;
         }
 
         private void SelectTile(TileViewModel t, EventArgs e)
@@ -81,6 +103,25 @@ namespace UI.Screen.Game.Core
             PlayersViewModel.Refresh();
             MapViewModel.Refresh();
             UnitsViewModel.Refresh();
+        }
+
+        private void GameExit(MenuViewModel t, EventArgs e)
+        {
+            //TODO: dispose of event handler in children view model
+
+            // event unsubscription to avoid memory leak
+            MapViewModel.OnSelectTile -= SelectTile;
+            MapViewModel.OnMoveToTile -= MoveToTile;
+
+            PlayersViewModel.OnCurrentPlayerChange -= CurrentPlayerChange;
+
+            MenuViewModel.OnGameExit -= GameExit;
+
+            //emit the game exit event
+            if (OnGameExit != null)
+            {
+                OnGameExit(this, null);
+            }
         }
     }
 }

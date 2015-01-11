@@ -1,48 +1,41 @@
 ﻿using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Model.Game.Builder
 {
     class LoadGameBuilder : GameBuilder, ILoadGameBuilder
     {
-        private string SaveFilepath
+        public string SaveFilepath
         {
             get;
             set;
         }
 
-        public void SetSaveFilepath(string value)
+        public override void Create()
         {
-            SaveFilepath = value;
-        }
+            var stream = File.Open(SaveFilepath, FileMode.Open);
+            var bformatter = new BinaryFormatter();
 
-        public string GetSaveFilepath()
-        {
-            return SaveFilepath;
+            IDGame = (Game)bformatter.Deserialize(stream);
+            stream.Close();
         }
 
         public override void BuildPlayer()
         {
-            throw new NotImplementedException();
+            // well well well... kind of feel like that builder implementation defeats the purpose of the design pattern but we're gonna leave it so anyway
         }
 
         public override void BuildUnits()
         {
-            throw new NotImplementedException();
         }
 
         public override void BuildMap()
         {
-            throw new NotImplementedException();
         }
 
         public override void BuildDifficulty()
         {
-            throw new NotImplementedException();
-        }
-
-        public override void Create()
-        {
-            throw new NotImplementedException();
         }
     }
 }
