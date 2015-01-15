@@ -45,5 +45,7 @@ namespace Model.Unit
         /// Removes a life point from 
         /// </summary>
         void DecrementLifePoint();
+
+        void SimulateMoveTo(ITile targetTile);
     }
 }

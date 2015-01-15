@@ -58,7 +58,7 @@ namespace UI.Screen.Game.Core.Map.ViewModel
             StartLoading();
         }
 
-        public void StartLoading()
+        private void StartLoading()
         {
             var difficulty = Game.DifficultyStrategy;
             for (var i = 0; i < difficulty.MapWidth; ++i) // i -> y
@@ -90,21 +90,6 @@ namespace UI.Screen.Game.Core.Map.ViewModel
             Refresh();
         }
 
-        public int ConvertRaceNameToID(string name)
-        {
-            switch (name)
-            {
-                case "elf":
-                    return 0;
-                case "nain":
-                    return 1;
-                case "orc":
-                    return 2;
-                default:
-                    return -1;
-            }
-        }
-
         public void Refresh()
         {
             foreach (var tile in Tiles)
@@ -127,7 +112,7 @@ namespace UI.Screen.Game.Core.Map.ViewModel
                 }
 
                 var unit = tile.Units.First();
-                var raceID = ConvertRaceNameToID(unit.Model.Player.Race.GetName());
+                var raceID = Utils.Unit.ConvertRaceNameToID(unit.Model.Player.Race.Name);
                 tile.UnitTexture = raceID == -1 ? null : RacesTexture[raceID];
                 tile.Refresh();
             }

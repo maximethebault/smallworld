@@ -47,14 +47,14 @@ namespace Model.Game.Builder
                 {
                     var name = playerNamesIterator.Current;
                     var race = playerRacesIterator.Current;
-                    if (alreadyUsedRaces.IndexOf(race.GetName()) == -1)
+                    if (alreadyUsedRaces.IndexOf(race.Name) == -1)
                     {
-                        alreadyUsedRaces.Add(race.GetName());
+                        alreadyUsedRaces.Add(race.Name);
                         players.Add(new Player.Player(name, race));
                     }
                     else
                     {
-                        throw new SameRaceSelectedException("The race " + race .GetName() + " was already selected by another player!");
+                        throw new SameRaceSelectedException("The race " + race.Name + " was already selected by another player!");
                     }
             }
             }

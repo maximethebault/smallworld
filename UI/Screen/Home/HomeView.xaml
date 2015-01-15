@@ -32,7 +32,7 @@
         </Style>
     </UserControl.Resources>
     <UserControl.Background>
-        <ImageBrush ImageSource="Textures/background.jpg"/>
+        <ImageBrush ImageSource="/Images/Background/background.jpg"/>
     </UserControl.Background>
     <Grid Margin="0, 0, 10, 0" UseLayoutRounding="True">
         <Grid.RowDefinitions>
@@ -54,7 +54,7 @@
                 <TextBlock TextAlignment="Center" Width="{Binding ElementName=tbLonger, Path=ActualWidth}">Nouvelle Partie</TextBlock>
             </Viewbox>
             <Button.Background>
-                <ImageBrush ImageSource="Textures/button.png"/>
+                <ImageBrush ImageSource="/Images/Background/button.png"/>
             </Button.Background>
             <Button.BitmapEffect>
                 <DropShadowBitmapEffect x:Name="ShadowEffect1"  Color="WhiteSmoke" Direction="0" ShadowDepth="0" Opacity="0" Softness="100"/>
@@ -79,7 +79,7 @@
                 <TextBlock Margin="20,0,20,0" TextAlignment="Center" Name="tbLonger">Charger une partie</TextBlock>
             </Viewbox>
             <Button.Background>
-                <ImageBrush ImageSource="Textures/button.png"/>
+                <ImageBrush ImageSource="/Images/Background/button.png"/>
             </Button.Background>
             <Button.BitmapEffect>
                 <DropShadowBitmapEffect x:Name="ShadowEffect2"  Color="WhiteSmoke" Direction="0" ShadowDepth="0" Opacity="0" Softness="100"/>
@@ -104,7 +104,7 @@
                 <TextBlock TextAlignment="Center" Width="{Binding ElementName=tbLonger, Path=ActualWidth}">Quitter le jeu</TextBlock>
             </Viewbox>
             <Button.Background>
-                <ImageBrush ImageSource="Textures/button.png"/>
+                <ImageBrush ImageSource="/Images/Background/button.png"/>
             </Button.Background>
             <Button.BitmapEffect>
                 <DropShadowBitmapEffect x:Name="ShadowEffect3"  Color="WhiteSmoke" Direction="0" ShadowDepth="0" Opacity="0" Softness="100"/>

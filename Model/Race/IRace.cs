@@ -4,6 +4,6 @@ namespace Model.Race
 {
     public interface IRace
     {
-        String GetName();
+        string Name { get; }
     }
 }

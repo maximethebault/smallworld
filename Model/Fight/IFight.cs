@@ -10,7 +10,7 @@ namespace Model.Fight
         IUnit Defender { get; }
         IUnit Winner { get; }
         IUnit Loser { get; }
-        void NextRound();
-        bool IsFinished();
+        IUnit NextRound();
+        bool Finished { get; }
     }
 }

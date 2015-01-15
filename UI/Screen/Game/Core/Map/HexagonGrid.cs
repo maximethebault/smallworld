@@ -87,7 +87,7 @@ namespace UI.Screen.Game.Core.Map
                 var height = 2 * side;
                 var semiWidth = Math.Round(width/2);
                 var fullWidth = Math.Round(width);
-                var oneQuarterHeight = Math.Round(height / 4);
+                var oneQuarterHeight = Math.Round(height / 4) - 1;
                 var threeQuarterHeight = Math.Round(3 * (height / 4));
                 var fullHeight = Math.Round(height);
                 return "M " + semiWidth + ",0 L " + fullWidth + "," + oneQuarterHeight + " L " + fullWidth + "," + threeQuarterHeight + " L " + semiWidth + "," + fullHeight + " L 0," + threeQuarterHeight + "  L 0," + oneQuarterHeight + "  Z";

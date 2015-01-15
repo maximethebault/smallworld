@@ -15,29 +15,29 @@ namespace UI
 {
     class MainWindowViewModel : ViewModelBase
     {
-        public static BitmapImage[] Maps =
+        private static readonly BitmapImage[] Maps =
         {
-            new BitmapImage(new Uri("/Screen/Game/Creation/Images/demo.png", UriKind.Relative)),
-            new BitmapImage(new Uri("/Screen/Game/Creation/Images/petite.png", UriKind.Relative)),
-            new BitmapImage(new Uri("/Screen/Game/Creation/Images/normale.png", UriKind.Relative))
+            new BitmapImage(new Uri("/Images/Map/demo.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Images/Map/petite.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Images/Map/normale.png", UriKind.Relative))
         };
 
-        public static BitmapImage[] RacesTexture =
+        private static readonly BitmapImage[] RacesTexture =
         {
-            new BitmapImage(new Uri("/Screen/Game/Images/elf.png", UriKind.Relative)),
-            new BitmapImage(new Uri("/Screen/Game/Images/dwarf.png", UriKind.Relative)),
-            new BitmapImage(new Uri("/Screen/Game/Images/orc.png", UriKind.Relative))
+            new BitmapImage(new Uri("/Images/Race/elf.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Images/Race/dwarf.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Images/Race/orc.png", UriKind.Relative))
         };
 
-        public static BitmapImage[] TilesTexture =
+        private static readonly BitmapImage[] TilesTexture =
         {
-            new BitmapImage(new Uri("/Screen/Game/Core/Map/Textures/Alt/desert.png", UriKind.Relative)),
-            new BitmapImage(new Uri("/Screen/Game/Core/Map/Textures/Alt/foret.png", UriKind.Relative)),
-            new BitmapImage(new Uri("/Screen/Game/Core/Map/Textures/Alt/montagne.png", UriKind.Relative)),
-            new BitmapImage(new Uri("/Screen/Game/Core/Map/Textures/Alt/plaine.png", UriKind.Relative))
+            new BitmapImage(new Uri("/Images/Tile/Alt/desert.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Images/Tile/Alt/foret.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Images/Tile/Alt/montagne.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Images/Tile/Alt/plaine.png", UriKind.Relative))
         };
 
-        public static int PlayerCount = 2;
+        private const int PlayerCount = 2;
 
         private ViewModelBase _currentViewModel;
 
@@ -56,14 +56,18 @@ namespace UI
 
         public MainWindowViewModel()
         {
-            var newGameBuilder = BuilderFactory.GetNewGameBuilder();
-            newGameBuilder.AddPlayer("Kikou", 0);
-            newGameBuilder.AddPlayer("salut", 1);
-            newGameBuilder.Difficulty = DifficultyFactory.GetDifficultyByID(0);
-            var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
+            //var newGameBuilder = BuilderFactory.GetNewGameBuilder();
+            //newGameBuilder.AddPlayer("Kikou", 0);
+            //newGameBuilder.AddPlayer("salut", 1);
+            //newGameBuilder.Difficulty = DifficultyFactory.GetDifficultyByID(0);
+            //var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
+            //var game = gameCreator.CreateGame().GetGame();
+            var loadGameBuilder = BuilderFactory.GetLoadGameBuilder();
+            loadGameBuilder.SaveFilepath = "C:\\Users\\Max\\Documents\\almostwin.sws";
+            var gameCreator = BuilderFactory.GetGameCreator(loadGameBuilder);
             var game = gameCreator.CreateGame().GetGame();
-            //StartGame(game);
-            StartIntro();
+            StartGame(game);
+            //StartIntro();
         }
 
         private void StartIntro()

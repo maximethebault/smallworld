@@ -86,6 +86,10 @@ namespace UI.Screen.Game.Core.Unit.ViewModel
 
         public void Refresh()
         {
+            if (Units == null)
+            {
+                return;
+            }
             foreach (var unit in Units)
             {
                 unit.Refresh();

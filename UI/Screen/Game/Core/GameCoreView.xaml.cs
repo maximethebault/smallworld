@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace UI.Screen.Game.Core
 {
@@ -10,6 +11,11 @@ namespace UI.Screen.Game.Core
         public GameCoreView()
         {
             InitializeComponent();
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Focus();
         }
     }
 }

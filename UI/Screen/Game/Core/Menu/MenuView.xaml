@@ -36,12 +36,12 @@
         </Style>
     </UserControl.Resources>
     <UserControl.Background>
-        <ImageBrush ImageSource="/Screen/Home/Textures/background.jpg"/>
+        <ImageBrush ImageSource="/Images/Background/background.jpg"/>
     </UserControl.Background>
     <StackPanel UseLayoutRounding="True" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Button x:Name="Button1" Content="Reprendre la partie" Width="{Binding ElementName=TbLonger, Path=ActualWidth}" Command="{Binding ResumeGameCommand}" Style="{StaticResource BtnStyle}" MouseEnter="ButtonMouseEnter" MouseLeave="ButtonMouseLeave">
             <Button.Background>
-                <ImageBrush ImageSource="/Screen/Home/Textures/button.png"/>
+                <ImageBrush ImageSource="/Images/Background/button.png"/>
             </Button.Background>
             <Button.BitmapEffect>
                 <DropShadowBitmapEffect x:Name="ShadowEffect1"  Color="WhiteSmoke" Direction="0" ShadowDepth="0" Opacity="0" Softness="100"/>
@@ -63,7 +63,7 @@
 
         <Button Name="TbLonger" Content="Sauvegarder la partie" Command="{Binding SaveGameCommand}" Style="{StaticResource BtnStyle}" MouseEnter="ButtonMouseEnter" MouseLeave="ButtonMouseLeave">
             <Button.Background>
-                <ImageBrush ImageSource="/Screen/Home/Textures/button.png"/>
+                <ImageBrush ImageSource="/Images/Background/button.png"/>
             </Button.Background>
             <Button.BitmapEffect>
                 <DropShadowBitmapEffect x:Name="ShadowEffect2"  Color="WhiteSmoke" Direction="0" ShadowDepth="0" Opacity="0" Softness="100"/>
@@ -85,7 +85,7 @@
 
         <Button Content="Quitter le jeu" Width="{Binding ElementName=TbLonger, Path=ActualWidth}" Command="{Binding ExitGameCommand}" Style="{StaticResource BtnStyle}" MouseEnter="ButtonMouseEnter" MouseLeave="ButtonMouseLeave">
             <Button.Background>
-                <ImageBrush ImageSource="/Screen/Home/Textures/button.png"/>
+                <ImageBrush ImageSource="/Images/Background/button.png"/>
             </Button.Background>
             <Button.BitmapEffect>
                 <DropShadowBitmapEffect x:Name="ShadowEffect3"  Color="WhiteSmoke" Direction="0" ShadowDepth="0" Opacity="0" Softness="100"/>

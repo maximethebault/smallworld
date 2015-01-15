@@ -1,14 +1,25 @@
 ﻿using System;
 using Model.Fight.Strategy;
 using Model.Unit;
+using Model.Utils;
 
 namespace Model.Fight
 {
     [Serializable()]
-    class Fight : IDFight
+    class Fight : PropertyChangedNotifier, IDFight
     {
-        public int ElapsedRounds { get; set; }
-        public int TotalRounds { get; set; }
+        private int _elapsedRounds;
+        public int ElapsedRounds
+        {
+            get { return _elapsedRounds; }
+            private set
+            {
+                _elapsedRounds = value;
+                RaisePropertyChanged("ElapsedRounds");
+            }
+        }
+
+        public int TotalRounds { get; private set; }
 
         public IDUnit IDAttacker { get; private set; }
         public IUnit Attacker
@@ -22,14 +33,31 @@ namespace Model.Fight
             get { return IDDefender; }
         }
 
-        public IDUnit IDWinner { get; private set; }
+        private IDUnit _idWinner;
+        public IDUnit IDWinner
+        {
+            get { return _idWinner; }
+            private set
+            {
+                _idWinner = value;
+                RaisePropertyChanged("Winner");
+            }
+        }
         public IUnit Winner
         {
             get { return IDWinner; }
         }
 
-        public IDUnit IDLoser { get; private set; }
-
+        private IDUnit _idLoser;
+        public IDUnit IDLoser
+        {
+            get { return _idLoser; }
+            private set
+            {
+                _idLoser = value; 
+                RaisePropertyChanged("Loser");
+            }
+        }
         public IUnit Loser
         {
             get { return IDLoser; }
@@ -37,7 +65,17 @@ namespace Model.Fight
 
         public IFightStrategy FightStrategy { get; set; }
 
-        private bool _finished { get; set; }
+        private bool _finished;
+
+        public bool Finished
+        {
+            get { return _finished; }
+            private set
+            {
+                _finished = value;
+                RaisePropertyChanged("Finished");
+            }
+        }
 
         public Fight(IDUnit attacker, IDUnit defender, IFightStrategy fightStrategy)
         {
@@ -50,6 +88,9 @@ namespace Model.Fight
             FightStrategy = fightStrategy;
             FightStrategy.IDAttacker = attacker;
             FightStrategy.IDDefender = defender;
+            Finished = false;
+
+            StartFight();
         }
 
         private void StartFight()
@@ -57,53 +98,48 @@ namespace Model.Fight
             TotalRounds = FightStrategy.ComputeTotalRounds();
         }
 
-        public void NextRound()
+        public IUnit NextRound()
         {
-            if (TotalRounds == 0)
-            {
-                StartFight();
-            }
+            IUnit winner;
             ElapsedRounds++;
             var attackerWinRatio = FightStrategy.ComputeAttackerWinRatio();
             var r = new Random();
             if (r.NextDouble() <= attackerWinRatio)
             {
                 // attacker wins
+                winner = Attacker;
                 IDDefender.DecrementLifePoint();
                 if (IDDefender.IsDead())
                 {
                     IDWinner = IDAttacker;
                     IDLoser = IDDefender;
                     FinishFight();
-                    return;
+                    return winner;
                 }
             }
             else
             {
                 // defender wins
+                winner = Defender;
                 IDAttacker.DecrementLifePoint();
                 if (IDAttacker.IsDead())
                 {
                     IDWinner = IDDefender;
                     IDLoser = IDAttacker;
                     FinishFight();
-                    return;
+                    return winner;
                 }
             }
             if (ElapsedRounds == TotalRounds)
             {
                 FinishFight();
             }
+            return winner;
         }
 
         private void FinishFight()
         {
-            _finished = true;
-        }
-
-        public bool IsFinished()
-        {
-            return _finished;
+            Finished = true;
         }
     }
 }

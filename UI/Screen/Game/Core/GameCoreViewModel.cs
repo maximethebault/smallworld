@@ -9,6 +9,7 @@ using UI.Screen.Game.Core.Map.ViewModel;
 using UI.Screen.Game.Core.Menu.ViewModel;
 using UI.Screen.Game.Core.Player.ViewModel;
 using UI.Screen.Game.Core.Unit.ViewModel;
+using UI.Screen.Game.Core.Win;
 
 namespace UI.Screen.Game.Core
 {
@@ -17,13 +18,14 @@ namespace UI.Screen.Game.Core
         public BitmapImage[] TilesTexture { get; set; }
         public BitmapImage[] RacesTexture { get; set; }
 
-        public IGame Game { get; set; }
+        public IGame Model { get; set; }
 
         public MapViewModel MapViewModel { get; set; }
         public UnitsViewModel UnitsViewModel { get; set; }
         public PlayersViewModel PlayersViewModel { get; set; }
         public FightViewModel FightViewModel { get; set; }
         public MenuViewModel MenuViewModel { get; set; }
+        public WinViewModel WinViewModel { get; set; }
 
         private bool _moveErrorVisibility;
         public bool MoveErrorVisibility
@@ -43,7 +45,7 @@ namespace UI.Screen.Game.Core
 
         public GameCoreViewModel(IGame game, BitmapImage[] tilesTexture, BitmapImage[] racesTexture)
         {
-            Game = game;
+            Model = game;
             TilesTexture = TilesTexture;
             RacesTexture = RacesTexture;
 
@@ -52,15 +54,20 @@ namespace UI.Screen.Game.Core
             MapViewModel = new MapViewModel(game, tilesTexture, racesTexture);
             UnitsViewModel = new UnitsViewModel(game);
             PlayersViewModel = new PlayersViewModel(game);
-            FightViewModel = new FightViewModel(game);
+            FightViewModel = new FightViewModel(game, racesTexture);
             MenuViewModel = new MenuViewModel(game);
+            WinViewModel = new WinViewModel(game);
 
             MapViewModel.OnSelectTile += SelectTile;
             MapViewModel.OnMoveToTile += MoveToTile;
 
             PlayersViewModel.OnCurrentPlayerChange += CurrentPlayerChange;
 
+            FightViewModel.OnFightEnd += FightEnd;
+
             MenuViewModel.OnGameExit += GameExit;
+
+            WinViewModel.OnGameExit += GameExit;
         }
 
         private void ToggleMenu()
@@ -84,17 +91,13 @@ namespace UI.Screen.Game.Core
             }
             try
             {
-                Game.MoveUnit(unit.Model, PositionFactory.GetHexaPosition(tile.Column, tile.Row));
+                Model.MoveUnit(unit.Model, PositionFactory.GetHexaPosition(tile.Column, tile.Row));
             }
             catch (UnitMovementUnauthorized ex)
             {
                 MoveErrorVisibility = true;
             }
-            if (Game.Fight != null)
-            {
-                //TODO
-                return;
-            }
+            FightViewModel.Refresh();
             MapViewModel.Refresh();
         }
 
@@ -105,7 +108,14 @@ namespace UI.Screen.Game.Core
             UnitsViewModel.Refresh();
         }
 
-        private void GameExit(MenuViewModel t, EventArgs e)
+        private void FightEnd(FightViewModel t, EventArgs e)
+        {
+            PlayersViewModel.Refresh();
+            MapViewModel.Refresh();
+            UnitsViewModel.Refresh();
+        }
+
+        private void GameExit(ViewModelBase t, EventArgs e)
         {
             //TODO: dispose of event handler in children view model
 
@@ -115,7 +125,11 @@ namespace UI.Screen.Game.Core
 
             PlayersViewModel.OnCurrentPlayerChange -= CurrentPlayerChange;
 
+            FightViewModel.OnFightEnd -= FightEnd;
+
             MenuViewModel.OnGameExit -= GameExit;
+
+            WinViewModel.OnGameExit -= GameExit;
 
             //emit the game exit event
             if (OnGameExit != null)

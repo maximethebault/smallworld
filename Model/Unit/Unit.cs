@@ -11,16 +11,22 @@ namespace Model.Unit
     [Serializable()]
     abstract class Unit : PropertyChangedNotifier, IDUnit
     {
-        // as we want to make the following constants overridable, we make them static
-        public static float UnitDefaultMovementCost = 1;
-        public static int UnitDefaultScore = 1;
-        public static int UnitDefaultHealthPoint = 5;
-        public static int UnitDefaultAttackPoint = 2;
-        public static int UnitDefaultDefensePoint = 1;
-        public static float UnitDefaultMovePoint = 1;
+        protected virtual int DefaultScore
+        {
+            get { return 1; }
+        }
+
+        protected virtual float DefaultMovementCost
+        {
+            get { return 1; }
+        }
 
         private int _healthPoint;
 
+        public virtual int InitialHealthPoint
+        {
+            get { return 5; }
+        }
         public int HealthPoint
         {
             get { return _healthPoint; }
@@ -33,24 +39,36 @@ namespace Model.Unit
             }
         }
 
+        public virtual int InitialAttackPoint
+        {
+            get { return 2; }
+        }
         public float AttackPoint
         {
             get
             {
-                var healthLeft = (float) HealthPoint/UnitDefaultHealthPoint;
-                return UnitDefaultAttackPoint * healthLeft;
+                var healthLeft = (float) HealthPoint / InitialHealthPoint;
+                return InitialAttackPoint * healthLeft;
             }
         }
 
+        public virtual int InitialDefensePoint
+        {
+            get { return 1; }
+        }
         public float DefensePoint
         {
             get
             {
-                var healthLeft = (float) HealthPoint / UnitDefaultHealthPoint;
-                return UnitDefaultDefensePoint * healthLeft;
+                var healthLeft = (float)HealthPoint / InitialHealthPoint;
+                return InitialDefensePoint * healthLeft;
             }
         }
 
+        public virtual float InitialMovePoint
+        {
+            get { return 1; }
+        }
         private float _movePoint;
         public float MovePoint
         {
@@ -78,8 +96,8 @@ namespace Model.Unit
             IDPlayer = player;
             Position = position;
             Tile = tile;
-            HealthPoint = UnitDefaultHealthPoint;
-            MovePoint = UnitDefaultMovePoint;
+            HealthPoint = InitialHealthPoint;
+            MovePoint = InitialMovePoint;
         }
 
         public bool IsDead()
@@ -94,9 +112,14 @@ namespace Model.Unit
             MovePoint -= GetNeededPointToMoveAt(targetTile);
         }
 
+        public void SimulateMoveTo(ITile targetTile)
+        {
+            MovePoint -= GetNeededPointToMoveAt(targetTile);
+        }
+
         public virtual int ComputeScore()
         {
-            return UnitDefaultScore;
+            return DefaultScore;
         }
 
         public virtual void Kill(IDUnit killed)
@@ -115,7 +138,7 @@ namespace Model.Unit
 
         public void ResetMovePoint()
         {
-            MovePoint = UnitDefaultMovePoint;
+            MovePoint = InitialMovePoint;
         }
 
         public virtual void DecrementLifePoint()
@@ -130,7 +153,7 @@ namespace Model.Unit
 
         protected virtual float GetNeededPointToMoveAt(ITile targetTile)
         {
-            return UnitDefaultMovementCost;
+            return DefaultMovementCost;
         }
 
         public bool Equals(IUnit other)

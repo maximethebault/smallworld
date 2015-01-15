@@ -39,7 +39,10 @@ namespace UI.Screen.Game.Core.Player.ViewModel
 
         public void Refresh()
         {
-            IsCurrentPlayer = Game.CurrentPlayer.Equals(Model);
+            if (Game.CurrentPlayer != null)
+            {
+                IsCurrentPlayer = Game.CurrentPlayer.Equals(Model);
+            }
         }
     }
 }

@@ -17,11 +17,12 @@ namespace Model.Game
         int ElapsedTurns { get; }
         IPlayer CurrentPlayer { get; }
         bool Finished { get; }
+        IPlayer Winner { get; set; }
 
         bool CanMoveUnit(IUnit unit, IPosition targetPosition);
         IMove MoveUnit(IUnit unit, IPosition targetPosition);
         void PropelGame();
-        void NextFightRound();
+        IUnit NextFightRound();
         List<IUnit> UnitsAt(IPosition position);
     }
 }

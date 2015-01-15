@@ -8,7 +8,6 @@ using Model.Fight.Strategy;
 using Model.Map;
 using Model.Move;
 using Model.Player;
-using Model.Race;
 using Model.Unit;
 using Model.Unit.Exception;
 using Model.Utils;
@@ -16,17 +15,38 @@ using Model.Utils;
 namespace Model.Game
 {
     [Serializable()]
-    public class Game : IDGame
+    public class Game : PropertyChangedNotifier, IDGame
     {
         public int ElapsedTurns { get; private set; }
 
-        public bool Finished { get; private set; }
+        private bool _finished;
+
+        public bool Finished
+        {
+            get { return _finished; }
+            private set
+            {
+                _finished = value;
+                RaisePropertyChanged("Finished");
+            }
+        }
 
         public IEnumerator<IDPlayer> PlayerTurnOrder { get; set; }
 
         public IPlayer CurrentPlayer
         {
             get { return PlayerTurnOrder.Current; }
+        }
+
+        private IPlayer _winner;
+        public IPlayer Winner
+        {
+            get { return _winner; }
+            set
+            {
+                _winner = value;
+                RaisePropertyChanged("Winner");
+            }
         }
 
         public List<IDPlayer> IDPlayers { get; set; }
@@ -57,11 +77,6 @@ namespace Model.Game
             ElapsedTurns = 0;
             Finished = false;
             IDFight = null;
-        }
-
-        private IRace GetRaceTypeAt(IPosition position)
-        {
-            throw new NotImplementedException();
         }
 
         private List<IDUnit> IDUnitsAt(IPosition position)
@@ -116,36 +131,61 @@ namespace Model.Game
             return move;
         }
 
-        public void NextFightRound()
+        public IUnit NextFightRound()
         {
             if (IDFight == null)
             {
                 throw new NoFightException("No fight in progress!");
             }
-            IDFight.NextRound();
-            if (!IDFight.IsFinished()) return;
-            if (IDFight.IDLoser != null)
+            var roundWinner = IDFight.NextRound();
+            if (!IDFight.Finished) return roundWinner;
+            // if IDLoser is filled, someone was killed
+            if (IDFight.IDLoser != null && IDFight.IDWinner != null && ReferenceEquals(IDFight.IDAttacker, IDFight.IDWinner))
             {
-                if (IDFight.IDWinner != null)
+                IDFight.IDWinner.Kill(IDFight.IDLoser);
+                IDFight.IDLoser.IDPlayer.IDUnits.Remove(IDFight.IDLoser);
+                var unitsOnTile = IDUnitsAt(IDFight.IDLoser.Position).Count;
+                if (unitsOnTile == 0)
                 {
-                    IDFight.IDWinner.Kill(IDFight.IDLoser);
+                    IDFight.IDWinner.MoveTo(IDFight.IDLoser.Position, IDFight.IDLoser.Tile);
                 }
-                foreach (var player in IDPlayers)
+                else
                 {
-                    player.IDUnits.Remove(IDFight.IDLoser);
+                    IDFight.IDWinner.SimulateMoveTo(IDFight.IDLoser.Tile);
                 }
                 CheckGameEnd();
             }
+            else if (IDFight.IDAttacker != null)
+            {
+                IDFight.IDAttacker.SimulateMoveTo(IDFight.IDDefender.Tile);
+            }
             IDFight = null;
+            return roundWinner;
         }
 
-        private void CheckGameEnd()
+        private bool CheckGameEnd()
         {
             var nbDead = IDPlayers.Count(player => !player.HasUnitLeft());
+
+            if (nbDead < IDPlayers.Count - 1 && !DifficultyStrategy.IsMaxTurnNumberReached(ElapsedTurns)) return false;
+
+            Finished = true;
             if (nbDead >= IDPlayers.Count - 1)
             {
-                Finished = true;
+                Winner = IDPlayers.FirstOrDefault(player => player.HasUnitLeft());
             }
+            else
+            {
+                ComputeScore();
+                var ordered = IDPlayers.OrderBy(player => player.Score);
+                var greatest = ordered.LastOrDefault();
+                var almostGreatest = ordered.ElementAtOrDefault(ordered.Count()-2);
+                if (greatest == null || almostGreatest == null || greatest.Score != almostGreatest.Score)
+                {
+                    Winner = greatest;
+                }
+            }
+            return true;
         }
 
         public bool CanMoveUnit(IUnit movedUnit, IPosition targetPosition)
@@ -181,9 +221,8 @@ namespace Model.Game
             {
                 return;
             }
-            if (DifficultyStrategy.IsMaxTurnNumberReached(ElapsedTurns))
+            if (CheckGameEnd())
             {
-                Finished = true;
                 return;
             }
             NextTurn();

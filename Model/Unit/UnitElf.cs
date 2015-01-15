@@ -32,11 +32,11 @@ namespace Model.Unit
         {
             if (targetTile.IsForest())
             {
-                return UnitDefaultMovementCost/2;
+                return DefaultMovementCost/2;
             }
             if (targetTile.IsDesert())
             {
-                return UnitDefaultMovementCost * 2;
+                return DefaultMovementCost * 2;
             }
             return base.GetNeededPointToMoveAt(targetTile);
         }

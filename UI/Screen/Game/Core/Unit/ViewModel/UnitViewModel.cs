@@ -31,7 +31,10 @@ namespace UI.Screen.Game.Core.Unit.ViewModel
 
         public void Refresh()
         {
-            IsPlayable = Game.CurrentPlayer.Equals(Model.Player);
+            if (Game.CurrentPlayer != null)
+            {
+                IsPlayable = Game.CurrentPlayer.Equals(Model.Player);
+            }
         }
     }
 }

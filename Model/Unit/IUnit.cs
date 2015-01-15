@@ -12,6 +12,10 @@ namespace Model.Unit
         float MovePoint { get; }
         IPosition Position { get; }
         IPlayer Player { get; }
+        int InitialHealthPoint { get; }
+        int InitialAttackPoint { get; }
+        int InitialDefensePoint { get; }
+        float InitialMovePoint { get; }
 
         /// <summary>
         /// Equality tests for two Unit instances

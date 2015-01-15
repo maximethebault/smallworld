@@ -106,18 +106,18 @@ namespace ModelTest
             Assert.IsFalse(move.Success);
             Assert.IsTrue(move.Fight);
             var fight = (Fight) game.IDFight;
-            var initHealthPoint = Unit.UnitDefaultHealthPoint;
+            var initHealthPoint = unit.InitialHealthPoint;
             fight.FightStrategy = new DeterministicFightStrategy(20, 1);
             var losingPlayer = fight.IDDefender.IDPlayer;
             var nbUnits = losingPlayer.IDUnits.Count;
-            Assert.IsFalse(fight.IsFinished());
+            Assert.IsFalse(fight.Finished);
             for (var i = 0; i < initHealthPoint; i++)
             {
                 Assert.AreEqual(initHealthPoint, fight.IDAttacker.HealthPoint);
                 Assert.AreEqual(initHealthPoint - i, fight.IDDefender.HealthPoint);
                 game.NextFightRound();
             }
-            Assert.IsTrue(fight.IsFinished());
+            Assert.IsTrue(fight.Finished);
             Assert.AreEqual(null, game.IDFight);
             Assert.AreEqual(nbUnits - 1, losingPlayer.IDUnits.Count);
             if (fight.IDAttacker.Tile.IsForest())

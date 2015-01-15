@@ -81,7 +81,9 @@
     <Compile Include="Screen\Game\Core\Fight\FightView.xaml.cs">
       <DependentUpon>FightView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screen\Game\Core\Fight\PercentConverter.cs" />
     <Compile Include="Screen\Game\Core\Fight\ViewModel\FightViewModel.cs" />
+    <Compile Include="Screen\Game\Core\Fight\ViewModel\UnitViewModel.cs" />
     <Compile Include="Screen\Game\Core\Menu\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
@@ -92,6 +94,10 @@
     <Compile Include="Screen\Game\Core\Player\ViewModel\PlayersViewModel.cs" />
     <Compile Include="Screen\Game\Core\Player\ViewModel\PlayerViewModel.cs" />
     <Compile Include="Screen\Game\Core\Unit\ViewModel\UnitsViewModel.cs" />
+    <Compile Include="Screen\Game\Core\Win\WinView.xaml.cs">
+      <DependentUpon>WinView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screen\Game\Core\Win\WinViewModel.cs" />
     <Compile Include="Screen\Game\Creation\ViewModel\GameCreationViewModel.cs" />
     <Compile Include="Screen\Home\HomeViewModel.cs" />
     <Compile Include="Screen\Intro\IntroViewModel.cs" />
@@ -118,6 +124,7 @@
     <Compile Include="Screen\Game\Creation\ViewModel\RaceViewModel.cs" />
     <Compile Include="Screen\Game\GameEventArgs.cs" />
     <Compile Include="Utils\ListExtension.cs" />
+    <Compile Include="Utils\Unit.cs" />
     <Compile Include="Utils\ViewModelBase.cs" />
     <Page Include="Screen\Game\Core\Fight\FightView.xaml">
       <SubType>Designer</SubType>
@@ -143,15 +150,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Screen\Game\Core\Win\WinView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Screen\Game\Creation\GameCreationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Screen\Game\Creation\RaceSelector.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Screen\Game\Loading\GameLoading.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -173,9 +180,6 @@
     </Compile>
     <Compile Include="Screen\Game\Creation\GameCreationView.xaml.cs">
       <DependentUpon>GameCreationView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Screen\Game\Loading\GameLoading.xaml.cs">
-      <DependentUpon>GameLoading.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screen\Intro\IntroView.xaml.cs">
       <DependentUpon>IntroView.xaml</DependentUpon>
@@ -223,56 +227,55 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Screen\Game\Creation\Images\demo.png" />
-    <Resource Include="Screen\Game\Creation\Images\normale.png" />
-    <Resource Include="Screen\Game\Creation\Images\petite.png" />
+    <Resource Include="Images\Map\demo.png" />
+    <Resource Include="Images\Map\normale.png" />
+    <Resource Include="Images\Map\petite.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Screen\Game\Creation\Images\elf.png" />
-    <Resource Include="Screen\Game\Creation\Images\nain.png" />
-    <Resource Include="Screen\Game\Creation\Images\orc.png" />
+    <Resource Include="Images\Tile\desert.png" />
+    <Resource Include="Images\Tile\foret.png" />
+    <Resource Include="Images\Tile\montagne.png" />
+    <Resource Include="Images\Tile\plaine.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Screen\Game\Core\Map\Textures\desert.png" />
-    <Resource Include="Screen\Game\Core\Map\Textures\foret.png" />
-    <Resource Include="Screen\Game\Core\Map\Textures\montagne.png" />
-    <Resource Include="Screen\Game\Core\Map\Textures\plaine.png" />
+    <Resource Include="Images\icone.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Screen\icone.png" />
+    <Resource Include="Images\Background\background.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Screen\Home\Textures\background.jpg" />
+    <Resource Include="Images\Background\button.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Screen\Home\Textures\button.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Screen\Game\Core\Map\Textures\Alt\desert.png" />
-    <Resource Include="Screen\Game\Core\Map\Textures\Alt\foret.png" />
-    <Resource Include="Screen\Game\Core\Map\Textures\Alt\montagne.png" />
-    <Resource Include="Screen\Game\Core\Map\Textures\Alt\plaine.png" />
+    <Resource Include="Images\Tile\Alt\desert.png" />
+    <Resource Include="Images\Tile\Alt\foret.png" />
+    <Resource Include="Images\Tile\Alt\montagne.png" />
+    <Resource Include="Images\Tile\Alt\plaine.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Screen\Game\Images\orc_race.jpg">
+    <Content Include="Images\Race\orc_race.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Images\Win\draw.png" />
+    <Resource Include="Images\Win\elf.jpg" />
+    <Resource Include="Images\Win\dwarf.jpg" />
+    <Resource Include="Images\Win\orc.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\Race\elf_race.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Screen\Game\Images\elf_race.jpg">
+    <Content Include="Images\Race\dwarf_race.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Screen\Game\Images\dwarf_race.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Screen\Game\Images\dwarf.png" />
-    <Resource Include="Screen\Game\Images\elf.png" />
-    <Resource Include="Screen\Game\Images\orc.png" />
+    <Resource Include="Images\Race\dwarf.png" />
+    <Resource Include="Images\Race\elf.png" />
+    <Resource Include="Images\Race\orc.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

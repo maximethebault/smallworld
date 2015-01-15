@@ -79,7 +79,7 @@ namespace ModelTest
                     var expectedPlayer = expectedPlayersIterator.Current;
                     var actualPlayer = actualPlayersIterator.Current;
                     Assert.AreEqual(expectedPlayer.Name, actualPlayer.Name);
-                    Assert.AreEqual(expectedPlayer.Race.GetName(), actualPlayer.Race.GetName());
+                    Assert.AreEqual(expectedPlayer.Race.Name, actualPlayer.Race.Name);
                 }
             }
         }

@@ -35,11 +35,11 @@ namespace Model.Fight.Strategy
             float winRatio;
             if (IDAttacker.AttackPoint > IDDefender.DefensePoint)
             {
-                winRatio = 0.5f + (100.0f - (IDDefender.DefensePoint / IDAttacker.AttackPoint)) * 0.5f;
+                winRatio = 0.5f + (1.0f - (IDDefender.DefensePoint / IDAttacker.AttackPoint)) * 0.5f;
             }
             else
             {
-                winRatio = 0.5f - (100.0f - (IDAttacker.AttackPoint / IDDefender.DefensePoint)) * 0.5f;
+                winRatio = 0.5f - (1.0f - (IDAttacker.AttackPoint / IDDefender.DefensePoint)) * 0.5f;
             }
             return winRatio;
         }

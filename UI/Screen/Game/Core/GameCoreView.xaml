@@ -10,9 +10,12 @@
              xmlns:player="clr-namespace:UI.Screen.Game.Core.Player"
              xmlns:fight="clr-namespace:UI.Screen.Game.Core.Fight"
              xmlns:menu="clr-namespace:UI.Screen.Game.Core.Menu"
+             xmlns:win="clr-namespace:UI.Screen.Game.Core.Win"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              Name="GameCoreControl"
+             Focusable="True"
+             Loaded="OnLoaded"
              d:DataContext="{d:DesignInstance core:GameCoreViewModel}">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -60,7 +63,7 @@
                 Padding="20"
                 BorderBrush="Orange"
                 BorderThickness="4">
-                <fight:FightView />
+                <fight:FightView DataContext="{Binding Path=FightViewModel}" />
             </Border>
         </Grid>
 
@@ -87,7 +90,7 @@
                 <Style TargetType="Grid">
                     <Setter Property="Visibility" Value="Visible" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding FightViewModel.InProgress}" Value="False">
+                        <DataTrigger Binding="{Binding Model.Finished}" Value="False">
                             <Setter Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
                     </Style.Triggers>
@@ -103,7 +106,7 @@
                 Padding="20"
                 BorderBrush="Orange"
                 BorderThickness="4">
-                <!-- TODO -->
+                <win:WinView DataContext="{Binding Path=WinViewModel}" MaxWidth="500" />
             </Border>
         </Grid>
     </Grid>

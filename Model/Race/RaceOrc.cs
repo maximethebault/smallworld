@@ -9,9 +9,9 @@ namespace Model.Race
     [Serializable()]
     public class RaceOrc : IDRace
     {
-        public string GetName()
+        public string Name
         {
-            return "orc";
+            get { return "orc"; }
         }
 
         public IDUnit CreateUnit(IDPlayer player, IPosition position, ITile tile)

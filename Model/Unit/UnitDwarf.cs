@@ -24,7 +24,7 @@ namespace Model.Unit
         {
             if (targetTile.IsPlain())
             {
-                return UnitDefaultMovementCost / 2;
+                return DefaultMovementCost / 2;
             }
             return base.GetNeededPointToMoveAt(targetTile);
         }

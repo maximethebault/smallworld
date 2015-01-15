@@ -11,7 +11,7 @@
         xmlns:intro="clr-namespace:UI.Screen.Intro"
         mc:Ignorable="d"
         d:DesignHeight="300" d:DesignWidth="300"
-        Title="Small World" WindowState="Maximized" Icon="Screen/icone.png"
+        Title="Small World" WindowState="Maximized" Icon="Images/icone.png"
         d:DataContext="{d:DesignInstance ui:MainWindowViewModel}">
     <Window.Resources>
         <DataTemplate DataType="{x:Type intro:IntroViewModel}">
