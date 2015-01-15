@@ -18,33 +18,33 @@
         <Storyboard x:Shared="False" x:Key="Storyboard" Completed="OnStoryboardCompleted">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="IntroText1" Storyboard.TargetProperty="Opacity" BeginTime="00:00:00">
                 <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.0" />
-                <SplineDoubleKeyFrame KeyTime="00:00:03.00" Value="1.0" />
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="IntroText2" Storyboard.TargetProperty="Opacity" BeginTime="00:00:03">
-                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.0" />
                 <SplineDoubleKeyFrame KeyTime="00:00:01.00" Value="1.0" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="IntroText3" Storyboard.TargetProperty="Opacity" BeginTime="00:00:04">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="IntroText2" Storyboard.TargetProperty="Opacity" BeginTime="00:00:01">
                 <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.0" />
-                <SplineDoubleKeyFrame KeyTime="00:00:01.00" Value="1.0" />
+                <SplineDoubleKeyFrame KeyTime="00:00:00.500" Value="1.0" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="IntroText4" Storyboard.TargetProperty="Opacity" BeginTime="00:00:05">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="IntroText3" Storyboard.TargetProperty="Opacity" BeginTime="00:00:01.500">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.0" />
+                <SplineDoubleKeyFrame KeyTime="00:00:00.500" Value="1.0" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="IntroText4" Storyboard.TargetProperty="Opacity" BeginTime="00:00:02.00">
                 <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.0" />
                 <SplineDoubleKeyFrame KeyTime="00:00:00.200" Value="1.0" />
             </DoubleAnimationUsingKeyFrames>
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="IntroText1" Storyboard.TargetProperty="Margin" BeginTime="00:00:05.600">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="IntroText1" Storyboard.TargetProperty="Margin" BeginTime="00:00:02.600">
                 <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0, 0, 0, 0" />
                 <SplineThicknessKeyFrame KeyTime="00:00:00.500" Value="-5000, 0, 0, 0" />
             </ThicknessAnimationUsingKeyFrames>
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="IntroText2" Storyboard.TargetProperty="Margin" BeginTime="00:00:05.800">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="IntroText2" Storyboard.TargetProperty="Margin" BeginTime="00:00:02.800">
                 <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0, 0, 0, 0" />
                 <SplineThicknessKeyFrame KeyTime="00:00:00.500" Value="5000, 0, 0, 0" />
             </ThicknessAnimationUsingKeyFrames>
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="IntroText3" Storyboard.TargetProperty="Margin" BeginTime="00:00:06.000">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="IntroText3" Storyboard.TargetProperty="Margin" BeginTime="00:00:03.000">
                 <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0, 0, 0, 0" />
                 <SplineThicknessKeyFrame KeyTime="00:00:00.500" Value="-5000, 0, 0, 0" />
             </ThicknessAnimationUsingKeyFrames>
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="IntroText4" Storyboard.TargetProperty="Margin" BeginTime="00:00:06.200">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="IntroText4" Storyboard.TargetProperty="Margin" BeginTime="00:00:03.200">
                 <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0, 0, 0, 0" />
                 <SplineThicknessKeyFrame KeyTime="00:00:00.500" Value="5000, 0, 0, 0" />
             </ThicknessAnimationUsingKeyFrames>
@@ -56,9 +56,9 @@
         </EventTrigger>
     </UserControl.Triggers>
     <StackPanel VerticalAlignment="Center" x:Name="IntroPanel">
-        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="100" FontWeight="Bold" FontStyle="Normal" Opacity="0" x:Name="IntroText1">INSA RENNES</TextBlock>
-        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" FontStyle="Normal" Opacity="0" x:Name="IntroText2">La Suciu</TextBlock>
-        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" FontStyle="Normal" Opacity="0" x:Name="IntroText3">Le Kikou</TextBlock>
+        <Image VerticalAlignment="Center" HorizontalAlignment="Center" Source="/Images/Intro/INSA.jpg" Width="450" Opacity="0" x:Name="IntroText1" />
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" FontStyle="Normal" Opacity="0" x:Name="IntroText2">Oana Suciu</TextBlock>
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" FontStyle="Normal" Opacity="0" x:Name="IntroText3">Maxime Thébault</TextBlock>
         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" FontStyle="Italic" Opacity="0" x:Name="IntroText4">présentent...</TextBlock>
     </StackPanel>
 </UserControl>

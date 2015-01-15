@@ -66,8 +66,10 @@ namespace UI
             loadGameBuilder.SaveFilepath = "C:\\Users\\Max\\Documents\\almostwin.sws";
             var gameCreator = BuilderFactory.GetGameCreator(loadGameBuilder);
             var game = gameCreator.CreateGame().GetGame();
-            StartGame(game);
-            //StartIntro();
+            //StartGame(game);
+            //StartHome();
+            //StartNewGame();
+            StartIntro();
         }
 
         private void StartIntro()

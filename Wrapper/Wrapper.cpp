@@ -8,8 +8,9 @@ WrapperAlgo::WrapperAlgo(int mapSize, int nbPlayers, int nbTileTypes) {
 
 WrapperAlgo::~WrapperAlgo() {
 	// TODO: make sure the destructor is called
-	Algo_delete(_algo);
 	delete _algo;
+	//Algo_delete(_algo);
+	//delete _algo;
 }
 
 int ** WrapperAlgo::createMap() {

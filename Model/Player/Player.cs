@@ -50,7 +50,21 @@ namespace Model.Player
 
         public void ComputeScore()
         {
-            Score = IDUnits.Sum(unit => unit.ComputeScore());
+            var score = 0;
+            IEnumerable<IDUnit> alreadyProcessed = new List<IDUnit>();
+            foreach (var unit in IDUnits)
+            {
+                if (alreadyProcessed.Contains(unit))
+                {
+                    continue;
+                }
+                var position = unit.Position;
+                var unitsOnSameTile = IDUnits.Where(sameTileUnit => sameTileUnit.Position.Equals(position));
+                score += unitsOnSameTile.Sum(sameTileUnit => sameTileUnit.ComputeScore());
+                score -= unitsOnSameTile.Count()-1;
+                alreadyProcessed = alreadyProcessed.Union(unitsOnSameTile);
+            }
+            Score = score;
         }
 
         public bool HasUnitLeft()

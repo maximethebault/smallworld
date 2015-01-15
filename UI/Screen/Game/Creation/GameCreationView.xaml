@@ -9,7 +9,6 @@
              xmlns:viewModel="clr-namespace:UI.Screen.Game.Creation.ViewModel"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              Name="GameCreationUserControl"
-             Background="White"
              d:DesignHeight="500" d:DesignWidth="600" d:DataContext="{d:DesignInstance creation:GameCreationViewModel}"
              mc:Ignorable="d">
     <UserControl.Resources>
@@ -44,72 +43,89 @@
             </Setter>
         </Style>
     </UserControl.Resources>
+    <UserControl.Background>
+        <ImageBrush ImageSource="/Images/Background/creation.jpg" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,1024,1024"/>
+    </UserControl.Background>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <!--
             Map selection
             -->
-            <StackPanel Margin="10, 0, 0, 0" Orientation="Vertical">
-                <Label Content="Carte" FontSize="25" FontWeight="Heavy" />
-                <Label Foreground="Red" Margin="0, -10, 0, 0" Content="Aucune carte n'est sélectionnée !" Visibility="{Binding MapErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
-            </StackPanel>
-            <ListBox Name="MapListBox" SelectedIndex="{Binding SelectedMap}" ItemsSource="{Binding Maps}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="{Binding Items.Count, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}" />
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding}" Margin="10, 10, 10, 10"/>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListBoxItem}">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ListBoxItem">
-                                    <Border Name="Border" Padding="2" SnapsToDevicePixels="true">
-                                        <ContentPresenter />
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsSelected" Value="true">
-                                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
+            <Border CornerRadius="10" Margin="10">
+                <Border.Background>
+                    <SolidColorBrush Color="#dcc0a8" Opacity=".8"/>
+                </Border.Background>
+                <StackPanel>
+                    <StackPanel Margin="10, 0, 0, 0" Orientation="Vertical">
+                        <Label Foreground="#3d4966" Content="Carte" FontSize="25" FontWeight="Heavy" />
+                        <Label Foreground="#7a5230" Margin="0, -10, 0, 0" Content="Aucune carte n'est sélectionnée !" FontWeight="Bold" HorizontalAlignment="Center" FontSize="20" Visibility="{Binding MapErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
+                    </StackPanel>
+                    <ListBox BorderThickness="0" Background="Transparent" Name="MapListBox" SelectedIndex="{Binding SelectedMap}" ItemsSource="{Binding Maps}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="{Binding Items.Count, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding}" Margin="10, 10, 10, 10"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <Border Name="Border" Padding="2" CornerRadius="10" SnapsToDevicePixels="true" Background="Transparent" BorderThickness="0" Margin="5">
+                                                <ContentPresenter />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsSelected" Value="true">
+                                                    <Setter TargetName="Border" Property="Background" Value="#747d94"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </StackPanel>
+            </Border>
             <!--
             Player setup
             -->
-            <StackPanel Margin="10, 0, 0, 0">
-                <Label Content="Joueurs" FontSize="25" FontWeight="Heavy"></Label>
-            </StackPanel>
-            <ItemsControl Name="PlayerListBox" ItemsSource="{Binding Players}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsTabStop="False">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="{Binding Items.Count, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}}" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Margin="10, 10, 10, 10">
-                            <Label Content="Nom :" FontSize="12" />
-                            <TextBox Style="{StaticResource PlaceHolder}" Tag="{Binding PlaceHolder}" Text="{Binding Name}" IsTabStop="False" />
-                            <Label Foreground="Red" Content="Veuillez entrer un nom !" Visibility="{Binding NameErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
-                            <Label Content="Race :" FontSize="12" Margin="0, 10, 0, 0" />
-                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <creation:RaceSelector HorizontalContentAlignment="Center" ItemsSource="{Binding RacesViewModel}" SelectedIndex="{Binding SelectedRace}" />
-                            </WrapPanel>
-                            <Label Foreground="Red" Margin="0, -10, 0, 0" Content="Veuillez sélectionner une race !" Visibility="{Binding RaceErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <Border CornerRadius="10" Margin="10">
+                <Border.Background>
+                    <SolidColorBrush Color="#dcc0a8" Opacity=".8"/>
+                </Border.Background>
+                <StackPanel>
+                    <StackPanel Margin="10, 0, 0, 0">
+                        <Label Foreground="#3d4966" Content="Joueurs" FontSize="25" FontWeight="Heavy"></Label>
+                    </StackPanel>
+                    <ItemsControl Name="PlayerListBox" ItemsSource="{Binding Players}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsTabStop="False">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="{Binding Items.Count, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}}" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="10, 10, 10, 10">
+                                    <Label Content="Nom :" FontSize="12" />
+                                    <TextBox Style="{StaticResource PlaceHolder}" Tag="{Binding PlaceHolder}" Text="{Binding Name}" IsTabStop="False" />
+                                    <Label Foreground="Red" Content="Veuillez entrer un nom !" Visibility="{Binding NameErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
+                                    <Label Content="Race :" FontSize="12" Margin="0, 10, 0, 0" />
+                                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <creation:RaceSelector HorizontalContentAlignment="Center" ItemsSource="{Binding RacesViewModel}" SelectedIndex="{Binding SelectedRace}" />
+                                    </WrapPanel>
+                                    <Label Foreground="Red" Margin="0, -10, 0, 0" Content="Veuillez sélectionner une race !" Visibility="{Binding RaceErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
             <!--
             Control button
             -->

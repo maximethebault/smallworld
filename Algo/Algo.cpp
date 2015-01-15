@@ -6,7 +6,7 @@ Algo::Algo(int mapSize, int nbPlayers, int nbTileTypes) : _mapSize(mapSize), _nb
 }
 
 Algo::~Algo() {
-	for (int i = 0; i < _mapSize; i++) {
+	/*for (int i = 0; i < _mapSize; i++) {
 		delete[] _map[i];
 	}
 	delete[] _map;
@@ -14,7 +14,7 @@ Algo::~Algo() {
 	for (int i = 0; i < _nbPlayers; i++) {
 		delete[] _playerPlacement[i];
 	}
-	delete[] _playerPlacement;
+	delete[] _playerPlacement;*/
 }
 
 int ** Algo::createMap() {
@@ -74,6 +74,10 @@ int ** Algo::placePlayers() {
 
 	return _playerPlacement;
 }
+
+/*int ** Algo::advice(int * position, int ** map, int ** units) {
+
+}*/
 
 // interface
 

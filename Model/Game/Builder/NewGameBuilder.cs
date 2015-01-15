@@ -23,6 +23,14 @@ namespace Model.Game.Builder
             _playerNames = new List<string>();
         }
 
+        ~NewGameBuilder()
+        {
+            if (_wrapperAlgo != null)
+            {
+                ((IDisposable)_wrapperAlgo).Dispose();
+            }
+        }
+
         public override void Create()
         {
             base.Create();

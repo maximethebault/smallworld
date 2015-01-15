@@ -6,7 +6,7 @@
              xmlns:viewModel="clr-namespace:UI.Screen.Game.Core.Menu.ViewModel"
              mc:Ignorable="d" 
              x:Name="MenuUserControl"
-             d:DesignHeight="300" d:DesignWidth="500" d:DataContext="{d:DesignInstance viewModel:MenuViewModel}">
+             d:DesignHeight="900" d:DesignWidth="1600" d:DataContext="{d:DesignInstance viewModel:MenuViewModel}">
     <UserControl.Resources>
         <Style x:Key="BtnStyle" TargetType="Button" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -15,10 +15,10 @@
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Foreground" Value="White" />
             <Setter Property="FontFamily" Value="Trajan Pro 3" />
-            <Setter Property="FontSize" Value="25" />
+            <Setter Property="FontSize" Value="30" />
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="20" />
+            <Setter Property="Margin" Value="60, 40, 20, 40" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -27,7 +27,7 @@
                             BorderBrush="DarkGray" 
                             CornerRadius="15" 
                             Background="{TemplateBinding Background}" 
-                            Padding="10">
+                            Padding="35, 15, 35, 15">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
@@ -36,9 +36,9 @@
         </Style>
     </UserControl.Resources>
     <UserControl.Background>
-        <ImageBrush ImageSource="/Images/Background/background.jpg"/>
+        <ImageBrush ImageSource="/Images/Background/menu.jpg"/>
     </UserControl.Background>
-    <StackPanel UseLayoutRounding="True" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <StackPanel UseLayoutRounding="True" HorizontalAlignment="Left" VerticalAlignment="Center">
         <Button x:Name="Button1" Content="Reprendre la partie" Width="{Binding ElementName=TbLonger, Path=ActualWidth}" Command="{Binding ResumeGameCommand}" Style="{StaticResource BtnStyle}" MouseEnter="ButtonMouseEnter" MouseLeave="ButtonMouseLeave">
             <Button.Background>
                 <ImageBrush ImageSource="/Images/Background/button.png"/>

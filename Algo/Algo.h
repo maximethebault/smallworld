@@ -19,9 +19,10 @@ class DLL Algo {
 		~Algo();
 		int ** createMap();
 		int ** placePlayers();
+		//int ** advice(int * position, int ** map, int ** units);
 };
 
-// définition d'une sorte d'interface
+// we define our library interface
 
 EXTERNC DLL Algo* Algo_new(int mapSize, int nbPlayers, int nbTileTypes);
 EXTERNC DLL void Algo_delete(Algo* algo);

@@ -1,6 +1,6 @@
 ﻿namespace Model.Game.Builder
 {
-    public class BuilderFactory
+    public static class BuilderFactory
     {
         public static INewGameBuilder GetNewGameBuilder()
         {

@@ -4,7 +4,7 @@
     xmlns:home="clr-namespace:UI.Screen.Home"
     mc:Ignorable="d" x:Class="UI.Screen.Home.HomeView"
     x:Name="HomeUserControl"
-        d:DesignWidth="960" d:DesignHeight="540" d:DataContext="{d:DesignInstance home:HomeViewModel}">
+        d:DesignWidth="1600" d:DesignHeight="900" d:DataContext="{d:DesignInstance home:HomeViewModel}">
     <UserControl.Resources>
         <Style x:Key="BtnStyle" TargetType="Button" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -13,7 +13,6 @@
             <Setter Property="FontWeight" Value="Bold"></Setter>
             <Setter Property="Foreground" Value="White"></Setter>
             <Setter Property="FontFamily" Value="Trajan Pro 3"></Setter>
-            <Setter Property="FontSize" Value="20"></Setter>
             <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
             <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
             <Setter Property="Template">
@@ -27,12 +26,12 @@
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
-                </Setter.Value> 
+                </Setter.Value>
             </Setter>
         </Style>
     </UserControl.Resources>
     <UserControl.Background>
-        <ImageBrush ImageSource="/Images/Background/background.jpg"/>
+        <ImageBrush ImageSource="/Images/Background/home.jpg"/>
     </UserControl.Background>
     <Grid Margin="0, 0, 10, 0" UseLayoutRounding="True">
         <Grid.RowDefinitions>
@@ -49,9 +48,9 @@
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="0.3*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="Button1" Grid.Row="1" Grid.Column="1" Command="{Binding NewGameCommand}" Style="{StaticResource BtnStyle}" MouseEnter="ButtonMouseEnter" MouseLeave="ButtonMouseLeave">
+        <Button x:Name="Button1" Grid.Row="1" Grid.Column="1" Command="{Binding NewGameCommand}" Style="{StaticResource BtnStyle}" MouseEnter="ButtonMouseEnter" MouseLeave="ButtonMouseLeave" Width="{Binding ElementName=TbLonger, Path=ActualWidth}">
             <Viewbox>
-                <TextBlock TextAlignment="Center" Width="{Binding ElementName=tbLonger, Path=ActualWidth}">Nouvelle Partie</TextBlock>
+                <TextBlock Padding="19" FontSize="30" TextAlignment="Center">Nouvelle Partie</TextBlock>
             </Viewbox>
             <Button.Background>
                 <ImageBrush ImageSource="/Images/Background/button.png"/>
@@ -74,9 +73,9 @@
         </Button>
 
 
-        <Button Grid.Row="3" Grid.Column="1" Command="{Binding LoadGameCommand}" Style="{StaticResource BtnStyle}" MouseEnter="ButtonMouseEnter" MouseLeave="ButtonMouseLeave">
+        <Button Grid.Row="3" Grid.Column="1" Name="TbLonger" Command="{Binding LoadGameCommand}" Style="{StaticResource BtnStyle}" MouseEnter="ButtonMouseEnter" MouseLeave="ButtonMouseLeave">
             <Viewbox>
-                <TextBlock Margin="20,0,20,0" TextAlignment="Center" Name="tbLonger">Charger une partie</TextBlock>
+                <TextBlock FontSize="20" Margin="20,0,20,0" TextAlignment="Center">Charger une partie</TextBlock>
             </Viewbox>
             <Button.Background>
                 <ImageBrush ImageSource="/Images/Background/button.png"/>
@@ -99,9 +98,9 @@
         </Button>
 
 
-        <Button Grid.Row="5" Grid.Column="1" Click="Exit" Style="{StaticResource BtnStyle}" MouseEnter="ButtonMouseEnter" MouseLeave="ButtonMouseLeave">
+        <Button Grid.Row="5" Grid.Column="1" Click="Exit" Style="{StaticResource BtnStyle}" MouseEnter="ButtonMouseEnter" MouseLeave="ButtonMouseLeave" Width="{Binding ElementName=TbLonger, Path=ActualWidth}">
             <Viewbox>
-                <TextBlock TextAlignment="Center" Width="{Binding ElementName=tbLonger, Path=ActualWidth}">Quitter le jeu</TextBlock>
+                <TextBlock FontSize="20" Padding="12" TextAlignment="Center">Quitter le jeu</TextBlock>
             </Viewbox>
             <Button.Background>
                 <ImageBrush ImageSource="/Images/Background/button.png"/>

@@ -24,6 +24,9 @@
         <KeyBinding Key="Space" Command="{Binding PlayersViewModel.EndTurnCommand}"/>
         <KeyBinding Key="Escape" Command="{Binding MenuCommand}"/>
     </UserControl.InputBindings>
+    <UserControl.Background>
+        <ImageBrush ImageSource="/Images/Background/map.jpg"/>
+    </UserControl.Background>
     <Grid>
         <Grid Name="MapGrid">
             <Grid.ColumnDefinitions>

@@ -241,7 +241,7 @@
     <Resource Include="Images\icone.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Background\background.jpg" />
+    <Resource Include="Images\Background\home.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Background\button.png" />
@@ -254,6 +254,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Resource Include="Images\Background\map.jpg" />
+    <Resource Include="Images\Background\menu.jpg" />
+    <Resource Include="Images\Background\creation.jpg" />
+    <Resource Include="Images\Intro\INSA.jpg" />
     <Content Include="Images\Race\orc_race.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

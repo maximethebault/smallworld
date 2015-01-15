@@ -39,7 +39,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Wrapper">
-      <HintPath>..\Wrapper\Release\Wrapper.dll</HintPath>
+      <HintPath>..\Model\bin\Debug\Wrapper.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Choose>

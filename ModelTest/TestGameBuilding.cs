@@ -90,7 +90,6 @@ namespace ModelTest
             var mapSize = 30;
             var nbTypes = 4;
             var wrapper = new WrapperAlgo(mapSize, 2, nbTypes);
-            // TODO: faire un test avec WrapperAlgo, voir si le destructeur est bien appelé à la fin d'un bloc local
             var map = wrapper.createMap();
             // we're going to check if the number of tiles for each type is well-distributed
             var nbTilesForType = new int[nbTypes];
@@ -109,6 +108,8 @@ namespace ModelTest
                 Assert.IsTrue(nbTilesForType[i] >= minNbTilesForType);
                 Assert.IsTrue(nbTilesForType[i] <= maxNbTilesForType);
             }
+
+            ((IDisposable)wrapper).Dispose();
         }
 
         [TestMethod]
@@ -185,6 +186,8 @@ namespace ModelTest
 
             Assert.AreEqual(mapSize - 1, playerPlacement[3][0]);
             Assert.AreEqual(0, playerPlacement[3][1]);
+
+            ((IDisposable)wrapper).Dispose();
         }
 
         [TestMethod]
