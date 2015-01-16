@@ -22,6 +22,17 @@ namespace UI.Screen.Game.Core.Map.ViewModel
             }
         }
 
+        private bool _isAdvised;
+        public bool IsAdvised
+        {
+            get { return _isAdvised; }
+            set
+            {
+                _isAdvised = value;
+                RaisePropertyChanged("IsAdvised");
+            }
+        }
+
         public bool HasUnit
         {
             get { return Units.Count > 0; }

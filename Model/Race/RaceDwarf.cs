@@ -11,7 +11,7 @@ namespace Model.Race
     {
         public int ID
         {
-            get { return 2; }
+            get { return 1; }
         }
 
         public string Name

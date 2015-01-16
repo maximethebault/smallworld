@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -116,6 +117,7 @@ namespace UI.Screen.Game.Core
         {
             if (t.SelectedUnit == null)
             {
+                MapViewModel.RefreshAdvices(new List<IPosition>());
                 return;
             }
 

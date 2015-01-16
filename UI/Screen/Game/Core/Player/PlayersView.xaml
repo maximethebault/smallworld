@@ -52,7 +52,7 @@
                 <ItemsControl.ItemContainerStyle>
                     <Style>
                         <Setter Property="Grid.Column" Value="0" />
-                        <Setter Property="Grid.Row" Value="{Binding Column}" />
+                        <Setter Property="Grid.Row" Value="{Binding Row}" />
                     </Style>
                 </ItemsControl.ItemContainerStyle>
             </ItemsControl>

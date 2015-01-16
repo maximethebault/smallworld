@@ -88,7 +88,7 @@
             <Setter Property="Background" Value="LightGray"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Background" Value="Orange"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -120,6 +120,9 @@
                         </Button>
                     </StackPanel>
                     <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Path=IsAdvised}" Value="True">
+                            <Setter TargetName="TileContainer" Property="Background" Value="DeepSkyBlue"/>
+                        </DataTrigger>
                         <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
                             <Setter TargetName="TileContainer" Property="Background" Value="Red"/>
                         </DataTrigger>

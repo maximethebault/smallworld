@@ -110,9 +110,10 @@ vector<Tile*> Algo::reachableTiles(int * position, float moveLeft, int type, int
 			if (i == position[0] && j == position[1]) {
 				continue;
 			}
-			if (!Tile::isAdjacent(position[0], position[1], i, j) && !(type == 1 && map[i][j] == 2 && (units[i][j] == -1 || units[i][j] == 1))) {
+			if (!Tile::isAdjacent(position[0], position[1], i, j) && !(type == 1 && map[i][j] == 2 && map[position[0]][position[1]] == 2 && (units[i][j] == -1 || units[i][j] == 1))) {
 				continue;
 			}
+
 			float cost;
 
 			// movement cost calculation

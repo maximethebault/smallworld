@@ -123,7 +123,7 @@ namespace UI.Screen.Game.Core.Map.ViewModel
             foreach (var tile in Tiles)
             {
                 var advice = advices.FirstOrDefault(PositionFactory.GetHexaPosition(tile.Column, tile.Row).Equals);
-                tile.IsSelected = advice != null;
+                tile.IsAdvised = advice != null;
             }
         }
 
