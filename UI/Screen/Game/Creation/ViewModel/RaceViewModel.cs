@@ -2,11 +2,11 @@
 
 namespace UI.Screen.Game.Creation.ViewModel
 {
-    public class RaceViewModel : ViewModelBase
+    class RaceViewModel : ViewModelBase
     {
         private bool _isEnabled;
 
-        public BitmapImage Image { get; set; }
+        public RaceDescription RaceDescription { get; set; }
 
         public int Index { get; set; }
 
@@ -24,9 +24,9 @@ namespace UI.Screen.Game.Creation.ViewModel
             }
         }
 
-        public RaceViewModel(BitmapImage image, int i)
+        public RaceViewModel(RaceDescription raceDescription, int i)
         {
-            Image = image;
+            RaceDescription = raceDescription;
             Index = i;
             IsSelected = false;
             IsEnabled = true;

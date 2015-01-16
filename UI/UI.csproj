@@ -99,6 +99,8 @@
       <DependentUpon>WinView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screen\Game\Core\Win\WinViewModel.cs" />
+    <Compile Include="Screen\Game\Creation\MapDescription.cs" />
+    <Compile Include="Screen\Game\Creation\RaceDescription.cs" />
     <Compile Include="Screen\Game\Creation\ViewModel\GameCreationViewModel.cs" />
     <Compile Include="Screen\Home\HomeViewModel.cs" />
     <Compile Include="Screen\Intro\IntroViewModel.cs" />
@@ -119,8 +121,8 @@
       <DependentUpon>UnitsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screen\Game\Creation\ViewModel\PlayerViewModel.cs" />
-    <Compile Include="Screen\Game\Creation\RaceSelector.xaml.cs">
-      <DependentUpon>RaceSelector.xaml</DependentUpon>
+    <Compile Include="Screen\Game\Creation\RacesView.xaml.cs">
+      <DependentUpon>RacesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screen\Game\Creation\ViewModel\RaceViewModel.cs" />
     <Compile Include="Screen\Game\GameEventArgs.cs" />
@@ -159,7 +161,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Screen\Game\Creation\RaceSelector.xaml">
+    <Page Include="Screen\Game\Creation\RacesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

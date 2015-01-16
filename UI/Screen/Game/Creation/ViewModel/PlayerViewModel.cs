@@ -66,17 +66,17 @@ namespace UI.Screen.Game.Creation.ViewModel
 
         public RaceViewModel[] RacesViewModel { get; set; }
 
-        public PlayerViewModel(GameCreationViewModel gameCreationViewModel, int index, IReadOnlyList<BitmapImage> races)
+        public PlayerViewModel(GameCreationViewModel gameCreationViewModel, int index, RaceDescription[] racesDescription)
         {
             Name = "";
             GameCreationViewModel = gameCreationViewModel;
             Index = index;
             SelectedRace = -1;
             PlaceHolder = "Joueur " + (index + 1);
-            RacesViewModel = new RaceViewModel[races.Count];
-            for (var i = 0; i < races.Count; i++)
+            RacesViewModel = new RaceViewModel[racesDescription.Length];
+            for (var i = 0; i < racesDescription.Length; i++)
             {
-                RacesViewModel[i] = new RaceViewModel(races[i], i);
+                RacesViewModel[i] = new RaceViewModel(racesDescription[i], i);
             }
         }
     }

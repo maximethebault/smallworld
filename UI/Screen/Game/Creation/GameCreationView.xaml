@@ -36,7 +36,7 @@
         </Style>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
         <Style x:Key="PlaceHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-            <Setter Property="Background" Value="#b89576" />
+            <Setter Property="Background" Value="#cbb19a" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
@@ -76,14 +76,14 @@
             -->
             <Border CornerRadius="10" Margin="10">
                 <Border.Background>
-                    <SolidColorBrush Color="#d5ab84" Opacity=".68"/>
+                    <SolidColorBrush Color="#d5ab84" Opacity=".8"/>
                 </Border.Background>
                 <StackPanel>
                     <StackPanel Margin="10, 0, 0, 0" Orientation="Vertical">
                         <Label Foreground="#3d4966" Content="Carte" FontSize="25" FontWeight="Heavy" />
                         <Label Foreground="#7a5230" Margin="0, -10, 0, 0" FontWeight="Bold" FontSize="20" Content="Aucune carte n'est sélectionnée !" HorizontalAlignment="Center" Visibility="{Binding MapErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
                     </StackPanel>
-                    <ListBox BorderThickness="0" Background="Transparent" Name="MapListBox" SelectedIndex="{Binding SelectedMap}" ItemsSource="{Binding Maps}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
+                    <ListBox BorderThickness="0" Background="Transparent" Name="MapListBox" SelectedIndex="{Binding SelectedMap}" ItemsSource="{Binding MapsDescription}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <UniformGrid Columns="{Binding Items.Count, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}" />
@@ -91,7 +91,7 @@
                         </ListBox.ItemsPanel>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding}" Margin="10, 10, 10, 10"/>
+                                <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding Path=Image}" ToolTip="{Binding Path=Description}" Margin="10, 10, 10, 10"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                         <ListBox.ItemContainerStyle>
@@ -120,7 +120,7 @@
             -->
             <Border CornerRadius="10" Margin="10">
                 <Border.Background>
-                    <SolidColorBrush Color="#d5ab84" Opacity=".68"/>
+                    <SolidColorBrush Color="#d5ab84" Opacity=".8"/>
                 </Border.Background>
                 <StackPanel>
                     <StackPanel Margin="10, 0, 0, 0">
@@ -154,7 +154,7 @@
                                         <Label Foreground="#7a5230" Margin="0, -5, 0, 0" FontWeight="Bold" FontSize="20" Content="Veuillez entrer un nom !" Visibility="{Binding NameErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
                                         <Label Content="Race :" FontSize="12" Margin="0, 10, 0, 0" />
                                         <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <creation:RaceSelector HorizontalContentAlignment="Center" ItemsSource="{Binding RacesViewModel}" SelectedIndex="{Binding SelectedRace}" />
+                                            <creation:RacesView HorizontalContentAlignment="Center" ItemsSource="{Binding RacesViewModel}" SelectedIndex="{Binding SelectedRace}" />
                                         </WrapPanel>
                                         <Label Foreground="#7a5230" Margin="0, -10, 0, 0" FontWeight="Bold" FontSize="20" Content="Veuillez sélectionner une race !" Visibility="{Binding RaceErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
                                     </StackPanel>

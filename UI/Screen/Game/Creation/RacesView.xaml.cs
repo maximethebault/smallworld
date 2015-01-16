@@ -5,9 +5,9 @@ namespace UI.Screen.Game.Creation
     /// <summary>
     /// Logique d'interaction pour RaceListBox.xaml
     /// </summary>
-    public partial class RaceSelector : ListBox
+    public partial class RacesView : ListBox
     {
-        public RaceSelector()
+        public RacesView()
         {
             InitializeComponent();
         }

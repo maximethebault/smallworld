@@ -1,4 +1,4 @@
-﻿<ListBox x:Class="UI.Screen.Game.Creation.RaceSelector"
+﻿<ListBox x:Class="UI.Screen.Game.Creation.RacesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -22,7 +22,7 @@
     <ListBox.ItemTemplate>
         <DataTemplate>
             <StackPanel HorizontalAlignment="Stretch">
-                <Image HorizontalAlignment="Stretch" VerticalAlignment="Top" MaxWidth="150" Source="{Binding Image}"/>
+                <Image HorizontalAlignment="Stretch" VerticalAlignment="Top" MaxWidth="150" Source="{Binding RaceDescription.Image}" ToolTip="{Binding RaceDescription.Description}"/>
             </StackPanel>
         </DataTemplate>
     </ListBox.ItemTemplate>

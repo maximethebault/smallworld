@@ -78,7 +78,6 @@ namespace UI.Screen.Game.Core
 
         private void ToggleMenu()
         {
-            // TODO: check for game end overlay presence first
             MenuViewModel.Visible = !MenuViewModel.Visible;
         }
 
@@ -147,8 +146,6 @@ namespace UI.Screen.Game.Core
 
         private void GameExit(ViewModelBase t, EventArgs e)
         {
-            //TODO: dispose of event handler in children view model
-
             // event unsubscription to avoid memory leak
             MapViewModel.OnSelectTile -= SelectTile;
             MapViewModel.OnMoveToTile -= MoveToTile;

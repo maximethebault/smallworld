@@ -9,24 +9,22 @@ using UI.Screen.Game.Creation;
 using UI.Screen.Home;
 using UI.Screen.Intro;
 
-// TODO: event unsubscription to avoid memory leak
-
 namespace UI
 {
     class MainWindowViewModel : ViewModelBase
     {
-        private static readonly BitmapImage[] Maps =
+        private static readonly MapDescription[] MapsDescription =
         {
-            new BitmapImage(new Uri("/Images/Map/demo.png", UriKind.Relative)),
-            new BitmapImage(new Uri("/Images/Map/petite.png", UriKind.Relative)),
-            new BitmapImage(new Uri("/Images/Map/normale.png", UriKind.Relative))
+            new MapDescription(new BitmapImage(new Uri("/Images/Map/demo.png", UriKind.Relative)), "Démonstration : 5 tours , 4 unités par peuple"),
+            new MapDescription(new BitmapImage(new Uri("/Images/Map/petite.png", UriKind.Relative)), "Petite : 20 tours , 6 unités par peuple"),
+            new MapDescription(new BitmapImage(new Uri("/Images/Map/normale.png", UriKind.Relative)), "Standard : 30 tours , 8 unités par peuple")
         };
 
-        private static readonly BitmapImage[] RacesTextureCreation =
+        private static readonly RaceDescription[] RacesDescription =
         {
-            new BitmapImage(new Uri("/Images/Race/Creation/elf.png", UriKind.Relative)),
-            new BitmapImage(new Uri("/Images/Race/Creation/nain.png", UriKind.Relative)),
-            new BitmapImage(new Uri("/Images/Race/Creation/orc.png", UriKind.Relative))
+            new RaceDescription(new BitmapImage(new Uri("/Images/Race/Creation/elf.png", UriKind.Relative)), "Elf :\nLe coût de déplacement sur une case Forêt est divisé par deux.\nLe coût de déplacement sur une case Désert est multiplié par deux.\nL'unité Elf a une chance sur deux de se replier lors d'un combat perdu, qu'il soit provoqué ou subi, devant normalement conduire à la destruction de l'unité. Dans ce cas l'unité survit avec 1 point de vie."),
+            new RaceDescription(new BitmapImage(new Uri("/Images/Race/Creation/nain.png", UriKind.Relative)), "Nain :\nLe coût de déplacement sur une case Plaine est divisé par deux.\nUne unité Nain n'acquière aucun point sur les cases de type Plaine.\nLorsqu'elle se trouve sur une case Montagne, une unité Nain a la capacité de se déplacer sur n'importe quelle case montagne de la carte à condition qu'elle ne soit pas occupée par une unité adverse."),
+            new RaceDescription(new BitmapImage(new Uri("/Images/Race/Creation/orc.png", UriKind.Relative)), "Orc :\nLe coût de déplacement sur une case Plaine est divisé par deux.\nL'unité Orc n'acquière aucun point sur les cases de type Forêt.\nLorsqu'une unité Orc détruit une autre unité, elle possède alors 1 point de bonus permanent. Cet effet est cumulable et est lié à chaque unité, c'est-à-dire que si l'unité ayant le bonus meurt, le bonus disparaît.")
         };
 
         private static readonly BitmapImage[] RacesTextureMap =
@@ -63,20 +61,7 @@ namespace UI
 
         public MainWindowViewModel()
         {
-            //var newGameBuilder = BuilderFactory.GetNewGameBuilder();
-            //newGameBuilder.AddPlayer("Kikou", 0);
-            //newGameBuilder.AddPlayer("salut", 1);
-            //newGameBuilder.Difficulty = DifficultyFactory.GetDifficultyByID(0);
-            //var gameCreator = BuilderFactory.GetGameCreator(newGameBuilder);
-            //var game = gameCreator.CreateGame().GetGame();
-            var loadGameBuilder = BuilderFactory.GetLoadGameBuilder();
-            loadGameBuilder.SaveFilepath = "C:\\Users\\Max\\Documents\\almostwin.sws";
-            var gameCreator = BuilderFactory.GetGameCreator(loadGameBuilder);
-            var game = gameCreator.CreateGame().GetGame();
-            StartGame(game);
-            //StartHome();
-            //StartNewGame();
-            //StartIntro();
+            StartIntro();
         }
 
         private void StartIntro()
@@ -96,7 +81,7 @@ namespace UI
 
         private void StartNewGame()
         {
-            var newGame = new GameCreationViewModel(Maps, RacesTextureCreation, PlayerCount);
+            var newGame = new GameCreationViewModel(MapsDescription, RacesDescription, PlayerCount);
             newGame.OnNewGame += OnStartGame;
             newGame.OnBackHome += OnBackHome;
             CurrentViewModel = newGame;

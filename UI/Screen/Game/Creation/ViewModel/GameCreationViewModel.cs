@@ -22,7 +22,7 @@ namespace UI.Screen.Game.Creation
         public event NewGameEventHandler OnNewGame;
         public delegate void NewGameEventHandler(GameCreationViewModel i, GameEventArgs e);
 
-        public BitmapImage[] Maps { get; set; }
+        public MapDescription[] MapsDescription { get; set; }
 
         private int _selectedMap;
 
@@ -50,23 +50,23 @@ namespace UI.Screen.Game.Creation
             }
         }
 
-        private BitmapImage[] Races { get; set; }
+        private RaceDescription[] RacesDescription { get; set; }
 
         public List<PlayerViewModel> Players { get; set; }
 
         public ICommand BackHomeCommand { get; private set; }
         public ICommand StartGameCommand { get; private set; }
 
-        public GameCreationViewModel(BitmapImage[] maps, BitmapImage[] races, int playerCount)
+        public GameCreationViewModel(MapDescription[] mapsDescription, RaceDescription[] racesDescription, int playerCount)
         {
-            Maps = maps;
+            MapsDescription = mapsDescription;
             SelectedMap = -1;
             MapErrorVisibility = false;
-            Races = races;
+            RacesDescription = racesDescription;
             Players = new List<PlayerViewModel>();
             for (var i = 0; i < playerCount; i++)
             {
-                Players.Add(new PlayerViewModel(this, i, Races));
+                Players.Add(new PlayerViewModel(this, i, RacesDescription));
             }
             BackHomeCommand = new DelegateCommand(o => BackHome());
             StartGameCommand = new DelegateCommand(o => StartGame());
