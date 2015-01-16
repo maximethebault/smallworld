@@ -27,7 +27,10 @@ namespace ModelTest
             IEnumerable<IPlayer> actualPlayersList = game.Players;
             Assert.IsFalse(actualPlayersList.IsNullOrEmpty());
             IEnumerable<IPlayer> expectedPlayersList = new List<IPlayer> { new Player("Kikou", new RaceDwarf()), new Player("salut", new RaceOrc()) };
-            ComparePlayerList(expectedPlayersList, actualPlayersList);
+            IEnumerable<IPlayer> expectedPlayersList2 = new List<IPlayer> { new Player("salut", new RaceOrc()), new Player("Kikou", new RaceDwarf()) };
+            var comp1 = ComparePlayerList(expectedPlayersList, actualPlayersList);
+            var comp2 = ComparePlayerList(expectedPlayersList2, actualPlayersList);
+            Assert.IsTrue(comp1 || comp2);
         }
 
         [TestMethod]
@@ -69,7 +72,7 @@ namespace ModelTest
             var game = gameCreator.CreateGame().GetGame();
         }
 
-        public void ComparePlayerList(IEnumerable<IPlayer> expectedPlayers, IEnumerable<IPlayer> actualPlayers)
+        public bool ComparePlayerList(IEnumerable<IPlayer> expectedPlayers, IEnumerable<IPlayer> actualPlayers)
         {
             using (var expectedPlayersIterator = expectedPlayers.GetEnumerator())
             using (var actualPlayersIterator = actualPlayers.GetEnumerator())
@@ -78,10 +81,17 @@ namespace ModelTest
                 {
                     var expectedPlayer = expectedPlayersIterator.Current;
                     var actualPlayer = actualPlayersIterator.Current;
-                    Assert.AreEqual(expectedPlayer.Name, actualPlayer.Name);
-                    Assert.AreEqual(expectedPlayer.Race.Name, actualPlayer.Race.Name);
+                    if (expectedPlayer.Name != actualPlayer.Name)
+                    {
+                        return false;
+                    }
+                    if (expectedPlayer.Race.Name != actualPlayer.Race.Name)
+                    {
+                        return false;
+                    }
                 }
             }
+            return true;
         }
 
         [TestMethod]
