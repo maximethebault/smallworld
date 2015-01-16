@@ -118,6 +118,15 @@ namespace UI.Screen.Game.Core.Map.ViewModel
             }
         }
 
+        public void RefreshAdvices(List<IPosition> advices)
+        {
+            foreach (var tile in Tiles)
+            {
+                var advice = advices.FirstOrDefault(PositionFactory.GetHexaPosition(tile.Column, tile.Row).Equals);
+                tile.IsSelected = advice != null;
+            }
+        }
+
         private void SelectTile(TileViewModel tileViewModel)
         {
             if (SelectedTile != null)

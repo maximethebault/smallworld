@@ -9,6 +9,11 @@ namespace Model.Race
     [Serializable()]
     public class RaceDwarf : IDRace
     {
+        public int ID
+        {
+            get { return 2; }
+        }
+
         public string Name
         {
             get { return "nain"; }

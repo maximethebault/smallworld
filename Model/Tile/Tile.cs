@@ -7,22 +7,7 @@ namespace Model.Tile
     [Serializable]
     abstract public class Tile : ITile
     {
-        [XmlIgnore]
-        private Bitmap Bitmap
-        {
-            get;
-            set;
-        }
-
-        public void SetBitmap(Bitmap bitmap)
-        {
-            Bitmap = bitmap;
-        }
-
-        public Bitmap GetBitmap()
-        {
-            return Bitmap;
-        }
+        public abstract int ID { get; }
 
         public virtual bool IsPlain()
         {

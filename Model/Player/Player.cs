@@ -60,8 +60,10 @@ namespace Model.Player
                 }
                 var position = unit.Position;
                 var unitsOnSameTile = IDUnits.Where(sameTileUnit => sameTileUnit.Position.Equals(position));
-                score += unitsOnSameTile.Sum(sameTileUnit => sameTileUnit.ComputeScore());
-                score -= unitsOnSameTile.Count()-1;
+                var tileScore = 0;
+                tileScore += unitsOnSameTile.Sum(sameTileUnit => sameTileUnit.ComputeScore());
+                tileScore -= unitsOnSameTile.Count() - 1;
+                score += tileScore >= 0 ? tileScore : 0;
                 alreadyProcessed = alreadyProcessed.Union(unitsOnSameTile);
             }
             Score = score;

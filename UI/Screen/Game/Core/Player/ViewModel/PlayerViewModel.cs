@@ -26,13 +26,13 @@ namespace UI.Screen.Game.Core.Player.ViewModel
 
         public IGame Game { get; set; }
 
-        public int Column { get; set; }
+        public int Row { get; set; }
 
         public PlayerViewModel(IGame game, IPlayer model, int i)
         {
             Game = game;
             Model = model;
-            Column = i;
+            Row = i;
 
             Refresh();
         }

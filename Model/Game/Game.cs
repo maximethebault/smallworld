@@ -11,13 +11,23 @@ using Model.Player;
 using Model.Unit;
 using Model.Unit.Exception;
 using Model.Utils;
+using Wrapper;
 
 namespace Model.Game
 {
     [Serializable()]
     public class Game : PropertyChangedNotifier, IDGame
     {
-        public int ElapsedTurns { get; private set; }
+        private int _currentTurn;
+        public int CurrentTurn
+        {
+            get { return _currentTurn; }
+            private set
+            {
+                _currentTurn = value;
+                RaisePropertyChanged("CurrentTurn");
+            }
+        }
 
         private bool _finished;
 
@@ -39,6 +49,7 @@ namespace Model.Game
         }
 
         private IPlayer _winner;
+
         public IPlayer Winner
         {
             get { return _winner; }
@@ -74,7 +85,7 @@ namespace Model.Game
 
         public Game()
         {
-            ElapsedTurns = 0;
+            CurrentTurn = 1;
             Finished = false;
             IDFight = null;
         }
@@ -84,7 +95,7 @@ namespace Model.Game
             return IDPlayers.Select(player => player.IDUnitsAt(position)).SingleOrDefault(units => units.Count > 0) ?? new List<IDUnit>();
         }
 
-        public List<IUnit> UnitsAt(IPosition position)
+        public IEnumerable<IUnit> UnitsAt(IPosition position)
         {
             return Players.Select(player => player.UnitsAt(position)).SingleOrDefault(units => units.Count > 0) ?? new List<IUnit>();
         }
@@ -155,6 +166,12 @@ namespace Model.Game
                 }
                 CheckGameEnd();
             }
+            else if (IDFight.IDLoser != null && IDFight.IDWinner != null && ReferenceEquals(IDFight.IDDefender, IDFight.IDWinner))
+            {
+                IDFight.IDWinner.Kill(IDFight.IDLoser);
+                IDFight.IDLoser.IDPlayer.IDUnits.Remove(IDFight.IDLoser);
+                CheckGameEnd();
+            }
             else if (IDFight.IDAttacker != null)
             {
                 IDFight.IDAttacker.SimulateMoveTo(IDFight.IDDefender.Tile);
@@ -167,7 +184,7 @@ namespace Model.Game
         {
             var nbDead = IDPlayers.Count(player => !player.HasUnitLeft());
 
-            if (nbDead < IDPlayers.Count - 1 && !DifficultyStrategy.IsMaxTurnNumberReached(ElapsedTurns)) return false;
+            if (nbDead < IDPlayers.Count - 1 && !DifficultyStrategy.IsMaxTurnNumberReached(CurrentTurn)) return false;
 
             Finished = true;
             if (nbDead >= IDPlayers.Count - 1)
@@ -228,6 +245,60 @@ namespace Model.Game
             NextTurn();
         }
 
+        public unsafe List<IPosition> ComputeAdvices(IUnit unit)
+        {
+            var wrapperAlgo = new WrapperAlgo(DifficultyStrategy.MapWidth, Players.Count, DifficultyStrategy.NbTileTypes);
+            var map = new int[DifficultyStrategy.MapWidth, DifficultyStrategy.MapWidth];
+            for (var i = 0; i < DifficultyStrategy.MapWidth; i++)
+            {
+                for (var j = 0; j < DifficultyStrategy.MapWidth; j++)
+                {
+                    map[i,j] = IDMap.TileAtPosition(new HexaPosition(i, j)).ID;
+                }
+            }
+            var units = new int[DifficultyStrategy.MapWidth, DifficultyStrategy.MapWidth];
+            for (var i = 0; i < DifficultyStrategy.MapWidth; i++)
+            {
+                for (var j = 0; j < DifficultyStrategy.MapWidth; j++)
+                {
+                    var unitAt = UnitsAt(new HexaPosition(i, j)).FirstOrDefault();
+                    if (unitAt != null)
+                    {
+                        units[i,j] = unitAt.Player.Race.ID;
+                    }
+                    else
+                    {
+                        units[i,j] = -1;
+                    }
+                }
+            }
+
+            var advices = new List<IPosition>();
+            var position = new int[2] {unit.Position.X, unit.Position.Y};
+            int ** ret;
+            try
+            {
+                ret = wrapperAlgo.advice(position, unit.MovePoint, unit.Player.Race.ID, map, units);
+            }
+            catch (System.AccessViolationException e)
+            {
+                ((IDisposable)wrapperAlgo).Dispose();
+                return advices;
+            }
+            for (var i = 0; i < 3; i++)
+            {
+                if (ret[i] == null)
+                {
+                    break;
+                }
+                advices.Add(new HexaPosition(ret[i][0], ret[i][1]));
+            }
+
+            ((IDisposable)wrapperAlgo).Dispose();
+
+            return advices;
+        }
+
         public void ComputeScore()
         {
             foreach (var player in IDPlayers)
@@ -238,7 +309,7 @@ namespace Model.Game
 
         private void NextTurn()
         {
-            ElapsedTurns++;
+            CurrentTurn++;
             // let's reset the cursor to the first Player
             PlayerTurnOrder.Reset();
             PlayerTurnOrder.MoveNext();

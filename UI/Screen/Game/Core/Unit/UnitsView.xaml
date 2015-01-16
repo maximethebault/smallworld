@@ -6,20 +6,27 @@
              xmlns:viewModel="clr-namespace:UI.Screen.Game.Core.Unit.ViewModel"
              xmlns:interactivity="http://www.codeplex.com/prism"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:unit="clr-namespace:UI.Screen.Game.Core.Unit"
              mc:Ignorable="d"
              x:Name="UnitControl"
              d:DataContext="{d:DesignInstance viewModel:UnitsViewModel}"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <unit:StringToUpperCaseConverter x:Key="StringToUpperCaseConverter" />
     </UserControl.Resources>
-    <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding Visible, Converter={StaticResource BooleanToVisibilityConverter}}">
-        <ListBox Name="UnitListBox" ItemsSource="{Binding Units}"  SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" SelectedItem="{Binding SelectedUnit}" VerticalAlignment="Top" SelectionMode="Single" Margin="0, 10, 10, 10">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding Visible, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Stretch">
+        <ListBox BorderThickness="0" Background="Transparent" Name="UnitListBox" ItemsSource="{Binding Units}" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" SelectedItem="{Binding SelectedUnit}" HorizontalAlignment="Stretch" VerticalAlignment="Top" SelectionMode="Single">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding TargetUpdatedCommand}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
+            <ListBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </ListBox.Resources>
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Rows="{Binding ElementName=UnitListBox, Path=Items.Count}" />
@@ -27,21 +34,17 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="viewModel:UnitViewModel">
+                    <DataTemplate.Resources>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsPlayable}" Value="False">
+                                    <Setter Property="Foreground" Value="Gray" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataTemplate.Resources>
                     <StackPanel Margin="5" IsEnabled="{Binding IsPlayable}">
-                        <TextBlock Text="Unit !">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsPlayable}" Value="True">
-                                            <Setter Property="Foreground" Value="Green"></Setter>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding IsPlayable}" Value="False">
-                                            <Setter Property="Foreground" Value="Red"></Setter>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
+                        <TextBlock Text="{Binding Model.Player.Race.Name, Converter={StaticResource StringToUpperCaseConverter}}" FontWeight="Bold" FontSize="16" />
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Attack point : " />
                             <TextBlock Text="{Binding Path=Model.AttackPoint}" />
@@ -66,6 +69,20 @@
                     <Setter Property="Grid.Row" Value="{Binding Row}" />
                     <Setter Property="Grid.Column" Value="0" />
                     <Setter Property="IsEnabled" Value="{Binding IsPlayable}" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Border Name="Border" Padding="5" CornerRadius="10" SnapsToDevicePixels="true" Background="Transparent" BorderThickness="0" Margin="5">
+                                    <ContentPresenter />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="#e6abc1"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>

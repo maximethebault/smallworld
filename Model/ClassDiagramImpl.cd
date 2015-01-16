@@ -12,7 +12,7 @@
   <Comment CommentText="Factory design pattern">
     <Position X="18.5" Y="11.5" Height="0.75" Width="1.113" />
   </Comment>
-  <Class Name="ClassLibrary.GameEngine.Builder.NewGameBuilder">
+  <Class Name="Model.GameEngine.Builder.NewGameBuilder">
     <Position X="3" Y="11.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIEAEAAAAQAAIAAAAAAAAgAAAEAABAgAAgAAABA=</HashCode>
@@ -20,7 +20,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ClassLibrary.GameEngine.Builder.LoadGameBuilder">
+  <Class Name="Model.GameEngine.Builder.LoadGameBuilder">
     <Position X="5.25" Y="11.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAEAAAIgAAAAIAAAAAAAAAAAAEAgBAAAAgAAAAA=</HashCode>
@@ -28,7 +28,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ClassLibrary.Unit.Unit">
+  <Class Name="Model.Unit.Unit">
     <Position X="16.5" Y="2.75" Width="2.25" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
@@ -39,7 +39,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ClassLibrary.Map.Position">
+  <Class Name="Model.Map.Position">
     <Position X="6" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAYAAAAAAAYAA=</HashCode>
@@ -47,7 +47,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ClassLibrary.GameEngine.Builder.GameBuilder">
+  <Class Name="Model.GameEngine.Builder.GameBuilder">
     <Position X="4" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAEAAAAAAAAAIAAAAAAAAAgAAEAABAAAAgAAAAA=</HashCode>
@@ -55,7 +55,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ClassLibrary.Player.Player">
+  <Class Name="Model.Player.Player">
     <Position X="12.75" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAAAAAAAAAAAAAAAYAEAAASAAAAAAAAAAAAAgBAABAA=</HashCode>
@@ -63,7 +63,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ClassLibrary.Turn.UnitTurn">
+  <Class Name="Model.Turn.UnitTurn">
     <Position X="14" Y="2.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>DSABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -71,7 +71,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ClassLibrary.Turn.PlayerTurn">
+  <Class Name="Model.Turn.PlayerTurn">
     <Position X="11.25" Y="2.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AABAAAQAAgAAAAAAAAAAAAAAAAAAAQAAAAAAgAAAAAQ=</HashCode>
@@ -79,28 +79,28 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ClassLibrary.Unit.UnitElf">
+  <Class Name="Model.Unit.UnitElf">
     <Position X="14.5" Y="7.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Unit\UnitElf.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ClassLibrary.Unit.UnitOrc">
+  <Class Name="Model.Unit.UnitOrc">
     <Position X="16.5" Y="7.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
       <FileName>Unit\UnitOrc.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ClassLibrary.Unit.UnitDwarf">
+  <Class Name="Model.Unit.UnitDwarf">
     <Position X="18.5" Y="7.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAgAAAAAA=</HashCode>
       <FileName>Unit\UnitDwarf.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ClassLibrary.Race.RaceElf">
+  <Class Name="Model.Race.RaceElf">
     <Position X="15" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -108,7 +108,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ClassLibrary.Race.RaceOrc">
+  <Class Name="Model.Race.RaceOrc">
     <Position X="16.75" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -116,7 +116,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ClassLibrary.Race.RaceDwarf">
+  <Class Name="Model.Race.RaceDwarf">
     <Position X="18.5" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -124,21 +124,21 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ClassLibrary.Race.RaceFactory">
+  <Class Name="Model.Race.RaceFactory">
     <Position X="16.75" Y="11.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Race\RaceFactory.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ClassLibrary.GameEngine.Builder.GameCreator">
+  <Class Name="Model.GameEngine.Builder.GameCreator">
     <Position X="1.25" Y="8.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAACAAAAAAAAAAAAAACAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameEngine\Builder\GameCreator.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ClassLibrary.Difficulty.DemoMapStrategy">
+  <Class Name="Model.Difficulty.DemoMapStrategy">
     <Position X="2.25" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAEAAQAAAAQAAAAAEAAAAAAAQQAAAAAAAAAEAAAAA=</HashCode>
@@ -146,7 +146,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ClassLibrary.Difficulty.SmallMapStrategy">
+  <Class Name="Model.Difficulty.SmallMapStrategy">
     <Position X="4" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAEAAQAAAAQAAAAAEAAAAAAAQQAAAAAAAAAEAAAAA=</HashCode>
@@ -154,7 +154,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ClassLibrary.Difficulty.StandardMapStrategy">
+  <Class Name="Model.Difficulty.StandardMapStrategy">
     <Position X="5.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAEAAQAAAAQAAAAAEAAAAAAAQQAAAAAAAAAEAAAAA=</HashCode>
@@ -162,7 +162,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ClassLibrary.GameEngine.Game">
+  <Class Name="Model.GameEngine.Game">
     <Position X="8" Y="2.75" Width="2" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
@@ -173,7 +173,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ClassLibrary.Map.Map">
+  <Class Name="Model.Map.Map">
     <Position X="8.25" Y="8.75" Width="1.5" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
@@ -184,42 +184,42 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ClassLibrary.Tiles.Plain">
+  <Class Name="Model.Tiles.Plain">
     <Position X="7.25" Y="11.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
       <FileName>Tiles\Plain.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ClassLibrary.Tiles.Desert">
+  <Class Name="Model.Tiles.Desert">
     <Position X="9" Y="11.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Tiles\Desert.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ClassLibrary.Tiles.Mountain">
+  <Class Name="Model.Tiles.Mountain">
     <Position X="11.25" Y="11.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
       <FileName>Tiles\Mountain.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ClassLibrary.Tiles.Forest">
+  <Class Name="Model.Tiles.Forest">
     <Position X="13" Y="11.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Tiles\Forest.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ClassLibrary.Tiles.TileFlyweightFactory">
+  <Class Name="Model.Tiles.TileFlyweightFactory">
     <Position X="10.75" Y="13.25" Width="1.5" />
-    <AssociationLine Name="_plainTile" Type="ClassLibrary.Tiles.Plain">
+    <AssociationLine Name="_plainTile" Type="Model.Tiles.Plain">
       <MemberNameLabel ManuallyPlaced="true">
         <Position X="-0.807" Y="0.081" />
       </MemberNameLabel>
     </AssociationLine>
-    <AssociationLine Name="_desertTile" Type="ClassLibrary.Tiles.Desert" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="_desertTile" Type="Model.Tiles.Desert" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="10.938" Y="13.25" />
         <Point X="10.938" Y="12.96" />
@@ -230,7 +230,7 @@
         <Position X="0.116" Y="0.082" />
       </MemberNameLabel>
     </AssociationLine>
-    <AssociationLine Name="_mountainTile" Type="ClassLibrary.Tiles.Mountain" FixedToPoint="true">
+    <AssociationLine Name="_mountainTile" Type="Model.Tiles.Mountain" FixedToPoint="true">
       <Path>
         <Point X="11.625" Y="13.25" />
         <Point X="11.625" Y="12.482" />
@@ -239,7 +239,7 @@
         <Position X="-1.088" Y="0.07" />
       </MemberNameLabel>
     </AssociationLine>
-    <AssociationLine Name="_forestTile" Type="ClassLibrary.Tiles.Forest" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="_forestTile" Type="Model.Tiles.Forest" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="12.25" Y="13.944" />
         <Point X="13.75" Y="13.944" />
@@ -260,7 +260,7 @@
       <Field Name="_forestTile" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="ClassLibrary.Tiles.Tile">
+  <Class Name="Model.Tiles.Tile">
     <Position X="11" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAAAAAAIAACA=</HashCode>
@@ -268,7 +268,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="ClassLibrary.Difficulty.IDifficultyStrategy">
+  <Interface Name="Model.Difficulty.IDifficultyStrategy">
     <Position X="4" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAEAAQAAAAQAAAAAEAAAAAAAQQAAAAAAAAAEAAAAA=</HashCode>

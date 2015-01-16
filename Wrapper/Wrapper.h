@@ -2,6 +2,7 @@
 #define __WRAPPER__
 
 #include "../Algo/Algo.h"
+#include "CliConverter.h"
 
 #include <iostream>
 
@@ -16,6 +17,7 @@ namespace Wrapper {
 			~WrapperAlgo();
 			int ** createMap();
 			int ** placePlayers();
+			int ** advice(array<int>^ position, float moveLeft, int type, array<int, 2>^ map, array<int, 2>^ units);
 	};
 }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Model.Game;
@@ -39,6 +40,7 @@ namespace UI.Screen.Game.Core
         }
 
         public ICommand MenuCommand { get; private set; }
+        public ICommand HideMoveErrorCommand { get; private set; }
 
         public event GameExitEventHandler OnGameExit;
         public delegate void GameExitEventHandler(GameCoreViewModel t, EventArgs e);
@@ -50,6 +52,7 @@ namespace UI.Screen.Game.Core
             RacesTexture = RacesTexture;
 
             MenuCommand = new DelegateCommand(o => ToggleMenu());
+            HideMoveErrorCommand = new DelegateCommand(o => HideMoveError());
 
             MapViewModel = new MapViewModel(game, tilesTexture, racesTexture);
             UnitsViewModel = new UnitsViewModel(game);
@@ -60,6 +63,8 @@ namespace UI.Screen.Game.Core
 
             MapViewModel.OnSelectTile += SelectTile;
             MapViewModel.OnMoveToTile += MoveToTile;
+
+            UnitsViewModel.OnSelectUnit += SelectUnit;
 
             PlayersViewModel.OnCurrentPlayerChange += CurrentPlayerChange;
 
@@ -76,6 +81,11 @@ namespace UI.Screen.Game.Core
             MenuViewModel.Visible = !MenuViewModel.Visible;
         }
 
+        private void HideMoveError()
+        {
+            MoveErrorVisibility = false;
+        }
+
         private void SelectTile(TileViewModel t, EventArgs e)
         {
             UnitsViewModel.Units = t.Units;
@@ -89,6 +99,7 @@ namespace UI.Screen.Game.Core
                 // no unit is selected, cancel the action
                 return;
             }
+
             try
             {
                 Model.MoveUnit(unit.Model, PositionFactory.GetHexaPosition(tile.Column, tile.Row));
@@ -99,6 +110,23 @@ namespace UI.Screen.Game.Core
             }
             FightViewModel.Refresh();
             MapViewModel.Refresh();
+        }
+
+        private void SelectUnit(UnitsViewModel t, EventArgs e)
+        {
+            if (t.SelectedUnit == null)
+            {
+                return;
+            }
+
+            Task.Factory.StartNew(() =>
+            {
+                // we take advantage of the fact that MVVM mechanisms automatically handle the UI thread update problematic
+                // getting advice can be a long operation, it needs to be asynchronous
+                var advices = Model.ComputeAdvices(UnitsViewModel.SelectedUnit.Model);
+                MapViewModel.RefreshAdvices(advices);
+            });
+
         }
 
         private void CurrentPlayerChange(PlayersViewModel t, EventArgs e)

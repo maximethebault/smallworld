@@ -11,6 +11,7 @@
              xmlns:fight="clr-namespace:UI.Screen.Game.Core.Fight"
              xmlns:menu="clr-namespace:UI.Screen.Game.Core.Menu"
              xmlns:win="clr-namespace:UI.Screen.Game.Core.Win"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              Name="GameCoreControl"
@@ -28,22 +29,63 @@
         <ImageBrush ImageSource="/Images/Background/map.jpg"/>
     </UserControl.Background>
     <Grid>
-        <Grid Name="MapGrid">
+        <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="15*" />
+                <ColumnDefinition Width="70*" />
+                <ColumnDefinition Width="15*" />
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <map:MapView x:Name="Map" Grid.Column="0" Grid.Row="0" DataContext="{Binding Path=MapViewModel}" />
-            <unit:UnitsView x:Name="Unit" Grid.Column="1" Grid.Row="0" DataContext="{Binding Path=UnitsViewModel}" />
-            <player:PlayersView x:Name="Players" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding Path=PlayersViewModel}" />
-            <Label Content="Mouvement non autorisé !" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Visibility="{Binding Path=MoveErrorVisibility, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <Border Grid.Column="0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                Background="#dbe787"
+                Padding="20"
+                BorderBrush="#8a9828"
+                CornerRadius="0 10 10 0"
+                BorderThickness="0 2 2 2">
+                <player:PlayersView x:Name="Players" VerticalContentAlignment="Center" DataContext="{Binding Path=PlayersViewModel}" />
+            </Border>
+            <map:MapView x:Name="Map" Grid.Column="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" DataContext="{Binding Path=MapViewModel}" />
+            <Border Grid.Column="2"  HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                Visibility="{Binding UnitsViewModel.Visible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Background="#dbe787"
+                Padding="0"
+                BorderBrush="#8a9828"
+                CornerRadius="10 0 0 10"
+                BorderThickness="2 2 0 2">
+                <unit:UnitsView x:Name="Unit" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" DataContext="{Binding Path=UnitsViewModel}" />
+            </Border>
         </Grid>
 
+        <!-- Overlay unauthorized movement -->
+        <Grid>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDown">
+                    <i:InvokeCommandAction Command="{Binding HideMoveErrorCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding MoveErrorVisibility}" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Border HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="DarkGray"
+                Opacity=".7" />
+            <Border HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="White"
+                Padding="20"
+                BorderBrush="Orange"
+                BorderThickness="4">
+                <Label Content="Mouvement non autorisé !" />
+            </Border>
+        </Grid>
+        
         <!-- Overlay fight -->
         <Grid>
             <Grid.Style>

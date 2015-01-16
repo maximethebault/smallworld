@@ -4,8 +4,7 @@ namespace Model.Tile
 {
     public interface ITile
     {
-        void SetBitmap(Bitmap bitmap);
-        Bitmap GetBitmap();
+        int ID { get; }
         bool IsPlain();
         bool IsDesert();
         bool IsMountain();

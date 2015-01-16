@@ -55,7 +55,7 @@
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid d:DataContext="{d:DesignInstance viewModel:TileViewModel}">
                             <Image x:Name="Img" Source="{Binding Texture}"/>
-                            <Image x:Name="Img2" MaxHeight="30" Source="{Binding UnitTexture}"/>
+                            <Image x:Name="Img2" MaxHeight="60" Source="{Binding UnitTexture}"/>
 
                             <Border Margin="0, 15, 15, 0" Padding="5, 2, 5, 2"
                                     BorderThickness="2" BorderBrush="Black" Background="White" CornerRadius="10"

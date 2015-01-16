@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -93,6 +93,7 @@
     </Compile>
     <Compile Include="Screen\Game\Core\Player\ViewModel\PlayersViewModel.cs" />
     <Compile Include="Screen\Game\Core\Player\ViewModel\PlayerViewModel.cs" />
+    <Compile Include="Screen\Game\Core\Unit\StringToUpperCaseConverter.cs" />
     <Compile Include="Screen\Game\Core\Unit\ViewModel\UnitsViewModel.cs" />
     <Compile Include="Screen\Game\Core\Win\WinView.xaml.cs">
       <DependentUpon>WinView.xaml</DependentUpon>
@@ -258,6 +259,12 @@
     <Resource Include="Images\Background\menu.jpg" />
     <Resource Include="Images\Background\creation.jpg" />
     <Resource Include="Images\Intro\INSA.jpg" />
+    <Resource Include="Images\Race\Creation\elf.png" />
+    <Resource Include="Images\Race\Creation\nain.png" />
+    <Resource Include="Images\Race\Creation\orc.png" />
+    <Resource Include="Images\Race\Map\elf.png" />
+    <Resource Include="Images\Race\Map\nain.png" />
+    <Resource Include="Images\Race\Map\orc.png" />
     <Content Include="Images\Race\orc_race.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

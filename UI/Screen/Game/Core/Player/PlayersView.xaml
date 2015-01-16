@@ -14,36 +14,33 @@
     </UserControl.Resources>
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <ItemsControl Grid.Column="0" Name="PlayerListBox" ItemsSource="{Binding Players}" VerticalAlignment="Top" Margin="0, 10, 10, 10" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ItemsControl Grid.Row="0" Name="PlayerListBox" ItemsSource="{Binding Players}" VerticalAlignment="Top" Margin="0, 10, 10, 10" HorizontalAlignment="Stretch">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Columns="{Binding ElementName=PlayerListBox, Path=Items.Count}" />
+                        <UniformGrid Rows="{Binding ElementName=PlayerListBox, Path=Items.Count}" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="viewModel1:PlayerViewModel">
+                        <DataTemplate.Resources>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsCurrentPlayer}" Value="False">
+                                        <Setter Property="Foreground" Value="Gray" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataTemplate.Resources>
                         <StackPanel Margin="5">
-                            <TextBlock Text="Player !">
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsCurrentPlayer}" Value="True">
-                                                <Setter Property="Foreground" Value="Green"></Setter>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding IsCurrentPlayer}" Value="False">
-                                                <Setter Property="Foreground" Value="Red"></Setter>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
+                            <TextBlock Text="{Binding Path=Model.Name}" FontWeight="Bold" FontSize="16" />
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Name : " />
-                                <TextBlock Text="{Binding Path=Model.Name}" />
+                                <TextBlock Text="Peuple : " />
+                                <TextBlock Text="{Binding Path=Model.Race.Name}" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Score : " />
@@ -54,12 +51,20 @@
                 </ItemsControl.ItemTemplate>
                 <ItemsControl.ItemContainerStyle>
                     <Style>
-                        <Setter Property="Grid.Row" Value="0" />
-                        <Setter Property="Grid.Column" Value="{Binding Column}" />
+                        <Setter Property="Grid.Column" Value="0" />
+                        <Setter Property="Grid.Row" Value="{Binding Column}" />
                     </Style>
                 </ItemsControl.ItemContainerStyle>
             </ItemsControl>
-            <Button Grid.Column="1" Content="Fin de tour" Margin="10" Padding="5" Command="{Binding EndTurnCommand}" />
+            <TextBlock Grid.Row="1" TextAlignment="Center" Margin="0, 10, 0, 0">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}Tour {0}/{1}">
+                        <Binding Path="Game.CurrentTurn" />
+                        <Binding Path="Game.DifficultyStrategy.NbTurns" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <Button Grid.Row="2" Content="Fin de tour" Margin="10" Padding="5" Command="{Binding EndTurnCommand}" />
         </Grid>
     </ScrollViewer>
 </UserControl>

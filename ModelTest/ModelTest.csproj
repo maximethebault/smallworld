@@ -21,7 +21,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -39,7 +39,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Wrapper">
-      <HintPath>..\Model\bin\Debug\Wrapper.dll</HintPath>
+      <HintPath>..\bin\Debug\Wrapper.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Choose>

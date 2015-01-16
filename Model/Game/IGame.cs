@@ -14,7 +14,7 @@ namespace Model.Game
         IMap Map { get; }
         IFight Fight { get; }
         IDifficultyStrategy DifficultyStrategy { get; }
-        int ElapsedTurns { get; }
+        int CurrentTurn { get; }
         IPlayer CurrentPlayer { get; }
         bool Finished { get; }
         IPlayer Winner { get; set; }
@@ -23,6 +23,7 @@ namespace Model.Game
         IMove MoveUnit(IUnit unit, IPosition targetPosition);
         void PropelGame();
         IUnit NextFightRound();
-        List<IUnit> UnitsAt(IPosition position);
+        IEnumerable<IUnit> UnitsAt(IPosition position);
+        unsafe List<IPosition> ComputeAdvices(IUnit unit);
     }
 }

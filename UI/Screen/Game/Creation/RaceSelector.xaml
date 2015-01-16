@@ -7,27 +7,27 @@
              xmlns:ui="clr-namespace:UI"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:viewModel="clr-namespace:UI.Screen.Game.Creation.ViewModel"
-             Background="White"
+             Background="Transparent"
              d:DesignHeight="500" d:DesignWidth="600"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModel:RaceViewModel}"
              ui:ListBoxSelectionBehavior.ClickSelection="True"
+             BorderThickness="0"
              SelectionMode="Multiple">
     <ListBox.ItemsPanel>
         <ItemsPanelTemplate>
-            <UniformGrid Columns="3" />
+            <UniformGrid Columns="{Binding Items.Count, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}" />
         </ItemsPanelTemplate>
     </ListBox.ItemsPanel>
     <ListBox.ItemTemplate>
         <DataTemplate>
-            <StackPanel>
-                <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding Image}"/>
+            <StackPanel HorizontalAlignment="Stretch">
+                <Image HorizontalAlignment="Stretch" VerticalAlignment="Top" MaxWidth="150" Source="{Binding Image}"/>
             </StackPanel>
         </DataTemplate>
     </ListBox.ItemTemplate>
     <ListBox.ItemContainerStyle>
         <Style TargetType="{x:Type ListBoxItem}">
-            <Setter Property="Height" Value="50"/>
             <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -37,11 +37,18 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="true">
-                                <Setter TargetName="Border" Property="Background"
-                                            Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter TargetName="Border" Property="Background">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="#747d94" Opacity="0.68" />
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="Border" Property="Background" Value="LightGray" />
+                                <Setter TargetName="Border" Property="Background">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="#c9ccd4" Opacity="0.58" />
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

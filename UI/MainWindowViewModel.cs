@@ -22,11 +22,18 @@ namespace UI
             new BitmapImage(new Uri("/Images/Map/normale.png", UriKind.Relative))
         };
 
-        private static readonly BitmapImage[] RacesTexture =
+        private static readonly BitmapImage[] RacesTextureCreation =
         {
-            new BitmapImage(new Uri("/Images/Race/elf.png", UriKind.Relative)),
-            new BitmapImage(new Uri("/Images/Race/dwarf.png", UriKind.Relative)),
-            new BitmapImage(new Uri("/Images/Race/orc.png", UriKind.Relative))
+            new BitmapImage(new Uri("/Images/Race/Creation/elf.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Images/Race/Creation/nain.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Images/Race/Creation/orc.png", UriKind.Relative))
+        };
+
+        private static readonly BitmapImage[] RacesTextureMap =
+        {
+            new BitmapImage(new Uri("/Images/Race/Map/elf.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Images/Race/Map/nain.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Images/Race/Map/orc.png", UriKind.Relative))
         };
 
         private static readonly BitmapImage[] TilesTexture =
@@ -66,10 +73,10 @@ namespace UI
             loadGameBuilder.SaveFilepath = "C:\\Users\\Max\\Documents\\almostwin.sws";
             var gameCreator = BuilderFactory.GetGameCreator(loadGameBuilder);
             var game = gameCreator.CreateGame().GetGame();
-            //StartGame(game);
+            StartGame(game);
             //StartHome();
             //StartNewGame();
-            StartIntro();
+            //StartIntro();
         }
 
         private void StartIntro()
@@ -89,7 +96,7 @@ namespace UI
 
         private void StartNewGame()
         {
-            var newGame = new GameCreationViewModel(Maps, RacesTexture, PlayerCount);
+            var newGame = new GameCreationViewModel(Maps, RacesTextureCreation, PlayerCount);
             newGame.OnNewGame += OnStartGame;
             newGame.OnBackHome += OnBackHome;
             CurrentViewModel = newGame;
@@ -97,7 +104,7 @@ namespace UI
 
         private void StartGame(IGame game)
         {
-            var gameCore = new GameCoreViewModel(game, TilesTexture, RacesTexture);
+            var gameCore = new GameCoreViewModel(game, TilesTexture, RacesTextureMap);
             gameCore.OnGameExit += OnGameExit;
             CurrentViewModel = gameCore;
         }

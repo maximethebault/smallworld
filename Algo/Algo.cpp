@@ -6,18 +6,42 @@ Algo::Algo(int mapSize, int nbPlayers, int nbTileTypes) : _mapSize(mapSize), _nb
 }
 
 Algo::~Algo() {
-	/*for (int i = 0; i < _mapSize; i++) {
-		delete[] _map[i];
-	}
-	delete[] _map;
+	this->destroyMap();
+	this->destroyPlayerPlacement();
+}
 
-	for (int i = 0; i < _nbPlayers; i++) {
-		delete[] _playerPlacement[i];
+void Algo::destroyMap() {
+	if (_map) {
+		for (int i = 0; i < _mapSize; i++) {
+			delete[] _map[i];
+		}
+		delete[] _map;
 	}
-	delete[] _playerPlacement;*/
+}
+
+void Algo::destroyPlayerPlacement() {
+
+	if (_playerPlacement) {
+		for (int i = 0; i < _nbPlayers; i++) {
+			delete[] _playerPlacement[i];
+		}
+		delete[] _playerPlacement;
+	}
+}
+
+void Algo::destroyAdvices() {
+	if (_advices) {
+		for (int i = 0; i < 3; i++) {
+			delete[] _advices[i];
+		}
+		delete[] _advices;
+	}
 }
 
 int ** Algo::createMap() {
+	//first, make sure the old pointer is deleted
+	destroyMap();
+
 	std::mt19937 eng{ std::random_device{}() };
 	std::uniform_int_distribution<> dist{ 0, _nbTileTypes-1 };
 
@@ -49,6 +73,9 @@ int ** Algo::createMap() {
 }
 
 int ** Algo::placePlayers() {
+	//first, make sure the old pointer is deleted
+	destroyPlayerPlacement();
+
 	// player placement init
 	_playerPlacement = new int *[_nbPlayers];
 	for (int i = 0; i < _nbPlayers; i++) {
@@ -75,9 +102,125 @@ int ** Algo::placePlayers() {
 	return _playerPlacement;
 }
 
-/*int ** Algo::advice(int * position, int ** map, int ** units) {
+vector<Tile*> Algo::reachableTiles(int * position, float moveLeft, int type, int ** map, int ** units) {
+	vector<Tile*> reachableTiles;
 
-}*/
+	for (int i = 0; i < _mapSize; i++) {
+		for (int j = 0; j < _mapSize; j++) {
+			if (i == position[0] && j == position[1]) {
+				continue;
+			}
+			if (!Tile::isAdjacent(position[0], position[1], i, j) && !(type == 1 && map[i][j] == 2 && (units[i][j] == -1 || units[i][j] == 1))) {
+				continue;
+			}
+			float cost;
+
+			// movement cost calculation
+			// elf
+			if (type == 0 && map[i][j] == 1) {
+				// forest
+				cost = 0.5;
+			}
+			else if (type == 0 && map[i][j] == 0) {
+				// desert
+				cost = 2;
+			}
+			// dwarf
+			else if (type == 1 && map[i][j] == 3) {
+				// plain
+				cost = 0.5;
+			}
+			// orc
+			else if (type == 2 && map[i][j] == 3) {
+				// plain
+				cost = 0.5;
+			}
+			else {
+				cost = 1;
+			}
+
+			if (cost > moveLeft) {
+				continue;
+			}
+			reachableTiles.push_back(new Tile(i, j, cost));
+		}
+	}
+
+	return reachableTiles;
+}
+
+void Algo::scoreMove(vector<Tile*> tiles, int * position, float moveLeft, int type, int ** map, int ** units) {
+	vector<Tile*>::iterator it;
+	// score: the higher, the better!
+
+	// stay close to your ennemies!
+	for (int i = 0; i < _mapSize; i++) {
+		for (int j = 0; j < _mapSize; j++) {
+			if (units[i][j] != type) {
+				// find which tile is the closest to the ennemy
+				int minDistance = 1000;
+				Tile* winner = 0;
+				for (it = tiles.begin(); it != tiles.end(); it++) {
+					int distance = Tile::distance((*it)->getX(), (*it)->getY(), i, j);
+					if (distance < minDistance) {
+						minDistance = distance;
+						winner = *it;
+					}
+				}
+				winner->score -= minDistance;
+			}
+		}
+	}
+
+	for (it = tiles.begin(); it != tiles.end(); it++) {
+		(*it)->score += 1-(*it)->getCost();
+	}
+	sort(tiles.begin(), tiles.end(), compByScore);
+	float oldScore = tiles.at(0)->score;
+	int i;
+	for (it = tiles.begin(), i = 0; it != tiles.end() && i < 3; it++, i++) {
+		(*it)->suggested = true;
+		if (oldScore - (*it)->score > 3) {
+			break;
+		}
+	}
+}
+
+
+
+// position: the position of the unit that we'd like adivces for
+// type: the type of the unit that we'd like adivces for
+// map: for each position, identifies the tile type
+// units: for each position, identifies the unit type
+int ** Algo::advice(int * position, float moveLeft, int type, int ** map, int ** units) {
+	destroyAdvices();
+
+	_advices = new int*[3];
+	for (int i = 0; i < 3; i++) {
+		// no more than 3 suggested position
+		_advices[i] = new int[3];
+	}
+
+	vector<Tile*> tiles = this->reachableTiles(position, moveLeft, type, map, units);
+	if (tiles.size())
+	{
+		this->scoreMove(tiles, position, moveLeft, type, map, units);
+		vector<Tile*>::iterator it;
+		int i;
+		for (it = tiles.begin(), i = 0; it != tiles.end(); it++) {
+			if ((*it)->suggested) {
+				_advices[i][0] = (*it)->getX();
+				_advices[i][1] = (*it)->getY();
+				i++;
+			}
+		}
+	}
+	return _advices;
+}
+
+int Algo::getMapSize() {
+	return _mapSize;
+}
 
 // interface
 
@@ -95,4 +238,17 @@ int ** Algo_createMap(Algo* algo) {
 
 int ** Algo_placePlayers(Algo* algo) {
 	return algo->placePlayers();
+}
+
+int ** Algo_advice(Algo* algo, int * position, float moveLeft, int type, int ** map, int ** units) {
+	return algo->advice(position, moveLeft, type, map, units);
+}
+
+int Algo_mapSize(Algo* algo) {
+	return algo->getMapSize();
+}
+
+bool compByScore(Tile* a, Tile* b)
+{
+	return a->score < b->score;
 }

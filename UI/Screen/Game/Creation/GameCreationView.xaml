@@ -12,8 +12,31 @@
              d:DesignHeight="500" d:DesignWidth="600" d:DataContext="{d:DesignInstance creation:GameCreationViewModel}"
              mc:Ignorable="d">
     <UserControl.Resources>
+        <Style x:Key="BtnStyle" TargetType="Button" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="BorderBrush" Value="{x:Null}"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FontFamily" Value="Trajan Pro 3"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            BorderThickness="3"
+                            BorderBrush="DarkGray" 
+                            CornerRadius="15" 
+                            Padding="20, 10, 20, 10"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
         <Style x:Key="PlaceHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Background" Value="#b89576" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
@@ -31,7 +54,7 @@
                                         <Setter Property="Foreground" Value="Transparent"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
-                                                <Setter Property="Foreground" Value="DarkGray"/>
+                                                <Setter Property="Foreground" Value="#747d94"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -53,12 +76,12 @@
             -->
             <Border CornerRadius="10" Margin="10">
                 <Border.Background>
-                    <SolidColorBrush Color="#dcc0a8" Opacity=".8"/>
+                    <SolidColorBrush Color="#d5ab84" Opacity=".68"/>
                 </Border.Background>
                 <StackPanel>
                     <StackPanel Margin="10, 0, 0, 0" Orientation="Vertical">
                         <Label Foreground="#3d4966" Content="Carte" FontSize="25" FontWeight="Heavy" />
-                        <Label Foreground="#7a5230" Margin="0, -10, 0, 0" Content="Aucune carte n'est sélectionnée !" FontWeight="Bold" HorizontalAlignment="Center" FontSize="20" Visibility="{Binding MapErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
+                        <Label Foreground="#7a5230" Margin="0, -10, 0, 0" FontWeight="Bold" FontSize="20" Content="Aucune carte n'est sélectionnée !" HorizontalAlignment="Center" Visibility="{Binding MapErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
                     </StackPanel>
                     <ListBox BorderThickness="0" Background="Transparent" Name="MapListBox" SelectedIndex="{Binding SelectedMap}" ItemsSource="{Binding Maps}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
                         <ListBox.ItemsPanel>
@@ -97,7 +120,7 @@
             -->
             <Border CornerRadius="10" Margin="10">
                 <Border.Background>
-                    <SolidColorBrush Color="#dcc0a8" Opacity=".8"/>
+                    <SolidColorBrush Color="#d5ab84" Opacity=".68"/>
                 </Border.Background>
                 <StackPanel>
                     <StackPanel Margin="10, 0, 0, 0">
@@ -111,16 +134,31 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="10, 10, 10, 10">
-                                    <Label Content="Nom :" FontSize="12" />
-                                    <TextBox Style="{StaticResource PlaceHolder}" Tag="{Binding PlaceHolder}" Text="{Binding Name}" IsTabStop="False" />
-                                    <Label Foreground="Red" Content="Veuillez entrer un nom !" Visibility="{Binding NameErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
-                                    <Label Content="Race :" FontSize="12" Margin="0, 10, 0, 0" />
-                                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <creation:RaceSelector HorizontalContentAlignment="Center" ItemsSource="{Binding RacesViewModel}" SelectedIndex="{Binding SelectedRace}" />
-                                    </WrapPanel>
-                                    <Label Foreground="Red" Margin="0, -10, 0, 0" Content="Veuillez sélectionner une race !" Visibility="{Binding RaceErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
-                                </StackPanel>
+                                <DockPanel Margin="10, 10, 10, 10" HorizontalAlignment="Stretch">
+                                    <DockPanel Dock="Left" HorizontalAlignment="Right" Margin="0, 0, 10, 0">
+                                        <Separator HorizontalAlignment="Left" Height="Auto" Width="2" Foreground="Gray">
+                                            <Separator.Style>
+                                                <Style TargetType="Separator" BasedOn="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Separator.Style>
+                                        </Separator>
+                                    </DockPanel>
+                                    <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Stretch" Margin="5, 0, 0, 0">
+                                        <Label Content="Nom :" FontSize="12" />
+                                        <TextBox Style="{StaticResource PlaceHolder}" Tag="{Binding PlaceHolder}" Text="{Binding Name}" IsTabStop="False" />
+                                        <Label Foreground="#7a5230" Margin="0, -5, 0, 0" FontWeight="Bold" FontSize="20" Content="Veuillez entrer un nom !" Visibility="{Binding NameErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
+                                        <Label Content="Race :" FontSize="12" Margin="0, 10, 0, 0" />
+                                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <creation:RaceSelector HorizontalContentAlignment="Center" ItemsSource="{Binding RacesViewModel}" SelectedIndex="{Binding SelectedRace}" />
+                                        </WrapPanel>
+                                        <Label Foreground="#7a5230" Margin="0, -10, 0, 0" FontWeight="Bold" FontSize="20" Content="Veuillez sélectionner une race !" Visibility="{Binding RaceErrorVisibility, Converter={StaticResource BoolToVisibility}}" />
+                                    </StackPanel>
+                                </DockPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -135,8 +173,46 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="Retour" Padding="5" FontSize="25" Command="{Binding BackHomeCommand}" HorizontalAlignment="Left"/>
-                <Button Grid.Column="2" Content="Commencer" Padding="5" FontSize="25" Command="{Binding StartGameCommand}" HorizontalAlignment="Right"/>
+                <Button Grid.Column="0" Content="Retour" Padding="5" FontSize="25" Command="{Binding BackHomeCommand}" HorizontalAlignment="Left" Style="{StaticResource BtnStyle}" MouseEnter="ButtonMouseEnter" MouseLeave="ButtonMouseLeave">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Images/Background/button.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0, 0, 200, 50"/>
+                    </Button.Background>
+                    <Button.BitmapEffect>
+                        <DropShadowBitmapEffect x:Name="ShadowEffect1"  Color="WhiteSmoke" Direction="0" ShadowDepth="0" Opacity="0" Softness="100"/>
+                    </Button.BitmapEffect>
+                    <Button.Resources>
+                        <Storyboard x:Key="Storyboard">
+                            <DoubleAnimationUsingKeyFrames
+                                  Storyboard.TargetName="ShadowEffect1"
+                                  Storyboard.TargetProperty="Opacity" AutoReverse="True"
+                                   RepeatBehavior="Forever">
+                                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0"/>
+                                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5"/>
+                                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </Button.Resources>
+                </Button>
+                <Button Grid.Column="2" Content="Commencer" Padding="5" FontSize="25" Command="{Binding StartGameCommand}" HorizontalAlignment="Right" Style="{StaticResource BtnStyle}" MouseEnter="ButtonMouseEnter" MouseLeave="ButtonMouseLeave">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Images/Background/button.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0, 0, 200, 50"/>
+                    </Button.Background>
+                    <Button.BitmapEffect>
+                        <DropShadowBitmapEffect x:Name="ShadowEffect2"  Color="WhiteSmoke" Direction="0" ShadowDepth="0" Opacity="0" Softness="100"/>
+                    </Button.BitmapEffect>
+                    <Button.Resources>
+                        <Storyboard x:Key="Storyboard">
+                            <DoubleAnimationUsingKeyFrames
+                                  Storyboard.TargetName="ShadowEffect2"
+                                  Storyboard.TargetProperty="Opacity" AutoReverse="True"
+                                   RepeatBehavior="Forever">
+                                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0"/>
+                                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5"/>
+                                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </Button.Resources>
+                </Button>
             </Grid>
         </StackPanel>
     </ScrollViewer>

@@ -8,7 +8,7 @@ namespace UI.Screen.Game.Core.Unit.ViewModel
 {
     class UnitsViewModel : ViewModelBase
     {
-        public IGame Game { get; set; }
+        private IGame Game { get; set; }
 
         private bool _visible;
         public bool Visible
@@ -62,9 +62,16 @@ namespace UI.Screen.Game.Core.Unit.ViewModel
             set
             {
                 _selectedUnit = value;
+                if (OnSelectUnit != null)
+                {
+                    OnSelectUnit(this, null);
+                }
                 RaisePropertyChanged("SelectedUnit");
             }
         }
+
+        public event SelectUnitEventHandler OnSelectUnit;
+        public delegate void SelectUnitEventHandler(UnitsViewModel t, EventArgs e);
 
         public UnitsViewModel(IGame game)
         {
@@ -75,7 +82,7 @@ namespace UI.Screen.Game.Core.Unit.ViewModel
             TargetUpdatedCommand = new DelegateCommand(o => UnitListUpdated());
         }
 
-        public void UnitListUpdated()
+        private void UnitListUpdated()
         {
             Visible = Units.Count != 0;
             if (Units.Count > 0 && SelectedIndex == -1 && Units.First().IsPlayable)

@@ -11,7 +11,7 @@
              d:DesignHeight="300" d:DesignWidth="350" d:DataContext="{d:DesignInstance viewModel:FightViewModel}"
              Background="White">
     <i:Interaction.Triggers>
-        <i:EventTrigger EventName="MouseUp">
+        <i:EventTrigger EventName="MouseDown">
             <i:InvokeCommandAction Command="{Binding PropelFightCommand}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>

@@ -83,7 +83,7 @@
         </Button>
 
 
-        <Button Content="Quitter le jeu" Width="{Binding ElementName=TbLonger, Path=ActualWidth}" Command="{Binding ExitGameCommand}" Style="{StaticResource BtnStyle}" MouseEnter="ButtonMouseEnter" MouseLeave="ButtonMouseLeave">
+        <Button Content="Quitter la partie" Width="{Binding ElementName=TbLonger, Path=ActualWidth}" Command="{Binding ExitGameCommand}" Style="{StaticResource BtnStyle}" MouseEnter="ButtonMouseEnter" MouseLeave="ButtonMouseLeave">
             <Button.Background>
                 <ImageBrush ImageSource="/Images/Background/button.png"/>
             </Button.Background>

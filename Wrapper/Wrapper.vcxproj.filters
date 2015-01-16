@@ -18,9 +18,15 @@
     <ClInclude Include="Wrapper.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="CliConverter.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Wrapper.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="CliConverter.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
