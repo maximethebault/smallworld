@@ -27,7 +27,7 @@ namespace UI.Screen.Game.Core.Player.ViewModel
         }
 
         private int _selectedIndex;
-        public int SelectedIndex
+        private int SelectedIndex
         {
             get { return _selectedIndex; }
             set
@@ -68,8 +68,12 @@ namespace UI.Screen.Game.Core.Player.ViewModel
             EndTurnCommand = new DelegateCommand(o => EndTurn());
         }
 
-        public void EndTurn()
+        private void EndTurn()
         {
+            if (Game.Finished || Game.Fight != null)
+            {
+                return;
+            }
             Game.PropelGame();
             if (OnCurrentPlayerChange != null)
             {

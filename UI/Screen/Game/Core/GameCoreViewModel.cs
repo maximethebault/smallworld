@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using Microsoft.Practices.Prism.Commands;
 using Model.Game;
 using Model.Map;
 using Model.Unit.Exception;
@@ -41,6 +42,7 @@ namespace UI.Screen.Game.Core
         }
 
         public ICommand MenuCommand { get; private set; }
+        public ICommand MoveCommand { get; private set; }
         public ICommand HideMoveErrorCommand { get; private set; }
 
         public event GameExitEventHandler OnGameExit;
@@ -53,6 +55,7 @@ namespace UI.Screen.Game.Core
             RacesTexture = RacesTexture;
 
             MenuCommand = new DelegateCommand(o => ToggleMenu());
+            MoveCommand = new DelegateCommand<string>(Move);
             HideMoveErrorCommand = new DelegateCommand(o => HideMoveError());
 
             MapViewModel = new MapViewModel(game, tilesTexture, racesTexture);
@@ -74,6 +77,68 @@ namespace UI.Screen.Game.Core
             MenuViewModel.OnGameExit += GameExit;
 
             WinViewModel.OnGameExit += GameExit;
+        }
+
+        private void Move(string cmd)
+        {
+            if (Model.Finished || Model.Fight != null)
+            {
+                return;
+            }
+            var unit = UnitsViewModel.SelectedUnit;
+            if (unit == null)
+            {
+                return;
+            }
+            var position = unit.Model.Position;
+            var newX = position.X;
+            var newY = position.Y;
+
+            var command = Int32.Parse(cmd);
+
+            switch (command)
+            {
+                case 1:
+                case 3:
+                    newY += 1;
+                    break;
+                case 7:
+                case 9:
+                    newY -= 1;
+                    break;
+                case 4:
+                    newX -= 1;
+                    break;
+                case 6:
+                    newX += 1;
+                    break;
+            }
+
+            if (position.Y%2 == 0 && (command == 1 || command == 7))
+            {
+                // even row
+                newX -= 1;
+            }
+            else if (position.Y % 2 == 1 && (command == 3 || command == 9))
+            {
+                // odd row
+                newX += 1;
+            }
+            if (newX < 0 || newY < 0 || newX >= Model.DifficultyStrategy.MapWidth || newY >= Model.DifficultyStrategy.MapWidth)
+            {
+                MoveErrorVisibility = true;
+                return;
+            }
+            try
+            {
+                Model.MoveUnit(unit.Model, PositionFactory.GetHexaPosition(newX, newY));
+            }
+            catch (UnitMovementUnauthorized ex)
+            {
+                MoveErrorVisibility = true;
+            }
+            FightViewModel.Refresh();
+            MapViewModel.Refresh();
         }
 
         private void ToggleMenu()

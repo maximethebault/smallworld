@@ -22,6 +22,12 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
     <UserControl.InputBindings>
+        <KeyBinding Key="NumPad1" Command="{Binding MoveCommand}" CommandParameter="1"/>
+        <KeyBinding Key="NumPad3" Command="{Binding MoveCommand}" CommandParameter="3"/>
+        <KeyBinding Key="NumPad4" Command="{Binding MoveCommand}" CommandParameter="4"/>
+        <KeyBinding Key="NumPad6" Command="{Binding MoveCommand}" CommandParameter="6"/>
+        <KeyBinding Key="NumPad7" Command="{Binding MoveCommand}" CommandParameter="7"/>
+        <KeyBinding Key="NumPad9" Command="{Binding MoveCommand}" CommandParameter="9"/>
         <KeyBinding Key="Space" Command="{Binding PlayersViewModel.EndTurnCommand}"/>
         <KeyBinding Key="Escape" Command="{Binding MenuCommand}"/>
     </UserControl.InputBindings>

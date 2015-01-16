@@ -35,7 +35,7 @@ namespace Model.Map
              * 
              * It's easy to know the indexes of 2 and 5, but more complicated to know 1, 4, 3 and 6.
              * 
-             * Indeed, tiles are hexagonal, which implies they can't all start on the same container's border, as show below:
+             * Indeed, tiles are hexagonal, which implies they can't all start on the same container's border, as shown below:
              * |  /\
              * | |  |
              * |  \//\
